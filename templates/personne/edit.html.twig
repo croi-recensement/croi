@@ -1,0 +1,93 @@
+{% extends 'base.html.twig' %} {% block content %}
+<div id="page-inner">
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <div class="card-title">
+            <div class="title">Modifier Personne</div>
+          </div>
+        </div>
+        {{ form_start(form) }}
+        <div>
+          <div class="panel-body">
+            <div class="row">
+              <div class="form-group col-md-3">
+                <div class="sub-title">Nom</div>
+                {{ form_widget(form.nom, {'attr': {'class': 'form-control'}}) }}
+              </div>
+              <div class="form-group col-md-3">
+                <div class="sub-title">Prénom</div>
+                {{ form_widget(form.prenom, {'attr': {'class': 'form-control'
+
+                }}) }}
+              </div>
+              <div class="form-group col-md-3">
+                <div class="sub-title">Date de Naissance</div>
+                {{ form_widget(form.dateNaissance, {'attr': {'class': 'form-control'
+
+                }}) }}
+              </div>
+              <div class="form-group col-md-3">
+                <div class="sub-title">Lieu de Naissance</div>
+                {{ form_widget(form.lieuNaissance, {'attr': {'class': 'form-control'
+
+                }}) }}
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-md-4">
+                <div class="sub-title">Nationalité</div>
+                {{ form_widget(form.nationalite, {'attr' : {'class': 'form-control'
+
+                }}) }}
+              </div>
+              <div class="form-group col-md-4">
+                <div class="sub-title">Situation Marital</div>
+                {{ form_widget(form.situationMarital, {'attr' : {'class': 'form-control'
+
+                }}) }}
+              </div>
+              <div class="form-group col-md-4">
+                <div class="sub-title">Spécialité</div>
+                {{ form_widget(form.specialite, {'attr' : {'class': 'form-control'
+
+                }}) }}
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-md-4">
+                <div class="sub-title">Situation Professionnel</div>
+                {{ form_widget(form.situationProfessionnel, {'attr' : {'class': 'form-control'
+
+                }}) }}
+              </div>
+              <div class="form-group col-md-4">
+                <div class="sub-title">Groupe Sanguin</div>
+                {{ form_widget(form.groupSangin, {'attr' : {'class': 'form-control'
+
+                }}) }}
+              </div>
+              <div class="form-group col-md-4">
+                <div class="sub-title">Pays d'Origine</div>
+                {{ form_widget(form.paysOrigin, {'attr' : {'class': 'form-control'
+
+                }}) }}
+              </div>
+            </div>
+
+            <div class="row justify-content-md-center">
+              <div class="form-group col-md-4">
+                <button type="submit" class="btn btn-primary align-self-center">
+                  Modifier Personne
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        {{ form_end(form) }}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %} {% block content %}
+<div id="page-inner">
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <div class="card-title">
+            <div class="title">Modifier Commerce</div>
+          </div>
+        </div>
+        {{ form_start(form) }}
+        <div>
+          <div class="panel-body">
+            <div class="row">
+              <div class="form-group col-md-4">
+                <div class="sub-title">Domaine d'activité</div>
+                {{ form_widget(form.domaineActivite, {'attr': {'class': 'form-control'}}) }}
+              </div>
+              <div class="form-group col-md-4">
+                <div class="sub-title">Fréquence</div>
+                {{ form_widget(form.personne, {'attr': {'class': 'form-control'}}) }}
+              </div>
+              <div class="form-group col-md-4">
+                <div class="sub-title">Etes vous ?</div>
+                {{ form_widget(form.commerce, {'attr' : {'class': 'radio3 radio-check radio-inline'}}) }}
+              </div>
+            </div>
+            <div class="row justify-content-md-center">
+              <div class="form-group col-md-4">
+                <button type="submit" class="btn btn-primary align-self-center">
+                  Modifier Commerce
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        {{ form_end(form) }}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

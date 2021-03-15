@@ -1,0 +1,74 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+<div id="page-inner"> 
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="card-title">
+                        <div class="title">Ajouter Maladie</div>
+                    </div>
+                </div>
+               {{ form_start(form) }}
+                <div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="form-group col-md-3">
+                            <div class="sub-title">Nom Maladie</div>
+                            {{ form_widget(form.nom, {'attr': {'class': 'form-control'}}) }}
+                        </div>
+                        <div class="form-group col-md-3">
+                            <div class="sub-title">Nom Chirurgie</div>
+                            {{ form_widget(form.nomChirurgie, {'attr': {'class': 'form-control'}}) }}
+                        </div>
+                        <div class="form-group col-md-3">
+                            <div class="sub-title">Coût Diagnostique</div>
+                            {{ form_widget(form.coutDiagnostique, {'attr': {'class': 'form-control'}}) }}
+                        </div>
+                        <div class="form-group col-md-3">
+                            <div class="sub-title">Coût Evacuation</div>
+                            {{ form_widget(form.coutEvacuation, {'attr': {'class': 'form-control'}}) }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-3">
+                            <div class="sub-title">Ayant subie des Chirurgies ?</div>
+                            {{ form_widget(form.chirurgie, {'attr' : {'class': 'radio3 radio-check radio-inline'}}) }}
+                        </div>
+                        <div class="form-group col-md-3">
+                            <div class="sub-title">Avez-vous un plan d'évacuation ?</div>
+                            {{ form_widget(form.evacuation, {'attr' : {'class': 'radio3 radio-check radio-inline'}}) }}
+                        </div>
+                        <div class="form-group col-md-3">
+                            <div class="sub-title">Date evacuation</div>
+                            {{ form_widget(form.dateEvacuation, {'attr' : {'class': 'form-control', 'id':'date-evacuation'}}) }}
+                        </div>
+                        <div class="form-group col-md-3">
+                            <div class="sub-title">Date chirurgie</div>
+                            {{ form_widget(form.dateChirurgie, {'attr' : {'class': 'form-control'}}) }}
+                        </div>
+                    </div>
+                     <div class="row">
+                        <div class="form-group col-md-6">
+                            <div class="sub-title">Existance de maladie ?</div>
+                            {{ form_widget(form.type, {'attr' : {'class': 'form-control'}}) }}
+                        </div>
+                        <div class="form-group col-md-6">
+                            <div class="sub-title">Personne rattacher</div>
+                            {{ form_widget(form.Personne, {'attr' : {'class': 'form-control'}}) }}
+                        </div>
+                     </div>
+
+                     <div class="row justify-content-md-center">
+                        <div class="form-group col-md-4">
+                            <button type="submit" class="btn btn-primary align-self-center">Modifier Maladie</button>
+                        </div>
+                     </div>
+                    </div>
+                </div>
+            {{ form_end(form) }}
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %} {% block content %}
+<div id="page-inner">
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <div class="card-title">
+            <div class="title">Ajouter Femme</div>
+          </div>
+        </div>
+        {{ form_start(form) }}
+        <div>
+          <div class="panel-body">
+            <div class="row">
+              <div class="form-group col-md-12">
+                <div class="sub-title">Nom Coinjoint</div>
+                {{ form_widget(form.coinjoint, {'attr': {'class': 'form-control'}}) }}
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-md-12">
+                <div class="sub-title">Nom Coinjointe</div>
+                {{ form_widget(form.coinjointe, {'attr': {'class': 'form-control'}}) }}
+              </div>
+            </div>
+            <div class="row justify-content-md-center">
+              <div class="form-group col-md-4">
+                <button type="submit" class="btn btn-primary align-self-center">
+                  Modifier Femme
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        {{ form_end(form) }}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

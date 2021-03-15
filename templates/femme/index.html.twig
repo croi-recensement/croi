@@ -1,0 +1,69 @@
+{% extends 'base.html.twig' %} {% block title %}{{ title }}{% endblock %} {%
+block content %} {% if is_granted('ROLE_ADMIN') %}
+<div id="page-inner">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <div class="row">
+            <div class="col-md-4">FEMME DU MEMBRE</div>
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+              <a
+                href="{{ path('app_dashboard_femme_create') }}"
+                class="btn btn-primary"
+              >
+                Ajouter Enfant
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="panel-body">
+          <div class="table-responsive">
+            <table
+              class="table table-striped table-bordered table-hover"
+              id="dataTables-example"
+            >
+              <thead>
+                <tr>
+                  <th>Id</th>
+                  <th>NOM COINJOINT</th>
+                  <th>NOM COINJOINTE</th>
+                  <th>ACTION</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for femme in femmes %}
+                
+                <tr>
+                  <td>{{ femme.id }}</td>
+                  <td>{{ femme.coinjoint.nom }} {{ femme.coinjoint.prenom }}</td>
+                  <td>{{ femme.coinjointe.nom }} {{ femme.coinjointe.prenom }}</td>
+                  <th>
+                    <a href="{{ path('app_dashboard_femme_delete', {'id': femme.id}) }}"
+                      onClick="return confirm('Voulez-vous supprimer vraiment cette ligne ??')"
+                      ><i
+                        class="fa fa-trash"
+                        style="color: red; margin-right: 5px"
+                        aria-hidden="true"
+                      ></i
+                    ></a>
+                    <a  href="{{ path('app_dashboard_femme_edit', {'id': femme.id}) }}"
+                      ><i
+                        class="fa fa-edit"
+                        style="color: green"
+                        aria-hidden="true"
+                      ></i
+                    ></a>
+                  </th>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endif %} {% endblock %}
