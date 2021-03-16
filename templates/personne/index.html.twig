@@ -31,6 +31,7 @@ block content %} {% if is_granted('ROLE_ADMIN') %}
                   <th>Prenom</th>
                   <th>Date de naissance</th>
                   <th>Lieu de naissance</th>
+                  <th>Sexe</th>
                   <th>Nationalite</th>
                   <th>Situation marital</th>
                   <th>Specialité</th>
@@ -48,6 +49,7 @@ block content %} {% if is_granted('ROLE_ADMIN') %}
                   <td>{{ person.prenom }}</td>
                   <td>{{ person.dateNaissance|date('m/d/Y') }}</td>
                   <td>{{ person.lieuNaissance }}</td>
+                  <td>{{ person.sexe }}</td>
                   <td>{{ person.nationalite }}</td>
                   <td>{{ person.situationMarital }}</td>
                   <td>{{ person.specialite }}</td>

@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-class DashboardController extends AbstractController
+class PersonneController extends AbstractController
 {
     /**
      * @Route("/admin", name="app_dashboard")
@@ -23,7 +23,7 @@ class DashboardController extends AbstractController
             ->getRepository('App\Entity\Personne')->findAll();
 
         return $this->render('personne/index.html.twig', [
-            'controller_name' => 'DashboardController',
+            'controller_name' => 'PersonneController',
             'personnes' => $personnes,
             'title' => 'Inscription du Personne'
         ]);
@@ -47,7 +47,7 @@ class DashboardController extends AbstractController
             return $this->redirectToRoute('app_dashboard');
         }
         return $this->render('personne/create.html.twig', [
-            'controller_name' => 'DashboardController',
+            'controller_name' => 'PersonneController',
             'form' => $form->createView(),
         ]);
     }

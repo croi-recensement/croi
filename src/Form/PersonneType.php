@@ -6,6 +6,7 @@ use App\Entity\Personne;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -21,6 +22,13 @@ class PersonneType extends AbstractType
                 'required' => false
             ])
             ->add("lieuNaissance", TextType::class)
+            ->add("sexe", ChoiceType::class,[
+                'choices' => [
+                    'Homme' => "masculin",
+                    'Femme' => "feminin"
+                ],
+                'expanded' => true,
+            ])
             ->add("nationalite", TextType::class)
             ->add("situationMarital", TextType::class)
             ->add("specialite", TextType::class)

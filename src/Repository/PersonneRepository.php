@@ -36,6 +36,16 @@ class PersonneRepository extends ServiceEntityRepository
     }
     */
 
+    public function findByToSchool($value = null){
+        return $this->createQueryBuilder('p')
+            ->join('App\Entity\Education e')
+            ->where('p.id = e.id')
+            ->getQuery()
+            ->getResult()
+        ;
+
+    }
+
     /*
     public function findOneBySomeField($value): ?Personne
     {

@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Enfants;
 use App\Entity\Personne;
+use App\Entity\Femme;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -15,22 +16,16 @@ class EnfantsType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add("pere", EntityType::class, [
-                'class' => Personne::class,
-                'choice_label' => function($personne){
-                   return $personne->getNom() . ' ' . $personne->getPrenom() . ' ("'.$personne->getSituationMarital().'")';
+            ->add("parent", EntityType::class, [
+                'class' => Femme::class,
+                'choice_label' => function($parent){
+                   return $parent->getCoinjoint()->getNom() . ' ' . $parent->getCoinjointe()->getNom();
                 },
-            ])
-            ->add("mere", EntityType::class,[
-                'class' => Personne::class,
-                'choice_label' => function($personne){
-                    return $personne->getNom() . ' ' . $personne->getPrenom() . ' ("'.$personne->getSituationMarital().'")';
-                 },
             ])
             ->add("enfant", EntityType::class,[
                 'class' => Personne::class,
-                'choice_label' => function($personne){
-                    return $personne->getNom() . ' ' . $personne->getPrenom() . ' ("'.$personne->getSituationMarital().'")';
+                'choice_label' => function($enfant){
+                    return $enfant->getNom() . ' ' . $enfant->getPrenom();
                  },
             ]);
     }

@@ -65,7 +65,7 @@
                             <a href="{{ path('app_dashboard_sante_delete', {'id': maladie.id}) }}" onClick="return confirm('Voulez-vous supprimer vraiment cette ligne ??')" style="cursor:pointer;color:red;margin-right: 3px" ><i class="fa fa-trash" aria-hidden="true"></i></a>
                             <a href="{{ path('app_dashboard_sante_edit', {'id': maladie.id}) }}" style="color:green;margin-right: 3px;cursor:pointer"><i class="fa fa-edit" aria-hidden="true"></i></a>
                             {% endif %}
-                            <a onClick="showPerson('{{maladie.personne.id}}', '{{ path('app_dashboard_sante_id', {'id': maladie.personne.id}) }}')" data-toggle="modal" data-target="#myModal" style="cursor:pointer;"><i class="fa fa-eye" style="color:sky;" aria-hidden="true"></i></a>
+                            <a onClick="showPerson('{{maladie.personne.id}}', '{{ path('app_dashboard_sante_id', {'id': maladie.personne.id}) }}')" data-toggle="modal" data-target="#myModal" style="cursor:pointer"><i class="fa fa-eye" style="color:sky;" aria-hidden="true"></i></a>
                         </th>
                       {% endif %}
                     </tr>
@@ -112,6 +112,7 @@
   <script>
 
       function showPerson(id, pathRoute){
+        console.log(id)
         $.ajax({
           type: "POST",
           url: pathRoute,
@@ -128,7 +129,8 @@
             html += '<th><strong>NATIONALITE</strong>:  '+ response.nationalite +' </th><br />';
             html += '<th><strong>SITUATION MARITAL</strong> : '+ response.situationMarital +'</th><br />';
             html += '<th><strong>GROUPE SANGUIN</strong> : '+ response.groupSangin +'</th><br />';
-            html += '<th><strong>PAYS D\'ORIGINE</strong> : '+ response.paysOrigin +'</th>';
+            html += '<th><strong>PAYS D\'ORIGINE</strong> : '+ response.paysOrigin +'</th><br />';
+            html += '<th><strong>SEXE</strong> : '+ response.sexe +'</th>';
             $("#modal-body").html(html);
           }
         })

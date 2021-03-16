@@ -29,20 +29,18 @@
               <thead>
                 <tr>
                   <th>Id</th>
-                  <th>Nom Père</th>
-                  <th>Nom Mère</th>
+                  <th>Parents</th>
                   <th>Enfant</th>
                   <th>ACTION</th>
                 </tr>
               </thead>
               <tbody>
                 {% for enfant in enfants %}
-                
                 <tr>
                   <td>{{ enfant.id }}</td>
-                  <td>{{ enfant.pere.nom }} {{ enfant.pere.prenom }}</td>
-                  <td>{{ enfant.mere.nom }} {{ enfant.mere.prenom }}</td>
+                  <td>{{ enfant.parent.coinjoint.nom }} | {{ enfant.parent.coinjointe.nom }}</td>
                   <td>{{ enfant.enfant.nom }} {{ enfant.enfant.prenom }}</td>
+                  
                   {% if is_granted('ROLE_ADMIN') %}
                   <th>
                     <a href="{{ path('app_dashboard_enfant_delete', {'id': enfant.id}) }}" style="cursor:pointer"

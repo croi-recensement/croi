@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Education;
+use App\Entity\Personne;
 use App\Form\EducationType;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -18,9 +19,27 @@ class EducationController extends AbstractController
      */
     public function index(): Response
     {
+        $conn = $this->getDoctrine()->getManager()->getConnection();
         $educations = $this->getDoctrine()
                             ->getManager()
                             ->getRepository('App\Entity\Education')->findAll();
+
+        //go to scholl
+        $sql = 'SELECT annee_scolaire FROM Personne p INNER JOIN Education e ON p.id = e.id';
+        $stmt = $conn->prepare($sql);
+        $stmt->execute();
+        $datas = $stmt->fetchAll();
+    
+        foreach($datas as $key => $value){
+            
+           
+        }
+        //dump($year);
+        die;
+        
+        //not to scholl
+        //$sql = 'SELECT * FROM Personne p INNER JOIN Education e ON p.id = e.id';
+
 
         return $this->render('education/index.html.twig', [
             'controller_name' => 'EducationController',
@@ -69,6 +88,23 @@ class EducationController extends AbstractController
         return $this->render('education/edit.html.twig',[
             'form' => $form->createView()
         ]);
+    }
+
+    /**
+     * @Route("/education/{id}", name="app_dashboard_education_id")
+     */
+    public function show(Request $request): Response
+    {
+        if($request->isXMLHttpRequest()){
+            $id = $request->request->get('id');
+            $education = $this->getDoctrine()
+                            ->getManager()
+                            ->getRepository('App\Entity\Education')->find((int)$id);
+                            
+            return $this->json($education, 200);
+           
+        }
+        return new Response('ok');
     }
 
     /**

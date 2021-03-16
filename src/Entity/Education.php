@@ -42,6 +42,11 @@ class Education
      */
     private $personne;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $anneeScolaire;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -103,6 +108,18 @@ class Education
     public function setPersonne(?Personne $personne): self
     {
         $this->personne = $personne;
+
+        return $this;
+    }
+
+    public function getAnneeScolaire(): ?string
+    {
+        return $this->anneeScolaire;
+    }
+
+    public function setAnneeScolaire(?string $anneeScolaire): self
+    {
+        $this->anneeScolaire = $anneeScolaire;
 
         return $this;
     }

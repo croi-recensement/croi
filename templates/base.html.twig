@@ -101,16 +101,18 @@
               <a><i class="fa fa-sitemap"></i> COMMUNAUTE<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
                   <li>
-                      <a>Membre de la communauté</a>
-                  </li>
-                  <li>
-                      <a {% if app.request.get('_route') == 'app_dashboard_enfant' %} class="active-menu"{% endif %}
-                         href="{{ path('app_dashboard_enfant') }}">Enfant du membre</a>
+                      <a {% if app.request.get('_route') == 'app_dashboard_membre' %} class="active-menu"{% endif %}
+                      href="{{ path('app_dashboard_membre') }}"
+                      >Membre de la communauté</a>
                   </li>
                   <li>
                       <a 
                         {% if app.request.get('_route') == 'app_dashboard_femme' %} class="active-menu"{% endif %}
                         href="{{ path('app_dashboard_femme') }}">Femme du membre</a>
+                  </li>
+                  <li>
+                      <a {% if app.request.get('_route') == 'app_dashboard_enfant' %} class="active-menu"{% endif %}
+                         href="{{ path('app_dashboard_enfant') }}">Enfant du membre</a>
                   </li>
 							  </ul>
 						</li>	
@@ -239,8 +241,6 @@
         asset('assets/js/Lightweight-Chart/jquery.chart.js')
       }}"></script>
    <script src="{{ asset('assets/js/custom-scripts.js') }}"></script>
-    <script src="{{ asset('assets/js/Chart.min.js') }}"></script>
-    <script src="{{ asset('assets/js/chartjs.js') }}"></script>
     <script src="{{ asset('js/main.js') }}"></script>
 
     <script>

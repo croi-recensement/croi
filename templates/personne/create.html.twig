@@ -36,19 +36,23 @@
               </div>
             </div>
             <div class="row">
-              <div class="form-group col-md-4">
+            <div class="form-group col-md-3">
+                <div class="sub-title">Sexe</div>
+                {{ form_widget(form.sexe, {'attr' : {'class': 'radio3 radio-check radio-inline'}}) }}
+              </div>
+              <div class="form-group col-md-3">
                 <div class="sub-title">Nationalité</div>
                 {{ form_widget(form.nationalite, {'attr' : {'class': 'form-control'
 
                 }}) }}
               </div>
-              <div class="form-group col-md-4">
+              <div class="form-group col-md-3">
                 <div class="sub-title">Situation Marital</div>
                 {{ form_widget(form.situationMarital, {'attr' : {'class': 'form-control'
 
                 }}) }}
               </div>
-              <div class="form-group col-md-4">
+              <div class="form-group col-md-3">
                 <div class="sub-title">Spécialité</div>
                 {{ form_widget(form.specialite, {'attr' : {'class': 'form-control'
 

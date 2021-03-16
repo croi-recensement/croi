@@ -70,9 +70,9 @@ class Personne
     private $situationProfessionnel;
 
     /**
-     * @ORM\OneToMany(targetEntity=Enfants::class, mappedBy="pere")
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $enfants;
+    private $sexe;
 
     public function __construct()
     {
@@ -205,32 +205,14 @@ class Personne
         return $this;
     }
 
-    /**
-     * @return Collection|Enfants[]
-     */
-    public function getEnfants(): Collection
+    public function getSexe(): ?string
     {
-        return $this->enfants;
+        return $this->sexe;
     }
 
-    public function addEnfant(Enfants $enfant): self
+    public function setSexe(?string $sexe): self
     {
-        if (!$this->enfants->contains($enfant)) {
-            $this->enfants[] = $enfant;
-            $enfant->setPere($this);
-        }
-
-        return $this;
-    }
-
-    public function removeEnfant(Enfants $enfant): self
-    {
-        if ($this->enfants->removeElement($enfant)) {
-            // set the owning side to null (unless already changed)
-            if ($enfant->getPere() === $this) {
-                $enfant->setPere(null);
-            }
-        }
+        $this->sexe = $sexe;
 
         return $this;
     }

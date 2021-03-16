@@ -36,6 +36,7 @@
                       <th>CLASSE</th>
                       <th>NIVEAU</th>
                       <th>DIPLOME</th>
+                      <th>ANNEE SCOLAIRE</th>
                       <th>ACTION</th>
                     </tr>
                   </thead>
@@ -52,6 +53,7 @@
                       <td>{{education.classe}}</td>
                       <td>{{education.niveau}}</td>
                       <td>{{education.diplome}}</td>
+                      <td>{{education.anneeScolaire}}</td>
                       {% if is_granted('ROLE_EDUCATION') %}
                         <th>
                             {% if is_granted('ROLE_ADMIN') %}
@@ -62,7 +64,7 @@
                                 <i class="fa fa-edit" style="color:green;" aria-hidden="true"></i>
                               </a>
                             {% endif %}
-                            <a><i class="fa fa-eye" style="color:sky;" aria-hidden="true"></i></a>
+                            <a onClick="showPersonneEduquer('{{education.id}}', '{{ path('app_dashboard_education_id', {'id': education.id}) }}')" data-toggle="modal" data-target="#myModal" style="cursor:pointer"><i class="fa fa-eye" aria-hidden="true"></i></a>
                         </th>
                       {% endif %}
                     </tr>
@@ -89,5 +91,102 @@
         {# endcharjs #}
       </div>
     </div>
-    
+
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" onClick="loadFonction()" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+              <h4 class="modal-title" id="myModalLabel">Detail de Personne</h4>
+          </div>
+          <div class="modal-body" id="modal-body">
+            
+          </div>
+      </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('vendor/jquery/jquery-3.2.1.min.js') }}"></script>
+    <script src="{{ asset('assets/js/Chart.min.js') }}"></script>
+
+  <script>
+
+      function showPersonneEduquer(id, pathRoute){
+        $.ajax({
+          type: "POST",
+          url: pathRoute,
+          data:{ id : id},
+          async: true,
+          success: function(response){
+            var html = '';
+            html += '<ul>';
+            html += '<th><strong>ID</strong>: '+ response.id +'</th><br />';
+            html += '<th><strong>NOM</strong>: '+ response.personne.nom +'</th><br />';
+            html += '<th><strong>PRENOM</strong>: '+ response.personne.prenom +'</th><br />';
+            html += '<th><strong>DATE DE NAISSANCE</strong>: '+ response.personne.dateNaissance +'</th><br />';
+            html += '<th><strong>LIEU DE NAISSANCE</strong>: '+ response.personne.lieuNaissance + '</th><br />';
+            html += '<th><strong>NATIONALITE</strong>:  '+ response.personne.nationalite +' </th><br />';
+            html += '<th><strong>SITUATION MARITAL</strong> : '+ response.personne.situationMarital +'</th><br />';
+            html += '<th><strong>GROUPE SANGUIN</strong> : '+ response.personne.groupSangin +'</th><br />';
+            html += '<th><strong>PAYS D\'ORIGINE</strong> : '+ response.personne.paysOrigin +'</th><br />';
+            html += '<th><strong>SEXE</strong> : '+ response.personne.sexe +'</th><br />';
+            html += '<th><strong>DIPLOME</strong>: '+ response.diplome +'</th><br />';
+            html += '<th><strong>ECOLE</strong>: '+ response.ecole +'</th><br />';
+            html += '<th><strong>NIVEAU</strong>: '+ response.niveau +'</th><br />';
+            html += '<th><strong>CLASSE</strong>: '+ response.classe +'</th>';
+            $("#modal-body").html(html);
+          }
+        })
+      }
+
+      $(function() {
+        var ctx, data, myLineChart, options;
+        Chart.defaults.global.responsive = true;
+        ctx = $('#line-chart').get(0).getContext('2d');
+        options = {
+          scaleShowGridLines: true,
+          scaleGridLineColor: "rgba(0,0,0,.05)",
+          scaleGridLineWidth: 1,
+          scaleShowHorizontalLines: true,
+          scaleShowVerticalLines: true,
+          bezierCurve: false,
+          bezierCurveTension: 0.4,
+          pointDot: true,
+          pointDotRadius: 4,
+          pointDotStrokeWidth: 1,
+          pointHitDetectionRadius: 20,
+          datasetStroke: true,
+          datasetStrokeWidth: 2,
+          datasetFill: true,
+          //legendTemplate: ""
+        };
+        data = {
+          labels: [],
+          datasets: [
+            {
+              label: "My First dataset",
+              fillColor: "rgba(26, 188, 156,0.2)",
+              strokeColor: "#1ABC9C",
+              pointColor: "#1ABC9C",
+              pointStrokeColor: "#fff",
+              pointHighlightFill: "#fff",
+              pointHighlightStroke: "#1ABC9C",
+              data: [9, 5, 8, 9, 7, 6, 4]
+            }, {
+              label: "My Second dataset",
+              fillColor: "rgba(34, 167, 240,0.2)",
+              strokeColor: "#22A7F0",
+              pointColor: "#22A7F0",
+              pointStrokeColor: "#fff",
+              pointHighlightFill: "#fff",
+              pointHighlightStroke: "#22A7F0",
+              data: [6, 9, 9, 8, 6, 9, 10]
+            }
+          ]
+        };
+        myLineChart = new Chart(ctx).Line(data, options);
+      });
+
+  </script>
 {% endblock %}
