@@ -50,13 +50,17 @@
                         </div>
                     </div>
                      <div class="row">
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-md-4">
                             <div class="sub-title">Existance de maladie ?</div>
                             {{ form_widget(form.type, {'attr' : {'class': 'form-control'}}) }}
                         </div>
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-md-4">
                             <div class="sub-title">Personne rattacher</div>
                             {{ form_widget(form.Personne, {'attr' : {'class': 'form-control'}}) }}
+                        </div>
+                        <div class="form-group col-md-4">
+                            <div class="sub-title">Année</div>
+                            {{ form_widget(form.annee, {'attr' : {'class': 'form-control'}}) }}
                         </div>
                      </div>
 

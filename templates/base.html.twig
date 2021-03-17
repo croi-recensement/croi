@@ -35,6 +35,7 @@
   </head>
   <body>
   {% if app.user != null %}
+
   <div id="wrapper">
     <nav class="navbar navbar-default top-navbar" role="navigation">
       <div class="navbar-header">
@@ -87,16 +88,8 @@
     <nav class="navbar-default navbar-side" role="navigation" id="navigation">
       <div class="sidebar-collapse">
         <ul class="nav" id="main-menu">
+
           {% if is_granted('ROLE_ADMIN') %}
-            {#<li>
-              <a
-              {% if app.request.get('_route') == 'app_dashboard' %} class="active-menu"{% endif %}
-              href="{{ path('app_dashboard') }}"
-                ><i class="fa fa-dashboard"></i> COMMUNAUTE</a
-              >
-            </li>#}
-            {# communaute #}
-            
             <li>
               <a><i class="fa fa-sitemap"></i> COMMUNAUTE<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
@@ -115,88 +108,94 @@
                          href="{{ path('app_dashboard_enfant') }}">Enfant du membre</a>
                   </li>
 							  </ul>
-						</li>	
-          {# endCommunaute #}
-          {% endif %}
-          {% if is_granted('ROLE_SANTE') %}
-          <li>
-            <a 
-              {% if app.request.get('_route') == 'app_dashboard_santer' %} class="active-menu" {% endif %}
-              href="{{ path('app_dashboard_santer') }}"
-              ><i class="fa fa-medkit"></i>DEPARTEMENT SANTER
-            </a>
-          </li>
+						</li>
           {% endif %}
 
-          {% if is_granted('ROLE_EDUCATION') %}
-          <li>
-            <a
-            {% if app.request.get('_route') == 'app_dashboard_education' %} class="active-menu"{% endif %}
-            href="{{ path('app_dashboard_education') }}"
-              ><i class="fa fa-graduation-cap"></i>DEPARTEMENT EDUCATION
-            </a>
-          </li>
-          {% endif %} 
-
-          {% if is_granted('ROLE_SOCIAL') %}
-          <li>
-            <a
-            {% if app.request.get('_route') == 'app_dashboard_social' %} class="active-menu"{% endif %}
-            href="{{ path('app_dashboard_social') }}"
-              ><i class="fa fa-comment"></i>DEPARTEMENT SOCIAL</a
-            >
-          </li>
-          {% endif %} 
-          
-          {% if is_granted('ROLE_LOGEMENT') %}
-          <li>
-            <a
-            {% if app.request.get('_route') == 'app_dashboard_logement' %} class="active-menu"{% endif %}
-             href="{{ path('app_dashboard_logement') }}"
-              ><i class="fa fa-home"></i>DEPARTEMENT LOGEMENT</a
-            >
-          </li>
-          {% endif %} {% if is_granted('ROLE_SPORT') %}
-          <li>
-            <a 
-            {% if app.request.get('_route') == 'app_dashboard_sport' %} class="active-menu"{% endif %}
-            href="{{ path('app_dashboard_sport') }}"><i class="fa fa-futbol-o"></i>DEPARTEMENT SPORT</a>
-          </li>
+          {% if  is_granted('ROLE_SANTE') %}
+            <li>
+              <a 
+                {% if app.request.get('_route') == 'app_dashboard_santer' %} class="active-menu" {% endif %}
+                href="{{ path('app_dashboard_santer') }}"
+                ><i class="fa fa-medkit"></i>DEPARTEMENT SANTER
+              </a>
+            </li>
           {% endif %}
 
-          {% if is_granted('ROLE_FINANCE') %}
-          <li>
-            <a
-            {% if app.request.get('_route') == 'app_dashboard_finance' %} class="active-menu"{% endif %}
-            href="{{ path('app_dashboard_finance') }}"><i class="fa fa-eur"></i>DEPARTEMENT FINANCE</a>
-          </li>
+          {% if  is_granted('ROLE_EDUCATION') %}
+            <li>
+              <a
+              {% if app.request.get('_route') == 'app_dashboard_education' %} class="active-menu"{% endif %}
+              href="{{ path('app_dashboard_education') }}"
+                ><i class="fa fa-graduation-cap"></i>DEPARTEMENT EDUCATION
+              </a>
+            </li>
           {% endif %}
 
-          {% if is_granted('ROLE_COMMERCE') %}
-          <li>
-            <a
-            {% if app.request.get('_route') == 'app_dashboard_commerce' %} class="active-menu"{% endif %}
-            href="{{ path('app_dashboard_commerce') }}"
-              ><i class="fa fa-shopping-cart fa-pulse fa-spin fa-1x"></i>DEPARTEMENT COMMERCE</a
-            >
-          </li>
-          {% endif %}{% if is_granted('ROLE_TABLIGH') %}
-          <li>
-            <a
-            href="empty.html"
-              ><i class="fa fa-user"></i>DEPARTEMENT TABLIGH</a
-            >
-          </li>
+          {% if  is_granted('ROLE_SOCIAL') %}
+            <li>
+              <a
+              {% if app.request.get('_route') == 'app_dashboard_social' %} class="active-menu"{% endif %}
+              href="{{ path('app_dashboard_social') }}"
+                ><i class="fa fa-comment"></i>DEPARTEMENT SOCIAL</a
+              >
+            </li>
           {% endif %}
+
+          {% if  is_granted('ROLE_LOGEMENT') %}
+            <li>
+              <a
+              {% if app.request.get('_route') == 'app_dashboard_logement' %} class="active-menu"{% endif %}
+              href="{{ path('app_dashboard_logement') }}"
+                ><i class="fa fa-home"></i>DEPARTEMENT LOGEMENT</a
+              >
+            </li>
+          {% endif %}
+
+          {% if  is_granted('ROLE_SPORT') %}
+            <li>
+              <a 
+              {% if app.request.get('_route') == 'app_dashboard_sport' %} class="active-menu"{% endif %}
+              href="{{ path('app_dashboard_sport') }}"><i class="fa fa-futbol-o"></i>DEPARTEMENT SPORT</a>
+            </li>
+          {% endif %}
+
+          {% if  is_granted('ROLE_FINANCE') %}
+            <li>
+              <a
+              {% if app.request.get('_route') == 'app_dashboard_finance' %} class="active-menu"{% endif %}
+              href="{{ path('app_dashboard_finance') }}"><i class="fa fa-eur"></i>DEPARTEMENT FINANCE</a>
+            </li>
+          {% endif %}
+
+          {% if  is_granted('ROLE_COMMERCE') %}
+            <li>
+              <a
+              {% if app.request.get('_route') == 'app_dashboard_commerce' %} class="active-menu"{% endif %}
+              href="{{ path('app_dashboard_commerce') }}"
+                ><i class="fa fa-shopping-cart fa-pulse fa-spin fa-1x"></i>DEPARTEMENT COMMERCE</a
+              >
+            </li>
+          {% endif %}
+
+          {% if is_granted('ROLE_TABLIGH') %}
+            <li>
+              <a
+              href="empty.html"
+                ><i class="fa fa-user"></i>DEPARTEMENT TABLIGH</a
+              >
+            </li>
+          {% endif %}
+
           {% if is_granted('ROLE_ADMIN') %}
-          <li>
-            <a
-              {% if app.request.get('_route') == 'app_dashboard' %} class="active-menu"{% endif %}
-              href="{{ path('app_dashboard') }}" 
-              ><i class="fa fa-user"></i>PERSONNE</a
-            >
-          </li>
+            <li>
+              <a
+                {% if app.request.get('_route') == 'app_dashboard' %} class="active-menu"{% endif %}
+                href="{{ path('app_dashboard') }}" 
+                ><i class="fa fa-user"></i>PERSONNE</a
+              >
+            </li>
           {% endif %}
+
         </ul>
       </div>
     </nav>
@@ -219,8 +218,7 @@
           </div>
         {% endfor %}
         {% block content %}{% endblock %}
-     {% endif %}
-     
+      {% endif %}
 </div>
 {% endif %}
 
@@ -241,7 +239,7 @@
         asset('assets/js/Lightweight-Chart/jquery.chart.js')
       }}"></script>
    <script src="{{ asset('assets/js/custom-scripts.js') }}"></script>
-    <script src="{{ asset('js/main.js') }}"></script>
+   {# <script src="{{ asset('js/main.js') }}"></script> #}
 
     <script>
       $(document).ready(function () {

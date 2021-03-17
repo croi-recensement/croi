@@ -80,6 +80,7 @@ class SanterController extends AbstractController
            
             $em->flush();
             $this->addFlash('success', 'Edition succèss!!!');
+            return $this->redirectToRoute('app_dashboard_santer');
         }
 
         return $this->render('sante/edit.html.twig',[

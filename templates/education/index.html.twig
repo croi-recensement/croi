@@ -140,7 +140,9 @@
         })
       }
 
+     
       $(function() {
+
         var ctx, data, myLineChart, options;
         Chart.defaults.global.responsive = true;
         ctx = $('#line-chart').get(0).getContext('2d');
@@ -162,26 +164,27 @@
           //legendTemplate: ""
         };
         data = {
-          labels: [],
+          labels: [0, {% for label in labels %} {{ label }}, {% endfor %}] ,
           datasets: [
             {
-              label: "My First dataset",
+              label: "avec éducation",
               fillColor: "rgba(26, 188, 156,0.2)",
-              strokeColor: "#1ABC9C",
-              pointColor: "#1ABC9C",
+              strokeColor: "#35AD11",
+              pointColor: "#35AD11",
               pointStrokeColor: "#fff",
               pointHighlightFill: "#fff",
               pointHighlightStroke: "#1ABC9C",
-              data: [9, 5, 8, 9, 7, 6, 4]
-            }, {
-              label: "My Second dataset",
-              fillColor: "rgba(34, 167, 240,0.2)",
-              strokeColor: "#22A7F0",
-              pointColor: "#22A7F0",
+              data: [0, {% for data in datasOne %} {{ data }}, {% endfor %}]
+            },
+            {
+              label: "non éducation",
+              fillColor: "rgba(26, 188, 156,0.2)",
+              strokeColor: "#FF0000",
+              pointColor: "#FF0000",
               pointStrokeColor: "#fff",
               pointHighlightFill: "#fff",
-              pointHighlightStroke: "#22A7F0",
-              data: [6, 9, 9, 8, 6, 9, 10]
+              pointHighlightStroke: "#1ABC9C",
+              data: [0, {% for data in datasTwo %} {{ data }}, {% endfor %}]
             }
           ]
         };

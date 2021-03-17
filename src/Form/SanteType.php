@@ -38,6 +38,7 @@ class SanteType extends AbstractType
                 ],
                 'expanded' => true,
             ])
+            ->add('annee', TextType::class)
             ->add("nomChirurgie",TextType::class)
             ->add("coutDiagnostique", MoneyType:: class, [
                 'divisor' => 100,

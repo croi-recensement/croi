@@ -40,6 +40,7 @@
                       <th>Type</th>
                       <th>Date evacuation</th>
                       <th>Date chirurgie</th>
+                      <th>Année</th>
                       <th>ACTION</th>
                     </tr>
                   </thead>
@@ -59,6 +60,7 @@
                       <td>{{maladie.type == 1 ? 'CHRONIQUE' : 'PONCTUELLE' }}</td>
                       <td>{{maladie.dateEvacuation != null ? maladie.dateEvacuation|date("m/d/Y") : 'Non renseigné'}}</td>
                       <td>{{maladie.dateChirurgie != null ? maladie.dateChirurgie|date("m/d/Y") : 'Non renseigné'}}</td>
+                      <td>{{maladie.annee}}</td>
                       {% if is_granted('ROLE_SANTE') %}
                         <th>
                             {% if is_granted('ROLE_ADMIN') %}
@@ -109,6 +111,8 @@
 {% endblock %}
 
 {% block javascripts %}
+ <script src="{{ asset('vendor/jquery/jquery-3.2.1.min.js') }}"></script>
+    <script src="{{ asset('assets/js/Chart.min.js') }}"></script>
   <script>
 
       function showPerson(id, pathRoute){
@@ -135,6 +139,56 @@
           }
         })
       }
+
+      $(function() {
+
+        var ctx, data, myLineChart, options;
+        Chart.defaults.global.responsive = true;
+        ctx = $('#line-chart').get(0).getContext('2d');
+        options = {
+          scaleShowGridLines: true,
+          scaleGridLineColor: "rgba(0,0,0,.05)",
+          scaleGridLineWidth: 1,
+          scaleShowHorizontalLines: true,
+          scaleShowVerticalLines: true,
+          bezierCurve: false,
+          bezierCurveTension: 0.4,
+          pointDot: true,
+          pointDotRadius: 4,
+          pointDotStrokeWidth: 1,
+          pointHitDetectionRadius: 20,
+          datasetStroke: true,
+          datasetStrokeWidth: 2,
+          datasetFill: true,
+          //legendTemplate: ""
+        };
+        data = {
+          labels: ["2001","2002","2003","2004"] ,
+          datasets: [
+            {
+              label: "avec éducation",
+              fillColor: "rgba(26, 188, 156,0.2)",
+              strokeColor: "#35AD11",
+              pointColor: "#35AD11",
+              pointStrokeColor: "#fff",
+              pointHighlightFill: "#fff",
+              pointHighlightStroke: "#1ABC9C",
+              data: [65, 25, 35, 12]
+            },
+            {
+              label: "non éducation",
+              fillColor: "rgba(26, 188, 156,0.2)",
+              strokeColor: "#FF0000",
+              pointColor: "#FF0000",
+              pointStrokeColor: "#fff",
+              pointHighlightFill: "#fff",
+              pointHighlightStroke: "#1ABC9C",
+              data: [12, 52, 65, 80]
+            }
+          ]
+        };
+        myLineChart = new Chart(ctx).Line(data, options);
+      });
 
   </script>
 {% endblock %}

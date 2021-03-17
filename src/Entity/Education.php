@@ -44,6 +44,7 @@ class Education
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\OrderBy({"id" = "DESC"})
      */
     private $anneeScolaire;
 

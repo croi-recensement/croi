@@ -19,6 +19,10 @@ class EducationRepository extends ServiceEntityRepository
         parent::__construct($registry, Education::class);
     }
 
+    public function findAll(array $orderBy = null){
+        return $this->findBy(array(),array('myProperty' => 'ASC'));
+    }
+
     // /**
     //  * @return Education[] Returns an array of Education objects
     //  */

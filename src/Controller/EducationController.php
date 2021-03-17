@@ -11,6 +11,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use function ArrayHelpers\array_get;
 
 class EducationController extends AbstractController
 {
@@ -20,30 +21,41 @@ class EducationController extends AbstractController
     public function index(): Response
     {
         $conn = $this->getDoctrine()->getManager()->getConnection();
+
         $educations = $this->getDoctrine()
                             ->getManager()
-                            ->getRepository('App\Entity\Education')->findAll();
+                            ->getRepository('App\Entity\Education')->findBy([], ['id' => 'DESC']);
 
-        //go to scholl
-        $sql = 'SELECT annee_scolaire FROM Personne p INNER JOIN Education e ON p.id = e.id';
-        $stmt = $conn->prepare($sql);
-        $stmt->execute();
-        $datas = $stmt->fetchAll();
-    
-        foreach($datas as $key => $value){
-            
-           
+        $personnes = $this->getDoctrine()
+                           ->getManager()
+                           ->getRepository('App\Entity\Personne')->findAll();
+        //EDUQUER
+        foreach($educations as $education){
+            $tabs[] = $education->getAnneeScolaire();
         }
-        //dump($year);
-        die;
-        
-        //not to scholl
-        //$sql = 'SELECT * FROM Personne p INNER JOIN Education e ON p.id = e.id';
+        $datasLabels =  isset($tabs) ? $tabs : [];
+        sort($datasLabels);
+        $getValues = array_count_values($datasLabels);
 
+        $nbr_pers = count($personnes);
+        $nbr_educs = count($educations);       
+
+       foreach($getValues as $getValue){
+           $datasNonEduquer[] = (($nbr_educs - $getValue) * 100) / $nbr_pers;
+           $datasEduquer[] = ($getValue * 100) / $nbr_pers;
+       }
+
+       $datasData1 =  isset($datasEduquer) ? $datasEduquer : [];
+       $datasData2 =  isset($datasNonEduquer) ? $datasNonEduquer : [];
+  
+       //NON EDUQUER
 
         return $this->render('education/index.html.twig', [
             'controller_name' => 'EducationController',
             'educations' => $educations,
+            'labels' => array_unique($datasLabels),
+            'datasOne' => $datasData1,
+            'datasTwo' => $datasData2,
             'title' => 'Département Education'
         ]);
     }
