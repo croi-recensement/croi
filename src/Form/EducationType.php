@@ -18,7 +18,7 @@ class EducationType extends AbstractType
         $builder
             ->add("ecole", TextType::class)
             ->add("classe", TextType::class)
-            ->add("anneeScolaire", TextType::class)
+            ->add("annee", TextType::class)
             ->add("niveau", TextType::class)
             ->add("diplome", TextType::class)
             ->add("personne", EntityType::class, [

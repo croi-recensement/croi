@@ -22,7 +22,6 @@ class FinanceController extends AbstractController
         $finances = $this->getDoctrine()
                             ->getManager()
                             ->getRepository('App\Entity\Finance')->findAll();
-
         return $this->render('finance/index.html.twig', [
             'controller_name' => 'FinanceController',
             'finances' => $finances,

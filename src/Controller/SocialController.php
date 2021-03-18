@@ -19,13 +19,40 @@ class SocialController extends AbstractController
      */
     public function index(): Response
     {
-        $socials = $this->getDoctrine()
+        $aideSocials = $this->getDoctrine()
                             ->getManager()
-                            ->getRepository('App\Entity\Social')->findAll();
+                            ->getRepository('App\Entity\Social')->findBy([], ['id' => 'ASC']);
 
+        $personnes = $this->getDoctrine()
+                          ->getManager()
+                          ->getRepository('App\Entity\Personne')->findAll();
+
+        foreach($aideSocials as $aideSocial){
+            $tabsAideSocials[] = $aideSocial->getAnnee();
+        }
+
+        $datasLabels =  isset($tabsAideSocials) ? $tabsAideSocials : [];
+        sort($datasLabels);
+        $getValues = array_count_values($datasLabels);
+
+        $nbr_pers = count($personnes);
+        $nbr_pers_aide_social = count($aideSocials);
+        $nbr_pers_non_aide_social = $nbr_pers - $nbr_pers_aide_social;
+
+        foreach($getValues as $getValue){
+            $datasNonAideSocials[] = ((($nbr_pers_aide_social - $getValue) + $nbr_pers_non_aide_social) * 100) / $nbr_pers;
+            $datasAideSocials[] = ($getValue * 100) / $nbr_pers;
+        }
+
+        $datasData1 =  isset($datasNonAideSocials) ? $datasNonAideSocials : [];
+        $datasData2 =  isset($datasAideSocials) ? $datasAideSocials : [];
+        
         return $this->render('social/index.html.twig', [
             'controller_name' => 'SocialController',
-            'socials' => $socials,
+            'socials' => $aideSocials,
+            'labels' => array_unique($datasLabels),
+            'datasData1' => $datasData1,
+            'datasData2' => $datasData2,
             'title' => 'Département Social'
         ]);
     }
@@ -71,6 +98,23 @@ class SocialController extends AbstractController
         return $this->render('social/edit.html.twig',[
             'form' => $form->createView()
         ]);
+    }
+
+    /**
+     * @Route("/social/{id}", name="app_dashboard_social_id")
+     */
+    public function show(Request $request): Response
+    {
+        if($request->isXMLHttpRequest()){
+            $id = $request->request->get('id');
+            $socials = $this->getDoctrine()
+                            ->getManager()
+                            ->getRepository('App\Entity\Social')->find((int)$id);
+            dd($socials);
+            return $this->json($socials, 200);
+           
+        }
+        return new Response('ok');
     }
 
     /**

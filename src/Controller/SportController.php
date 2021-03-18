@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Sport;
 use App\Form\SportType;
+use App\Services\ChartService;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Doctrine\ORM\EntityManagerInterface;
@@ -16,15 +17,24 @@ class SportController extends AbstractController
     /**
      * @Route("sport", name="app_dashboard_sport")
      */
-    public function sport(): Response
+    public function sport(ChartService $chartService): Response
     {
         $sports = $this->getDoctrine()
                             ->getManager()
-                            ->getRepository('App\Entity\Sport')->findAll();
+                            ->getRepository('App\Entity\Sport')->findBy([], ['id' => 'ASC']);
+
+        $personnes = $this->getDoctrine()
+                            ->getManager()
+                            ->getRepository('App\Entity\Personne')->findAll();
+
+        $datas = $chartService->chart($sports, $personnes);
 
         return $this->render('sport/index.html.twig', [
             'controller_name' => 'SportController',
             'sports' => $sports,
+            'labels' => $datas['labels'],
+            'whitSports' => $datas['calculeWiht'],
+            'WithoutSports' => $datas['calculeWithout'],
             'title' => 'Département Sports'
         ]);
     }

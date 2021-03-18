@@ -206,7 +206,7 @@
     // Initializing ///
 
     $(document).ready(function () {
-        //mainApp.initFunction(); 
+        mainApp.initFunction(); 
 		$("#sideNav").click(function(){
 			if($(this).hasClass('closed')){
 				$('.navbar-side').animate({left: '0px'});

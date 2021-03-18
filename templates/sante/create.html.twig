@@ -1,5 +1,17 @@
 {% extends 'base.html.twig' %}
 
+{% block stylesheets %}
+<style>
+  .btnEducat{
+    text-align: center;
+  }
+  .btnAjout{
+    display: flex;
+    justify-content: center;
+  }
+</style>
+{% endblock %}
+
 {% block content %}
 <div id="page-inner"> 
     <div class="row">
@@ -64,9 +76,9 @@
                         </div>
                      </div>
 
-                     <div class="row justify-content-md-center">
-                        <div class="form-group col-md-4">
-                            <button type="submit" class="btn btn-primary align-self-center">Modifier Maladie</button>
+                     <div class="row btnAjout">
+                        <div class="form-group col-md-4 btnEducat">
+                            <button type="submit" class="btn btn-success btn-block">Ajouter Maladie</button>
                         </div>
                      </div>
                     </div>

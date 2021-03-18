@@ -19,19 +19,24 @@ class FinanceType extends AbstractType
         $builder
             ->add("salaire", MoneyType::class, [
                 'divisor' => 100,
-                'currency' => false
+                'currency' => false,
+                'attr' => ['class' => 'form-control']
             ])
             ->add("loyer", MoneyType::class, [
                 'divisor' => 100,
-                'currency' => false
+                'currency' => false,
+                'attr' => ['class' => 'form-control']
             ])
             ->add("primeGratification", MoneyType::class, [
                 'divisor' => 100,
-                'currency' => false
+                'currency' => false,
+                'attr' => ['class' => 'form-control']
             ])
-            ->add("personne", EntityType::class, [
+            ->add('personne', EntityType::class, [
                 'class' => Personne::class,
-                'choice_label' => 'nom',
+                'choice_label' => function($personne){
+                    return $personne->getNom() . ' ' . $personne->getPrenom();
+                 },
             ]);
     }
 

@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Controller;
+use App\Services\ChartService;
 
 use App\Entity\Maladie;
 use App\Form\SanteType;
@@ -16,15 +17,23 @@ class SanterController extends AbstractController
     /**
      * @Route("/sante", name="app_dashboard_santer")
      */
-    public function index(): Response
+    public function index(ChartService $chartService): Response
     {
-        $maladies = $this->getDoctrine()
+        $persMalades = $this->getDoctrine()
                             ->getManager()
-                            ->getRepository('App\Entity\Maladie')->findAll();
+                            ->getRepository('App\Entity\Maladie')->findBy([], ['id' => 'ASC']);
+
+        $personnes = $this->getDoctrine()->getManager()
+                          ->getRepository('App\Entity\Personne')->findAll();
+
+        $datas = $chartService->chart($persMalades, $personnes);
 
         return $this->render('sante/index.html.twig', [
             'controller_name' => 'SanterController',
-            'maladies' => $maladies,
+            'maladies' => $persMalades,
+            'labels' => $datas['labels'],
+            'calculeWithout' => $datas['calculeWithout'],
+            'calculeWiht' => $datas['calculeWiht'],
             'title' => 'Département Santé'
         ]);
     }

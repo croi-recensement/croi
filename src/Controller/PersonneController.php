@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Personne;
+use App\Entity\Finance;
 use App\Form\PersonneType;
 
 use Doctrine\ORM\EntityManagerInterface;
@@ -39,7 +40,9 @@ class PersonneController extends AbstractController
 
         $form = $this->createForm(PersonneType::class, $personne);
         $form->handleRequest($request);
+        
         if ($form->isSubmitted() && $form->isValid()) {
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($personne);
             $em->flush();

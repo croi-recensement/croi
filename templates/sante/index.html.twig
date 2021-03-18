@@ -1,12 +1,21 @@
 {% extends 'base.html.twig' %} 
 
+{% block stylesheets %}
+<style>
+  .clsSante{
+    float: right !important;
+    font-size: x-small;
+  }
+</style>
+{% endblock %}
+
 {% block title %}{{ title }}{% endblock %} 
 
 {% block content %}
     {% if is_granted("ROLE_SANTE") %}
      <div id="page-inner">
       <div class="row">
-        <div class="col-md-7">
+        <div class="col-md-7" id="col1">
           <div class="panel panel-default">
             <div class="panel-heading">
             <div class="row">
@@ -15,7 +24,7 @@
               <div class="col-md-4">
                 <a
                   href="{{ path('app_dashboard_sante_create') }}"
-                  class="btn btn-primary"
+                  class="btn btn-primary clsSante"
                 >
                   Ajouter Santer
                 </a>
@@ -79,7 +88,7 @@
           </div>
         </div>
         {# charjs #}
-        <div class="col-md-5 col-sm-6 col-xs-12">  
+        <div class="col-md-5 col-sm-6 col-xs-12" id="col2">  
           <div class="panel panel-default chartJs">
             <div class="panel-heading">
               <div class="card-title">
@@ -163,31 +172,43 @@
           //legendTemplate: ""
         };
         data = {
-          labels: ["2001","2002","2003","2004"] ,
+          labels: [0, {% for label in labels %} {{ label }}, {% endfor %}] ,
           datasets: [
             {
-              label: "avec éducation",
+              label: "Personne Malade",
               fillColor: "rgba(26, 188, 156,0.2)",
               strokeColor: "#35AD11",
               pointColor: "#35AD11",
               pointStrokeColor: "#fff",
               pointHighlightFill: "#fff",
               pointHighlightStroke: "#1ABC9C",
-              data: [65, 25, 35, 12]
+              data: [0, {% for data in calculeWithout %} {{ data|number_format }}, {% endfor %}]
             },
             {
-              label: "non éducation",
+              label: "Personne Santer",
               fillColor: "rgba(26, 188, 156,0.2)",
               strokeColor: "#FF0000",
               pointColor: "#FF0000",
               pointStrokeColor: "#fff",
               pointHighlightFill: "#fff",
               pointHighlightStroke: "#1ABC9C",
-              data: [12, 52, 65, 80]
+              data: [0, {% for data in calculeWiht %} {{ data|number_format }}, {% endfor %}]
             }
           ]
         };
         myLineChart = new Chart(ctx).Line(data, options);
+      });
+
+       $(document).ready(function () {
+		    $("#sideNav").click(function(){
+          if($(this).hasClass('closed')){
+            $( "#col1" ).removeClass( "col-md-12" ).addClass( "col-md-7" );
+            $("#col2").show()
+          }else{
+            $( "#col1" ).removeClass( "col-md-7" ).addClass( "col-md-12" );
+            $("#col2").hide()
+          }
+        });
       });
 
   </script>

@@ -37,6 +37,11 @@ class Sport
      */
     private $lecture;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $annee;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -86,6 +91,18 @@ class Sport
     public function setLecture(?bool $lecture): self
     {
         $this->lecture = $lecture;
+
+        return $this;
+    }
+
+    public function getAnnee(): ?string
+    {
+        return $this->annee;
+    }
+
+    public function setAnnee(string $annee): self
+    {
+        $this->annee = $annee;
 
         return $this;
     }

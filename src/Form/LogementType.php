@@ -29,6 +29,7 @@ class LogementType extends AbstractType
                 ],
                 'expanded' => true,
             ])
+            ->add('annee', TextType::class)
             ->add("codePostale", TextType::class)
             ->add("maisonAllouer", ChoiceType::class, [
                 'choices' => [

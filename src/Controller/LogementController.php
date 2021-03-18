@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Logement;
 use App\Form\LogementType;
+use App\Services\ChartService;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Doctrine\ORM\EntityManagerInterface;
@@ -16,15 +17,24 @@ class LogementController extends AbstractController
     /**
      * @Route("/logement", name="app_dashboard_logement")
      */
-    public function index(): Response
+    public function index(ChartService $chartService): Response
     {
-        $logements = $this->getDoctrine()
+        $persLogers = $this->getDoctrine()
                             ->getManager()
-                            ->getRepository('App\Entity\Logement')->findAll();
+                            ->getRepository('App\Entity\Logement')->findBy([], ['id' => 'ASC']);
+
+        $personnes = $this->getDoctrine()
+                            ->getManager()
+                            ->getRepository('App\Entity\Personne')->findAll();
+
+        $datas = $chartService->chartLogement($persLogers, $personnes);
 
         return $this->render('logement/index.html.twig', [
             'controller_name' => 'LogementController',
-            'logements' => $logements,
+            'logements' => $persLogers,
+            'labels' => $datas['labels'],
+            'proprietaires' => $datas['proprietaire'],
+            'locataires' => $datas['locataire'],
             'title' => 'Département Logement'
         ]);
     }

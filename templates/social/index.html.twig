@@ -1,12 +1,20 @@
-{% extends 'base.html.twig' %} 
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+<style>
+  .clsSante{
+    float: right !important;
+    font-size: x-small;
+  }
+</style>
+{% endblock %}
 
 {% block title %}{{ title }}{% endblock %} 
 
 {% block content %} 
-{% if is_granted('ROLE_COMMERCE') %} 
   <div id="page-inner">
       <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-8">
           <div class="panel panel-default">
             <div class="panel-heading">
              <div class="row">
@@ -15,7 +23,7 @@
               <div class="col-md-4">
                 <a
                   href="{{ path('app_dashboard_social_create') }}"
-                  class="btn btn-primary"
+                  class="btn btn-primary clsSante"
                 >
                   Ajouter Social
                 </a>
@@ -42,6 +50,7 @@
                       <th>Allocation Solidaire Personne Agée</th>
                       <th>Protection Maladie et Médicament</th>
                       <th>Complémentaire Santé</th>
+                      <th>Année</th>
                       <th>ACTION</th>
                     </tr>
                   </thead>
@@ -63,7 +72,8 @@
                       <td>{{social.allocationSolidaritePersonneAgee}}</td>
                       <td>{{social.protectionMaladieEtMedicament}}</td>
                       <td>{{social.complementaireSante}}</td>
-                      {% if is_granted('ROLE_COMMERCE') %}
+                      <td>{{social.annee}}</td>
+                      {% if is_granted('ROLE_SOCIAL') %}
                         <th>
                             {% if is_granted('ROLE_ADMIN') %}
                               <a  href="{{ path('app_dashboard_social_delete', {'id': social.id}) }}"
@@ -74,7 +84,7 @@
                                 <i class="fa fa-edit" style="color:green;" aria-hidden="true"></i>
                               </a>
                             {% endif %}
-                            <a><i class="fa fa-eye" style="color:sky;" aria-hidden="true"></i></a>
+                            <a onClick="showPersonneSocial('{{social.id}}', '{{ path('app_dashboard_social_id', {'id': social.id}) }}')" data-toggle="modal" data-target="#myModal" style="cursor:pointer"><i class="fa fa-eye" style="color:sky;" aria-hidden="true"></i></a>
                         </th>
                       {% endif %}
                     </tr>
@@ -85,7 +95,128 @@
             </div>
           </div>
         </div>
+        {# charjs #}
+        <div class="col-md-4 col-sm-6 col-xs-12" id="col2">  
+          <div class="panel panel-default chartJs">
+            <div class="panel-heading">
+              <div class="card-title">
+                <div class="title">Line Chart</div>
+              </div>
+            </div>
+            <div class="panel-body">
+              <canvas id="line-chart" class="chart"></canvas>
+            </div>
+          </div>
+        </div>
+        {# endcharjs #}
       </div>
     </div>
-  {% endif %}
+
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" onClick="loadFonction()" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+              <h4 class="modal-title" id="myModalLabel">Detail de Personne</h4>
+          </div>
+          <div class="modal-body" id="modal-body"></div>
+      </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+  <script src="{{ asset('vendor/jquery/jquery-3.2.1.min.js') }}"></script>
+  <script src="{{ asset('assets/js/Chart.min.js') }}"></script>
+
+  <script>
+
+      function showPersonneSocial(id, pathRoute){
+        $.ajax({
+          type: "POST",
+          url: pathRoute,
+          data:{ id : id},
+          async: true,
+          success: function(response){
+            console.log(response)
+            var html = '';
+            html += '<ul>';
+            html += '<th><strong>ID</strong>: '+ response.id +'</th><br />';
+            html += '<th><strong>NOM</strong>: '+ response.personne.nom +'</th><br />';
+            html += '<th><strong>PRENOM</strong>: '+ response.personne.prenom +'</th><br />';
+            html += '<th><strong>DATE DE NAISSANCE</strong>: '+ response.personne.dateNaissance +'</th><br />';
+            html += '<th><strong>LIEU DE NAISSANCE</strong>: '+ response.personne.lieuNaissance + '</th><br />';
+            html += '<th><strong>NATIONALITE</strong>:  '+ response.personne.nationalite +' </th><br />';
+            html += '<th><strong>SITUATION MARITAL</strong> : '+ response.personne.situationMarital +'</th><br />';
+            html += '<th><strong>GROUPE SANGUIN</strong> : '+ response.personne.groupSangin +'</th><br />';
+            html += '<th><strong>PAYS D\'ORIGINE</strong> : '+ response.personne.paysOrigin +'</th><br />';
+            html += '<th><strong>SEXE</strong> : '+ response.personne.sexe +'</th><br />';
+            html += '<th><strong>CONDITION RSA</strong> : '+ response.conditionRsa +'</th><br />';
+            html += '<th><strong>RSA JEUNE ACTIF RSA</strong> : '+ response.rsaJeuneActif +'</th><br />';
+            html += '<th><strong>PRIME ACTIVITE</strong> : '+ response.primeActivite +'</th><br />';
+            html += '<th><strong>GARANTIE JEUNE</strong> : '+ response.garantieJeunes +'</th><br />';
+            html += '<th><strong>PRIME TRANSITOIRE SOLIDAIRE</strong> : '+ response.primeTransitoireSolidarite +'</th><br />';
+            html += '<th><strong>CHEQUE ENERGIE</strong> : '+ response.chequeEnergie +'</th><br />';
+            html += '<th><strong>AIDE FINANCIERE FACTURE JIRAMA</strong> : '+ response.aideFinancierePaiementFactureEau +'</th><br />';
+            html += '<th><strong>PRESTATION FAMILLIALE</strong> : '+ response.prestationFamiliales +'</th><br />';
+            html += '<th><strong>BOURSE D\'ETUDE</strong> : '+ response.boursePrimaireLycee +'</th><br />';
+            html += '<th><strong>GARANTIE VISA</strong> : '+ response.garantieVisale +'</th><br />';
+            html += '<th><strong>AIDE PAIEMENT TELEPHONIQUE</strong> : '+ response.aidePaiementTelephoneInternet +'</th><br />';
+            html += '<th><strong>ALLOCATION SOLIDARITE PERSONNE AGE</strong> : '+ response.allocationSolidaritePersonneAgee +'</th><br />';
+            html += '<th><strong>PROTECTION MEDICAL</strong> : '+ response.protectionMaladieEtMedicament +'</th><br />';
+            html += '<th><strong>COMPLEMENTAIRE SANTER</strong> : '+ response.complementaireSante +'</th>';
+            $("#modal-body").html(html);
+          }
+        })
+      }
+
+      $(function() {
+
+        var ctx, data, myLineChart, options;
+        Chart.defaults.global.responsive = true;
+        ctx = $('#line-chart').get(0).getContext('2d');
+        options = {
+          scaleShowGridLines: true,
+          scaleGridLineColor: "rgba(0,0,0,.05)",
+          scaleGridLineWidth: 1,
+          scaleShowHorizontalLines: true,
+          scaleShowVerticalLines: true,
+          bezierCurve: false,
+          bezierCurveTension: 0.4,
+          pointDot: true,
+          pointDotRadius: 4,
+          pointDotStrokeWidth: 1,
+          pointHitDetectionRadius: 20,
+          datasetStroke: true,
+          datasetStrokeWidth: 2,
+          datasetFill: true,
+        };
+        data = {
+          labels: [0, {% for label in labels %} {{ label }}, {% endfor %} ] ,
+          datasets: [
+            {
+              label: "Personne Avoir Social",
+              fillColor: "rgba(26, 188, 156,0.2)",
+              strokeColor: "#35AD11",
+              pointColor: "#35AD11",
+              pointStrokeColor: "#fff",
+              pointHighlightFill: "#fff",
+              pointHighlightStroke: "#1ABC9C",
+              data: [0, {% for data in datasData1 %} {{ data|number_format }}, {% endfor %} ]
+            },
+            {
+              label: "Personne Sans Social",
+              fillColor: "rgba(26, 188, 156,0.2)",
+              strokeColor: "#FF0000",
+              pointColor: "#FF0000",
+              pointStrokeColor: "#fff",
+              pointHighlightFill: "#fff",
+              pointHighlightStroke: "#1ABC9C",
+              data: [0, {% for data in datasData2 %} {{ data|number_format }}, {% endfor %} ]
+            }
+          ]
+        };
+        myLineChart = new Chart(ctx).Line(data, options);
+      });
+  </script>
+
 {% endblock %}

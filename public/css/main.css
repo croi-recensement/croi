@@ -25,7 +25,25 @@
   src: url('../fonts/poppins/Poppins-SemiBold.ttf'); 
 }
 
+/*Retour Haut*/
+.retourHaut{
+    width:100px;
+    height:100px;
+    text-align:center;
+    background: whiteSmoke;
+    font-weight: bold;
+    color: #444;
+    text-decoration: none;
+    position:fixed;
+    top:80%;
+    right:20%;
+    display:none;
+    background: url('../img/retour.png')no-repeat 0px 0px;
+  }
 
+  .retourHaut:hover{
+  text-decoration:none;
+  }
 
 
 /*//////////////////////////////////////////////////////////////////

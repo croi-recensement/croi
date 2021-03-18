@@ -63,7 +63,8 @@ class SocialType extends AbstractType
             ->add("finance", EntityType::class, [
                 'class' => Finance::class,
                 'choice_label' => 'salaire',
-            ]);
+            ])
+            ->add('annee', TextType::class);
     }
 
     public function configureOptions(OptionsResolver $resolver)

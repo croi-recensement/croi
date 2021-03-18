@@ -87,3 +87,61 @@
       </div>
     </div>
 {% endblock %}
+
+{% block javascripts %}
+  <script src="{{ asset('vendor/jquery/jquery-3.2.1.min.js') }}"></script>
+  <script src="{{ asset('assets/js/Chart.min.js') }}"></script>
+  <script>
+
+      $(function() {
+
+        var ctx, data, myLineChart, options;
+        Chart.defaults.global.responsive = true;
+        ctx = $('#line-chart').get(0).getContext('2d');
+        options = {
+          scaleShowGridLines: true,
+          scaleGridLineColor: "rgba(0,0,0,.05)",
+          scaleGridLineWidth: 1,
+          scaleShowHorizontalLines: true,
+          scaleShowVerticalLines: true,
+          bezierCurve: false,
+          bezierCurveTension: 0.4,
+          pointDot: true,
+          pointDotRadius: 4,
+          pointDotStrokeWidth: 1,
+          pointHitDetectionRadius: 20,
+          datasetStroke: true,
+          datasetStrokeWidth: 2,
+          datasetFill: true,
+          //legendTemplate: ""
+        };
+        data = {
+          labels: [0, {% for label in labels %} {{ label }}, {% endfor %}] ,
+          datasets: [
+            {
+              label: "Personne Sport",
+              fillColor: "rgba(26, 188, 156,0.2)",
+              strokeColor: "#35AD11",
+              pointColor: "#35AD11",
+              pointStrokeColor: "#fff",
+              pointHighlightFill: "#fff",
+              pointHighlightStroke: "#1ABC9C",
+              data: [0, {% for data in whitSports %} {{ data|number_format }}, {% endfor %}]
+            },
+            {
+              label: "Personne Sans Sport",
+              fillColor: "rgba(26, 188, 156,0.2)",
+              strokeColor: "#FF0000",
+              pointColor: "#FF0000",
+              pointStrokeColor: "#fff",
+              pointHighlightFill: "#fff",
+              pointHighlightStroke: "#1ABC9C",
+              data: [0, {% for data in WithoutSports %} {{ data|number_format }}, {% endfor %}]
+            }
+          ]
+        };
+        myLineChart = new Chart(ctx).Line(data, options);
+      });
+
+  </script>
+{% endblock %}

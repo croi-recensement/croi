@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Personne;
+//use App\Form\FinanceType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -35,6 +36,7 @@ class PersonneType extends AbstractType
             ->add("situationProfessionnel", TextType::class)
             ->add("groupSangin", TextType::class)
             ->add("paysOrigin", TextType::class);
+            //->add('finance', FinanceType::class);
     }
 
     public function configureOptions(OptionsResolver $resolver)

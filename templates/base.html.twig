@@ -73,7 +73,7 @@
             <a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
           </li>
           <li>
-            <a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+            <a href="#"><i class="fa fa-file" aria-hidden="true"></i> Exporter CSV</a>
           </li>
           <li class="divider"></li>
           <li>
@@ -88,10 +88,9 @@
     <nav class="navbar-default navbar-side" role="navigation" id="navigation">
       <div class="sidebar-collapse">
         <ul class="nav" id="main-menu">
-
-          {% if is_granted('ROLE_ADMIN') %}
+          {#{% if is_granted('ROLE_ADMIN') %}
             <li>
-              <a><i class="fa fa-sitemap"></i> COMMUNAUTE<span class="fa arrow"></span></a>
+              <a><i class="fa fa-sitemap"></i>COMMUNAUTE<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
                   <li>
                       <a {% if app.request.get('_route') == 'app_dashboard_membre' %} class="active-menu"{% endif %}
@@ -109,8 +108,28 @@
                   </li>
 							  </ul>
 						</li>
+          {% endif %}#}
+          {% if is_granted('ROLE_ADMIN') %}
+            <li class="dropdown">
+              <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-sitemap"></i>COMMUNAUTE<span class="fa arrow"></a>
+              <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <li>
+                  <a {% if app.request.get('_route') == 'app_dashboard_membre' %} class="active-menu"{% endif %}
+                    class="dropdown-item" 
+                   href="{{ path('app_dashboard_membre') }}">Membre de la communauté</a>
+                </li>
+                <li>
+                  <a {% if app.request.get('_route') == 'app_dashboard_femme' %} class="active-menu"{% endif %}
+                    class="dropdown-item" 
+                    href="{{ path('app_dashboard_femme') }}">Femme du membre</a>
+                  </li>
+                <li>
+                  <a {% if app.request.get('_route') == 'app_dashboard_enfant' %} class="active-menu"{% endif %}
+                    class="dropdown-item" 
+                    href="{{ path('app_dashboard_enfant') }}">Enfant du membre</a></li>
+              </ul>
+            </li>
           {% endif %}
-
           {% if  is_granted('ROLE_SANTE') %}
             <li>
               <a 
@@ -223,6 +242,7 @@
 {% endif %}
 
    {% block body %}{% endblock %}
+   <div><a href='#' class='retourHaut'>MAINTENANT</a></div>
 
     <script src="{{ asset('vendor/jquery/jquery-3.2.1.min.js') }}"></script>
 
@@ -239,7 +259,7 @@
         asset('assets/js/Lightweight-Chart/jquery.chart.js')
       }}"></script>
    <script src="{{ asset('assets/js/custom-scripts.js') }}"></script>
-   {# <script src="{{ asset('js/main.js') }}"></script> #}
+   <script src="{{ asset('js/main.js') }}"></script>
 
     <script>
       $(document).ready(function () {

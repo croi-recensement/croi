@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\FinanceRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -33,9 +35,14 @@ class Finance
     private $primeGratification;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Personne::class)
+     * @ORM\ManyToOne(targetEntity=Personne::class, inversedBy="finance")
      */
     private $personne;
+
+    public function __construct()
+    {
+        $this->socials = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -88,5 +95,13 @@ class Finance
         $this->personne = $personne;
 
         return $this;
+    }
+
+    /**
+     * @return Collection|Social[]
+     */
+    public function getSocials(): Collection
+    {
+        return $this->socials;
     }
 }

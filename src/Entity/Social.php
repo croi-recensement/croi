@@ -17,15 +17,6 @@ class Social
      */
     private $id;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Personne::class)
-     */
-    private $personne;
-
-    /**
-     * @ORM\ManyToOne(targetEntity=Finance::class)
-     */
-    private $finance;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
@@ -97,33 +88,24 @@ class Social
      */
     private $primeTransitoireSolidarite;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $annee;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Finance::class, inversedBy="socials")
+     */
+    private $finance;
+
+     /**
+     * @ORM\ManyToOne(targetEntity=Personne::class, inversedBy="personne")
+     */
+    private $personne;
+
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getPersonne(): ?Personne
-    {
-        return $this->personne;
-    }
-
-    public function setPersonne(?Personne $personne): self
-    {
-        $this->personne = $personne;
-
-        return $this;
-    }
-
-    public function getFinance(): ?Finance
-    {
-        return $this->finance;
-    }
-
-    public function setFinance(?Finance $finance): self
-    {
-        $this->finance = $finance;
-
-        return $this;
     }
 
     public function getConditionRsa(): ?int
@@ -197,6 +179,7 @@ class Social
 
         return $this;
     }
+    
 
     public function getPrestationFamiliales(): ?int
     {
@@ -290,6 +273,42 @@ class Social
     public function setPrimeTransitoireSolidarite(?int $primeTransitoireSolidarite): self
     {
         $this->primeTransitoireSolidarite = $primeTransitoireSolidarite;
+
+        return $this;
+    }
+
+    public function getAnnee(): ?string
+    {
+        return $this->annee;
+    }
+
+    public function setAnnee(?string $annee): self
+    {
+        $this->annee = $annee;
+
+        return $this;
+    }
+
+    public function getFinance(): ?Finance
+    {
+        return $this->finance;
+    }
+
+    public function setFinance(?Finance $finance): self
+    {
+        $this->finance = $finance;
+
+        return $this;
+    }
+
+    public function getPersonne(): ?Personne
+    {
+        return $this->personne;
+    }
+
+    public function setPersonne(?Personne $personne): self
+    {
+        $this->personne = $personne;
 
         return $this;
     }

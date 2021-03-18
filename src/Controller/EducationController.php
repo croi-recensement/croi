@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Education;
 use App\Entity\Personne;
 use App\Form\EducationType;
+use App\Services\ChartService;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Doctrine\ORM\EntityManagerInterface;
@@ -18,44 +19,27 @@ class EducationController extends AbstractController
     /**
      * @Route("/education", name="app_dashboard_education")
      */
-    public function index(): Response
+    public function index(ChartService $chartService): Response
     {
         $conn = $this->getDoctrine()->getManager()->getConnection();
 
-        $educations = $this->getDoctrine()
+        $persEduquers = $this->getDoctrine()
                             ->getManager()
                             ->getRepository('App\Entity\Education')->findBy([], ['id' => 'DESC']);
 
         $personnes = $this->getDoctrine()
                            ->getManager()
                            ->getRepository('App\Entity\Personne')->findAll();
-        //EDUQUER
-        foreach($educations as $education){
-            $tabs[] = $education->getAnneeScolaire();
-        }
-        $datasLabels =  isset($tabs) ? $tabs : [];
-        sort($datasLabels);
-        $getValues = array_count_values($datasLabels);
+        
 
-        $nbr_pers = count($personnes);
-        $nbr_educs = count($educations);       
-
-       foreach($getValues as $getValue){
-           $datasNonEduquer[] = (($nbr_educs - $getValue) * 100) / $nbr_pers;
-           $datasEduquer[] = ($getValue * 100) / $nbr_pers;
-       }
-
-       $datasData1 =  isset($datasEduquer) ? $datasEduquer : [];
-       $datasData2 =  isset($datasNonEduquer) ? $datasNonEduquer : [];
-  
-       //NON EDUQUER
+       $datas = $chartService->chart($persEduquers, $personnes);
 
         return $this->render('education/index.html.twig', [
             'controller_name' => 'EducationController',
-            'educations' => $educations,
-            'labels' => array_unique($datasLabels),
-            'datasOne' => $datasData1,
-            'datasTwo' => $datasData2,
+            'educations' => $persEduquers,
+            'labels' => $datas['labels'],
+            'datasOne' => $datas['calculeWithout'],
+            'datasTwo' => $datas['calculeWiht'],
             'title' => 'Département Education'
         ]);
     }

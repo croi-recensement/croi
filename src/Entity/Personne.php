@@ -74,10 +74,16 @@ class Personne
      */
     private $sexe;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Finance::class, mappedBy="personne")
+     */
+    private $finance;
+
     public function __construct()
     {
-        $this->maladies = new ArrayCollection();
-        $this->enfants = new ArrayCollection();
+        //$this->maladies = new ArrayCollection();
+        //$this->enfants = new ArrayCollection();
+        $this->finance = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -213,6 +219,36 @@ class Personne
     public function setSexe(?string $sexe): self
     {
         $this->sexe = $sexe;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Finance[]
+     */
+    public function getFinance(): Collection
+    {
+        return $this->finance;
+    }
+
+    public function addFinance(Finance $finance): self
+    {
+        if (!$this->finance->contains($finance)) {
+            $this->finance[] = $finance;
+            $finance->setPersonne($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFinance(Finance $finance): self
+    {
+        if ($this->finance->removeElement($finance)) {
+            // set the owning side to null (unless already changed)
+            if ($finance->getPersonne() === $this) {
+                $finance->setPersonne(null);
+            }
+        }
 
         return $this;
     }

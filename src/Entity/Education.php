@@ -46,7 +46,7 @@ class Education
      * @ORM\Column(type="string", length=255, nullable=true)
      * @ORM\OrderBy({"id" = "DESC"})
      */
-    private $anneeScolaire;
+    private $annee;
 
     public function getId(): ?int
     {
@@ -113,14 +113,14 @@ class Education
         return $this;
     }
 
-    public function getAnneeScolaire(): ?string
+    public function getAnnee(): ?string
     {
-        return $this->anneeScolaire;
+        return $this->annee;
     }
 
-    public function setAnneeScolaire(?string $anneeScolaire): self
+    public function setAnnee(?string $annee): self
     {
-        $this->anneeScolaire = $anneeScolaire;
+        $this->annee = $annee;
 
         return $this;
     }
