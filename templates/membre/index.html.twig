@@ -3,81 +3,77 @@
 {% block title %}{{ title }}{% endblock %} 
 
 {% block content %}  
-  <div id="page-inner">
-      <div class="row">
-        <div class="col-md-12">
-          <div class="panel panel-default">
-            <div class="panel-heading">
-              <div class="row">
-              <div class="col-md-4">MEMBRE DU COMMUNAUTE</div>
-              <div class="col-md-4"></div>
-              <div class="col-md-4">
-                <a
-                  href="{{ path('app_dashboard_create') }}"
-                  class="btn btn-primary"
-                >
-                  Ajouter Membre
-                </a>
-              </div>
-            </div>
-            </div>
-            <div class="panel-body">
-              <div class="table-responsive">
-                <table class="table table-striped table-bordered table-hover" id="dataTables-example">
-                  <thead>
-                    <tr>
-                      <th>Id</th>
-                      <th>Membre</th>
-                      <th>ACTION</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                  {% for membre in membres %}
-                    <tr>
-                      <td>{{membre.id}}</td>
-                      <td>{{membre.personne.nom}}</td>
-                    
-                      {% if is_granted('ROLE_ADMIN') %}
-                        <th>
-                            {% if is_granted('ROLE_ADMIN') %}
-                            <a href="{{ path('app_dashboard_membre_delete', {'id': membre.id}) }}" 
-                               onClick="return confirm('Voulez-vous supprimer vraiment cette ligne ??')">
-                              <i class="fa fa-trash" style="color:red;margin-right: 3px" aria-hidden="true"></i>
-                            </a>
-                            <a 
-                              href="{{ path('app_dashboard_membre_edit', {'id': membre.id}) }}"
-                            >
-                              <i class="fa fa-edit" style="color:green;margin-right: 3px" aria-hidden="true"></i>
-                            </a>
-                            {% endif %}
-                            <a onClick="showMembre('{{membre.id}}', '{{ path('app_dashboard_membre_id', {'id': membre.id}) }}')" data-toggle="modal" data-target="#myModal" style="cursor:pointer"><i class="fa fa-eye" style="color:sky;" aria-hidden="true"></i></a>
-                        </th>
-                      {% endif %}
-                    </tr>
-                  {% endfor %}   
-                  </tbody>
-                </table>
-              </div>
-            </div>
+<div id="page-inner">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <div class="row">
+          <div class="col-md-4">MEMBRE DU COMMUNAUTE</div>
+          <div class="col-md-4"></div>
+          <div class="col-md-4">
+            <a
+              href="{{ path('app_dashboard_create') }}"
+              class="btn btn-primary"
+            >
+              Ajouter Membre
+            </a>
           </div>
         </div>
       </div>
-    </div>
-
-    {# show whith id #}
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" onClick="loadFonction()" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-              <h4 class="modal-title" id="myModalLabel">Detail de Personne</h4>
-          </div>
-          <div class="modal-body" id="modal-body">
-            
-          </div>
+      <div class="panel-body">
+        <div class="table-responsive">
+          <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+            <thead>
+              <tr>
+                <th>Id</th>
+                <th>Membre</th>
+                <th>ACTION</th>
+              </tr>
+            </thead>
+            <tbody>
+            {% for membre in membres %}
+              <tr>
+                <td>{{membre.id}}</td>
+                <td>{{membre.personne.nom}}</td>
+                {% if is_granted('ROLE_ADMIN') %}
+                <td>
+                  {% if is_granted('ROLE_ADMIN') %}
+                  <a href="{{ path('app_dashboard_membre_delete', {'id': membre.id}) }}" 
+                      onClick="return confirm('Voulez-vous supprimer vraiment cette ligne ??')">
+                    <i class="fa fa-trash" style="color:red;margin-right: 3px" aria-hidden="true"></i>
+                  </a>
+                  <a 
+                    href="{{ path('app_dashboard_membre_edit', {'id': membre.id}) }}"
+                  >
+                    <i class="fa fa-edit" style="color:green;margin-right: 3px" aria-hidden="true"></i>
+                  </a>
+                  {% endif %}
+                  <a onClick="showMembre('{{membre.id}}', '{{ path('app_dashboard_membre_id', {'id': membre.id}) }}')" data-toggle="modal" data-target="#myModal" style="cursor:pointer"><i class="fa fa-eye" style="color:sky;" aria-hidden="true"></i></a>
+                </td>
+                {% endif %}
+              </tr>
+            {% endfor %}   
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
-    {# end show #}
+  </div>
+</div>
+{# show whith id #}
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" onClick="loadFonction()" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title" id="myModalLabel">Detail de Personne</h4>
+      </div>
+      <div class="modal-body" id="modal-body"></div>
+    </div>
+  </div>
+</div>
+{# end show #}
 {% endblock %}
 
 {% block javascripts %}

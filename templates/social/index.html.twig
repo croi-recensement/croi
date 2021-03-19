@@ -1,127 +1,120 @@
 {% extends 'base.html.twig' %}
 
-{% block stylesheets %}
-<style>
-  .clsSante{
-    float: right !important;
-    font-size: x-small;
-  }
-</style>
-{% endblock %}
-
 {% block title %}{{ title }}{% endblock %} 
 
 {% block content %} 
-  <div id="page-inner">
-      <div class="row">
-        <div class="col-md-8">
-          <div class="panel panel-default">
-            <div class="panel-heading">
-             <div class="row">
-              <div class="col-md-4">COMMERCE</div>
-              <div class="col-md-4"></div>
-              <div class="col-md-4">
-                <a
-                  href="{{ path('app_dashboard_social_create') }}"
-                  class="btn btn-primary clsSante"
-                >
-                  Ajouter Social
-                </a>
-              </div>
-            </div>
-            </div>
-            <div class="panel-body">
-              <div class="table-responsive">
-                <table class="table table-striped table-bordered table-hover" id="dataTables-example">
-                  <thead>
-                    <tr>
-                      <th>Id</th>
-                      <th>ConditionRSA</th>
-                      <th>RSA Jeune Actif</th>
-                      <th>Prime Actif</th>
-                      <th>Garantie Jeune</th>
-                      <th>Prime Transitoire Solidaire</th>
-                      <th>Chéque Energie</th>
-                      <th>Aide Financière Paiement Eau</th>
-                      <th>Préstation Familiale</th>
-                      <th>Bourse Primaire et Lycée</th>
-                      <th>Garantie Visal</th>
-                      <th>Aide Paiement Téléphone et Intérnet</th>
-                      <th>Allocation Solidaire Personne Agée</th>
-                      <th>Protection Maladie et Médicament</th>
-                      <th>Complémentaire Santé</th>
-                      <th>Année</th>
-                      <th>ACTION</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                  {% for social in socials %}
-                    <tr>
-                      <td>{{social.id}}</td>
-                      <td>{{social.conditionRsa}}</td>
-                      <td>{{social.rsaJeuneActif}}</td>
-                      <td>{{social.primeActivite}}</td>
-                      <td>{{social.garantieJeunes}}</td>
-                      <td>{{social.primeTransitoireSolidarite}}</td>
-                      <td>{{social.chequeEnergie}}</td>
-                      <td>{{social.aideFinancierePaiementFactureEau}}</td>
-                      <td>{{social.prestationFamiliales}}</td>
-                      <td>{{social.boursePrimaireLycee}}</td>
-                      <td>{{social.garantieVisale}}</td>
-                      <td>{{social.aidePaiementTelephoneInternet}}</td>
-                      <td>{{social.allocationSolidaritePersonneAgee}}</td>
-                      <td>{{social.protectionMaladieEtMedicament}}</td>
-                      <td>{{social.complementaireSante}}</td>
-                      <td>{{social.annee}}</td>
-                      {% if is_granted('ROLE_SOCIAL') %}
-                        <th>
-                            {% if is_granted('ROLE_ADMIN') %}
-                              <a  href="{{ path('app_dashboard_social_delete', {'id': social.id}) }}"
-                                  onClick="return confirm('Voulez-vous supprimer vraiment cette ligne ??')">
-                                <i class="fa fa-trash" style="color:red;margin-right: 5px" aria-hidden="true"></i>
-                              </a>
-                              <a href="{{ path('app_dashboard_social_edit', {'id': social.id}) }}">
-                                <i class="fa fa-edit" style="color:green;" aria-hidden="true"></i>
-                              </a>
-                            {% endif %}
-                            <a onClick="showPersonneSocial('{{social.id}}', '{{ path('app_dashboard_social_id', {'id': social.id}) }}')" data-toggle="modal" data-target="#myModal" style="cursor:pointer"><i class="fa fa-eye" style="color:sky;" aria-hidden="true"></i></a>
-                        </th>
-                      {% endif %}
-                    </tr>
-                  {% endfor %}   
-                  </tbody>
-                </table>
-              </div>
+<div id="page-inner">
+  <div class="row">
+    <div class="col-md-8">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <div class="row">
+            <div class="col-md-4">COMMERCE</div>
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+              <a
+                href="{{ path('app_dashboard_social_create') }}"
+                class="btn btn-primary clsSante"
+                style="float:right;font-size: x-small;"
+              >
+                Ajouter Social
+              </a>
             </div>
           </div>
         </div>
-        {# charjs #}
-        <div class="col-md-4 col-sm-6 col-xs-12" id="col2">  
-          <div class="panel panel-default chartJs">
-            <div class="panel-heading">
-              <div class="card-title">
-                <div class="title">Line Chart</div>
-              </div>
-            </div>
-            <div class="panel-body">
-              <canvas id="line-chart" class="chart"></canvas>
-            </div>
+        <div class="panel-body">
+          <div class="table-responsive">
+            <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+              <thead>
+                <tr>
+                  <th>Id</th>
+                  <th>ConditionRSA</th>
+                  <th>RSA Jeune Actif</th>
+                  <th>Prime Actif</th>
+                  <th>Garantie Jeune</th>
+                  <th>Prime Transitoire Solidaire</th>
+                  <th>Chéque Energie</th>
+                  <th>Aide Financière Paiement Eau</th>
+                  <th>Préstation Familiale</th>
+                  <th>Bourse Primaire et Lycée</th>
+                  <th>Garantie Visal</th>
+                  <th>Aide Paiement Téléphone et Intérnet</th>
+                  <th>Allocation Solidaire Personne Agée</th>
+                  <th>Protection Maladie et Médicament</th>
+                  <th>Complémentaire Santé</th>
+                  <th>Année</th>
+                  <th>ACTION</th>
+                </tr>
+              </thead>
+              <tbody>
+              {% for social in socials %}
+                <tr>
+                  <td>{{social.id}}</td>
+                  <td>{{social.conditionRsa}}</td>
+                  <td>{{social.rsaJeuneActif}}</td>
+                  <td>{{social.primeActivite}}</td>
+                  <td>{{social.garantieJeunes}}</td>
+                  <td>{{social.primeTransitoireSolidarite}}</td>
+                  <td>{{social.chequeEnergie}}</td>
+                  <td>{{social.aideFinancierePaiementFactureEau}}</td>
+                  <td>{{social.prestationFamiliales}}</td>
+                  <td>{{social.boursePrimaireLycee}}</td>
+                  <td>{{social.garantieVisale}}</td>
+                  <td>{{social.aidePaiementTelephoneInternet}}</td>
+                  <td>{{social.allocationSolidaritePersonneAgee}}</td>
+                  <td>{{social.protectionMaladieEtMedicament}}</td>
+                  <td>{{social.complementaireSante}}</td>
+                  <td>{{social.annee}}</td>
+                  {% if is_granted('ROLE_SOCIAL') %}
+                    <th>
+                        {% if is_granted('ROLE_ADMIN') %}
+                          <a  href="{{ path('app_dashboard_social_delete', {'id': social.id}) }}"
+                              onClick="return confirm('Voulez-vous supprimer vraiment cette ligne ??')">
+                            <i class="fa fa-trash" style="color:red;margin-right: 5px" aria-hidden="true"></i>
+                          </a>
+                          <a href="{{ path('app_dashboard_social_edit', {'id': social.id}) }}">
+                            <i class="fa fa-edit" style="color:green;" aria-hidden="true"></i>
+                          </a>
+                        {% endif %}
+                        <a onClick="showPersonneSocial('{{social.id}}', '{{ path('app_dashboard_social_id', {'id': social.id}) }}')" data-toggle="modal" data-target="#myModal" style="cursor:pointer"><i class="fa fa-eye" style="color:sky;" aria-hidden="true"></i></a>
+                    </th>
+                  {% endif %}
+                </tr>
+              {% endfor %}   
+              </tbody>
+            </table>
           </div>
         </div>
-        {# endcharjs #}
       </div>
     </div>
-
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" onClick="loadFonction()" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-              <h4 class="modal-title" id="myModalLabel">Detail de Personne</h4>
+    {# charjs #}
+    <div class="col-md-4 col-sm-6 col-xs-12" id="col2">  
+      <div class="panel panel-default chartJs">
+        <div class="panel-heading">
+          <div class="card-title">
+            <div class="title">Line Chart</div>
           </div>
-          <div class="modal-body" id="modal-body"></div>
+        </div>
+        <div class="panel-body">
+          <canvas id="line-chart" class="chart"></canvas>
+        </div>
       </div>
     </div>
+    {# endcharjs #}
+  </div>
+</div>
+{# popup #}
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" onClick="loadFonction()" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">Detail de Personne</h4>
+      </div>
+      <div class="modal-body" id="modal-body"></div>
+    </div>
+  </div>
+</div>
 {% endblock %}
 
 {% block javascripts %}
@@ -137,7 +130,6 @@
           data:{ id : id},
           async: true,
           success: function(response){
-            console.log(response)
             var html = '';
             html += '<ul>';
             html += '<th><strong>ID</strong>: '+ response.id +'</th><br />';

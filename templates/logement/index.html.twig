@@ -1,14 +1,5 @@
 {% extends 'base.html.twig' %} 
 
-{% block stylesheets %}
-<style>
-  .clsSante{
-    float: right !important;
-    font-size: x-small;
-  }
-</style>
-{% endblock %}
-
 {% block title %}{{ title }}{% endblock %} 
 
 {% block content %}  
@@ -24,6 +15,7 @@
                 <a
                   href="{{ path('app_dashboard_logement_create') }}"
                   class="btn btn-primary clsSante"
+                  style="float:right;font-size: x-small;"
                 >
                   Ajouter Logement
                 </a>

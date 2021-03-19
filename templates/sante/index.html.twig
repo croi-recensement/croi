@@ -1,122 +1,110 @@
 {% extends 'base.html.twig' %} 
 
-{% block stylesheets %}
-<style>
-  .clsSante{
-    float: right !important;
-    font-size: x-small;
-  }
-</style>
-{% endblock %}
-
 {% block title %}{{ title }}{% endblock %} 
 
 {% block content %}
-    {% if is_granted("ROLE_SANTE") %}
-     <div id="page-inner">
-      <div class="row">
-        <div class="col-md-7" id="col1">
-          <div class="panel panel-default">
-            <div class="panel-heading">
-            <div class="row">
-              <div class="col-md-4">SANTER</div>
-              <div class="col-md-4"></div>
-              <div class="col-md-4">
-                <a
-                  href="{{ path('app_dashboard_sante_create') }}"
-                  class="btn btn-primary clsSante"
-                >
-                  Ajouter Santer
-                </a>
-              </div>
-            </div>
-            </div>
-            <div class="panel-body">
-              <div class="table-responsive">
-                <table class="table table-striped table-bordered table-hover" id="dataTables-example">
-                  <thead>
-                    <tr>
-                      <th>Id</th>
-                      <th>Nom Personne</th>
-                      <th>Prenom Personne</th>
-                      <th>Groupe sanguin</th>
-                      <th>Nom maladie</th>
-                      <th>Evacuation</th>
-                      <th>Chirurgie</th>
-                      <th>Nom chirurgie</th>
-                      <th>Coût diagnostique</th>
-                      <th>Coût evacuation</th>
-                      <th>Type</th>
-                      <th>Date evacuation</th>
-                      <th>Date chirurgie</th>
-                      <th>Année</th>
-                      <th>ACTION</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                  {% for maladie in maladies %}
-                    <tr>
-                      <td>{{maladie.id}}</td>
-                      <td>{{maladie.personne.nom}}</td>
-                      <td>{{maladie.personne.prenom}}</td>
-                      <td>{{maladie.personne.groupSangin}}</td>
-                      <td>{{maladie.nom}}</td>
-                      <td>{{maladie.evacuation == 1 ? 'Oui' : 'Non'}}</td>
-                      <td>{{maladie.chirurgie == 1 ? 'Oui' : 'Non' }}</td>
-                      <td>{{maladie.nomChirurgie}}</td>
-                      <td>{{maladie.coutDiagnostique}} €</td>
-                      <td>{{maladie.coutEvacuation}} €</td>
-                      <td>{{maladie.type == 1 ? 'CHRONIQUE' : 'PONCTUELLE' }}</td>
-                      <td>{{maladie.dateEvacuation != null ? maladie.dateEvacuation|date("m/d/Y") : 'Non renseigné'}}</td>
-                      <td>{{maladie.dateChirurgie != null ? maladie.dateChirurgie|date("m/d/Y") : 'Non renseigné'}}</td>
-                      <td>{{maladie.annee}}</td>
-                      {% if is_granted('ROLE_SANTE') %}
-                        <th>
-                            {% if is_granted('ROLE_ADMIN') %}
-                            <a href="{{ path('app_dashboard_sante_delete', {'id': maladie.id}) }}" onClick="return confirm('Voulez-vous supprimer vraiment cette ligne ??')" style="cursor:pointer;color:red;margin-right: 3px" ><i class="fa fa-trash" aria-hidden="true"></i></a>
-                            <a href="{{ path('app_dashboard_sante_edit', {'id': maladie.id}) }}" style="color:green;margin-right: 3px;cursor:pointer"><i class="fa fa-edit" aria-hidden="true"></i></a>
-                            {% endif %}
-                            <a onClick="showPerson('{{maladie.personne.id}}', '{{ path('app_dashboard_sante_id', {'id': maladie.personne.id}) }}')" data-toggle="modal" data-target="#myModal" style="cursor:pointer"><i class="fa fa-eye" style="color:sky;" aria-hidden="true"></i></a>
-                        </th>
-                      {% endif %}
-                    </tr>
-                  {% endfor %}   
-                  </tbody>
-                </table>
-              </div>
+<div id="page-inner">
+  <div class="row">
+    <div class="col-md-7" id="col1">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <div class="row">
+            <div class="col-md-4">SANTER</div>
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+              <a
+                href="{{ path('app_dashboard_sante_create') }}"
+                class="btn btn-primary clsSante"
+                style="float:right; font-size: x-small;"
+              >
+                Ajouter Santer
+              </a>
             </div>
           </div>
         </div>
-        {# charjs #}
-        <div class="col-md-5 col-sm-6 col-xs-12" id="col2">  
-          <div class="panel panel-default chartJs">
-            <div class="panel-heading">
-              <div class="card-title">
-                <div class="title">Line Chart</div>
-              </div>
-            </div>
-            <div class="panel-body">
-              <canvas id="line-chart" class="chart"></canvas>
-            </div>
+        <div class="panel-body">
+          <div class="table-responsive">
+            <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+              <thead>
+                <tr>
+                  <th>Id</th>
+                  <th>Nom Personne</th>
+                  <th>Prenom Personne</th>
+                  <th>Groupe sanguin</th>
+                  <th>Nom maladie</th>
+                  <th>Evacuation</th>
+                  <th>Chirurgie</th>
+                  <th>Nom chirurgie</th>
+                  <th>Coût diagnostique</th>
+                  <th>Coût evacuation</th>
+                  <th>Type</th>
+                  <th>Date evacuation</th>
+                  <th>Date chirurgie</th>
+                  <th>Année</th>
+                  <th>ACTION</th>
+                </tr>
+              </thead>
+              <tbody>
+              {% for maladie in maladies %}
+                <tr>
+                  <td>{{maladie.id}}</td>
+                  <td>{{maladie.personne.nom}}</td>
+                  <td>{{maladie.personne.prenom}}</td>
+                  <td>{{maladie.personne.groupSangin}}</td>
+                  <td>{{maladie.nom}}</td>
+                  <td>{{maladie.evacuation == 1 ? 'Oui' : 'Non'}}</td>
+                  <td>{{maladie.chirurgie == 1 ? 'Oui' : 'Non' }}</td>
+                  <td>{{maladie.nomChirurgie}}</td>
+                  <td>{{maladie.coutDiagnostique}} €</td>
+                  <td>{{maladie.coutEvacuation}} €</td>
+                  <td>{{maladie.type == 1 ? 'CHRONIQUE' : 'PONCTUELLE' }}</td>
+                  <td>{{maladie.dateEvacuation != null ? maladie.dateEvacuation|date("m/d/Y") : 'Non renseigné'}}</td>
+                  <td>{{maladie.dateChirurgie != null ? maladie.dateChirurgie|date("m/d/Y") : 'Non renseigné'}}</td>
+                  <td>{{maladie.annee}}</td>
+                  {% if is_granted('ROLE_SANTE') %}
+                    <th>
+                        {% if is_granted('ROLE_ADMIN') %}
+                        <a href="{{ path('app_dashboard_sante_delete', {'id': maladie.id}) }}" onClick="return confirm('Voulez-vous supprimer vraiment cette ligne ??')" style="cursor:pointer;color:red;margin-right: 3px" ><i class="fa fa-trash" aria-hidden="true"></i></a>
+                        <a href="{{ path('app_dashboard_sante_edit', {'id': maladie.id}) }}" style="color:green;margin-right: 3px;cursor:pointer"><i class="fa fa-edit" aria-hidden="true"></i></a>
+                        {% endif %}
+                        <a onClick="showPerson('{{maladie.personne.id}}', '{{ path('app_dashboard_sante_id', {'id': maladie.personne.id}) }}')" data-toggle="modal" data-target="#myModal" style="cursor:pointer"><i class="fa fa-eye" style="color:sky;" aria-hidden="true"></i></a>
+                    </th>
+                  {% endif %}
+                </tr>
+              {% endfor %}   
+              </tbody>
+            </table>
           </div>
         </div>
-        {# endcharjs #}
       </div>
     </div>
-    {% endif %}
-
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" onClick="loadFonction()" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-              <h4 class="modal-title" id="myModalLabel">Detail de Personne</h4>
+    {# charjs #}
+    <div class="col-md-5 col-sm-6 col-xs-12" id="col2">  
+      <div class="panel panel-default chartJs">
+        <div class="panel-heading">
+          <div class="card-title">
+            <div class="title">Line Chart</div>
           </div>
-          <div class="modal-body" id="modal-body">
-            
-          </div>
+        </div>
+        <div class="panel-body">
+          <canvas id="line-chart" class="chart"></canvas>
+        </div>
       </div>
     </div>
+    {# endcharjs #}
+  </div>
+</div>
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" onClick="loadFonction()" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title" id="myModalLabel">Detail de Personne</h4>
+      </div>
+      <div class="modal-body" id="modal-body"></div>
+    </div>
+  </div>
+</div>
 {% endblock %}
 
 {% block javascripts %}
