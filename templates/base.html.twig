@@ -26,16 +26,50 @@
     <meta charset="UTF-8" />
     <title>{% block title %}Welcome!{% endblock %}</title>
     {# Run `composer require symfony/webpack-encore-bundle` and uncomment the
-    following Encore helpers to start using Symfony UX #} {% block stylesheets
-    %} {#{{
+    following Encore helpers to start using Symfony UX #} 
+    {% block stylesheets %} 
+      <style>
+        #bwp-scroll-top.bwp-visible {
+            bottom: 30px;
+            opacity: 1;
+            visibility: visible;
+        }
+
+        #bwp-scroll-top{
+          position: fixed;
+          z-index: 1041;
+          display: inline-block;
+          right: 30px;
+          width: 44px;
+          height: 44px;
+          line-height: 44px;
+          text-align: center;
+          font-size: 16px;
+          background-color: #fff;
+          border-radius: 50%;
+          box-shadow: 0 14px 28px -4px rgb(14 17 20 / 15%)
+        }
+
+        #bwp-scroll-top:hover {
+            color: #fff;
+            background-color: #6ca4db;
+        }
+
+        #bwp-scroll-top:focus {
+            color: #4c4f53;
+        }
+
+      </style>
+    {% endblock %}
+    {#{{
       encore_entry_link_tags("app")
-    }}#} {% endblock %} {% block javascripts %} {#{{
+    }}#}{% block javascripts %} {#{{
       encore_entry_script_tags("app")
     }}#} {% endblock %}
   </head>
   <body>
   {% if app.user != null %}
-
+  
   <div id="wrapper">
     <nav class="navbar navbar-default top-navbar" role="navigation">
       <div class="navbar-header">
@@ -73,7 +107,7 @@
             <a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
           </li>
           <li>
-            <a href="#"><i class="fa fa-file" aria-hidden="true"></i> Exporter CSV</a>
+            <a href="{{ path('app_dashboard_import') }}"><i class="fa fa-file" aria-hidden="true"></i> Exporter CSV</a>
           </li>
           <li class="divider"></li>
           <li>
@@ -221,13 +255,13 @@
 
     <div id="page-wrapper" class="page-default">
       <div class="header ">
-      <h1 class="page-header">{% if title  is defined %} {{ title }}{% endif %} </h1>
-      <ol class="breadcrumb">
-        <li>Home</li>
-        <li>Dashboard</li>
-        <li class="active">{{ app.request.requestUri|split('/', 3)|last }}</li>
-      </ol>
-    </div>
+        <h1 class="page-header">{% if title  is defined %} {{ title }}{% endif %} </h1>
+        <ol class="breadcrumb">
+          <li>Home</li>
+          <li>Dashboard</li>
+          <li class="active">{{ app.request.requestUri|split('/', 3)|last }}</li>
+        </ol>
+      </div>
       {% if is_granted(app.user.roles[0]) %}
         {% for message in app.flashes('success') %}
           <div class="header ">
@@ -237,29 +271,18 @@
           </div>
         {% endfor %}
         {% block content %}{% endblock %}
+        <a rel="nofollow" href="#" id="bwp-scroll-top" class="bwp-visible"><i class="fa fa-caret-up"></i></a>
       {% endif %}
-</div>
+    </div>
 {% endif %}
-
+   
    {% block body %}{% endblock %}
-   <div><a href='#' class='retourHaut'>MAINTENANT</a></div>
 
     <script src="{{ asset('vendor/jquery/jquery-3.2.1.min.js') }}"></script>
-
     <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('assets/js/jquery.metisMenu.js') }}"></script>
     <script src="{{ asset('assets/js/dataTables/jquery.dataTables.js') }}"></script>
     <script src="{{ asset('assets/js/dataTables/dataTables.bootstrap.js') }}"></script>
-
-    <script src="{{ asset('assets/js/morris/raphael-2.1.0.min.js') }}"></script>
-    <script src="{{ asset('assets/js/morris/morris.js') }}"></script>
-    <script src="{{ asset('assets/js/easypiechart.js') }}"></script>
-    <script src="{{ asset('assets/js/easypiechart-data.js') }}"></script>
-    <script src="{{
-        asset('assets/js/Lightweight-Chart/jquery.chart.js')
-      }}"></script>
-   <script src="{{ asset('assets/js/custom-scripts.js') }}"></script>
-   <script src="{{ asset('js/main.js') }}"></script>
+    
 
     <script>
       $(document).ready(function () {
@@ -274,6 +297,20 @@
       }
 
     </script>
+
+    {#<script src="{{ asset('assets/js/jquery.metisMenu.js') }}"></script>
+    <script src="{{ asset('assets/js/dataTables/jquery.dataTables.js') }}"></script>
+    <script src="{{ asset('assets/js/dataTables/dataTables.bootstrap.js') }}"></script>
+
+    <script src="{{ asset('assets/js/morris/raphael-2.1.0.min.js') }}"></script>
+    <script src="{{ asset('assets/js/morris/morris.js') }}"></script>
+    <script src="{{ asset('assets/js/easypiechart.js') }}"></script>
+    <script src="{{ asset('assets/js/easypiechart-data.js') }}"></script>
+    <script src="{{
+        asset('assets/js/Lightweight-Chart/jquery.chart.js')
+      }}"></script>
+   <script src="{{ asset('assets/js/custom-scripts.js') }}"></script>
+   <script src="{{ asset('js/main.js') }}"></script>#}
      
   </body>
 </html>
