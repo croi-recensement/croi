@@ -5,7 +5,7 @@
 {% block content %}
 <div id="page-inner">
   <div class="row">
-    <div class="col-md-7" id="col1">
+    <div id="boxTab" class="col-sm-7">
       <div class="panel panel-default">
         <div class="panel-heading">
           <div class="row">
@@ -79,7 +79,7 @@
       </div>
     </div>
     {# charjs #}
-    <div class="col-md-5 col-sm-6 col-xs-12" id="col2">  
+    <div class="col-md-5 col-sm-6 col-xs-12 boxChart">  
       <div class="panel panel-default chartJs">
         <div class="panel-heading">
           <div class="card-title">
@@ -186,19 +186,6 @@
         };
         myLineChart = new Chart(ctx).Line(data, options);
       });
-
-       $(document).ready(function () {
-		    $("#sideNav").click(function(){
-          if($(this).hasClass('closed')){
-            $( "#col1" ).removeClass( "col-md-12" ).addClass( "col-md-7" );
-            $("#col2").show()
-          }else{
-            $( "#col1" ).removeClass( "col-md-7" ).addClass( "col-md-12" );
-            $("#col2").hide()
-          }
-        });
-      });
-
 
   </script>
 {% endblock %}

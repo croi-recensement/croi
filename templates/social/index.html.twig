@@ -5,7 +5,7 @@
 {% block content %} 
 <div id="page-inner">
   <div class="row">
-    <div class="col-md-8">
+    <div class="col-sm-8" id="boxTab">
       <div class="panel panel-default">
         <div class="panel-heading">
           <div class="row">
@@ -88,7 +88,7 @@
       </div>
     </div>
     {# charjs #}
-    <div class="col-md-4 col-sm-6 col-xs-12" id="col2">  
+    <div class="col-md-4 col-sm-6 col-xs-12 boxChart">  
       <div class="panel panel-default chartJs">
         <div class="panel-heading">
           <div class="card-title">
@@ -209,6 +209,7 @@
         };
         myLineChart = new Chart(ctx).Line(data, options);
       });
+
   </script>
 
 {% endblock %}

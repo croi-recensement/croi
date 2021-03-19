@@ -268,28 +268,42 @@
     
 
     <script>
-      $("#sideNav").click(function(){
-        if($(this).hasClass('closed')){
-          $('.navbar-side').animate({left: '0px'});
-          $(this).removeClass('closed');
-          $('#page-wrapper').animate({'margin-left' : '260px'});
-        }else{
-          $(this).addClass('closed');
-          $('.navbar-side').animate({left: '-260px'});
-          $('#page-wrapper').animate({'margin-left' : '0px'}); 
-        }
-      })
-
-      $(document).ready(function () {
-          $('#dataTables-example').dataTable();
-      });
-
-      function admindash(){
-        event.preventdefault
-        const a = document.createElement('a');
-        div.className = 'active-menu';
-
+    //menu left
+    $("#sideNav").click(function(){
+      if($(this).hasClass('closed')){
+        $('.navbar-side').animate({left: '0px'});
+        $(this).removeClass('closed');
+        $('#page-wrapper').animate({'margin-left' : '260px'});
+      }else{
+        $(this).addClass('closed');
+        $('.navbar-side').animate({left: '-260px'});
+        $('#page-wrapper').animate({'margin-left' : '0px'}); 
       }
+    })
+
+    //chart
+    $(document).ready(function () {
+    $("#sideNav").click(function(){
+      if($(this).hasClass('closed')){
+        $('.boxChart').hide();
+        $("#boxTab").addClass('col-md-12');
+      }else{
+        $("#boxTab").removeClass('col-md-12');
+        $('.boxChart').show();
+      }
+    });
+  });
+
+  $(document).ready(function () {
+      $('#dataTables-example').dataTable();
+  });
+
+  function admindash(){
+    event.preventdefault
+    const a = document.createElement('a');
+    div.className = 'active-menu';
+
+  }
 
     </script>
   </body>
