@@ -143,27 +143,6 @@
 							  </ul>
 						</li>
           {% endif %}
-          {#{% if is_granted('ROLE_ADMIN') %}
-            <li class="dropdown">
-              <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-sitemap"></i>COMMUNAUTE<span class="fa arrow"></a>
-              <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <li>
-                  <a {% if app.request.get('_route') == 'app_dashboard_membre' %} class="active-menu"{% endif %}
-                    class="dropdown-item" 
-                   href="{{ path('app_dashboard_membre') }}">Membre de la communauté</a>
-                </li>
-                <li>
-                  <a {% if app.request.get('_route') == 'app_dashboard_femme' %} class="active-menu"{% endif %}
-                    class="dropdown-item" 
-                    href="{{ path('app_dashboard_femme') }}">Femme du membre</a>
-                  </li>
-                <li>
-                  <a {% if app.request.get('_route') == 'app_dashboard_enfant' %} class="active-menu"{% endif %}
-                    class="dropdown-item" 
-                    href="{{ path('app_dashboard_enfant') }}">Enfant du membre</a></li>
-              </ul>
-            </li>
-          {% endif %}#}
           {% if  is_granted('ROLE_SANTE') %}
             <li>
               <a 
@@ -289,6 +268,18 @@
     
 
     <script>
+      $("#sideNav").click(function(){
+        if($(this).hasClass('closed')){
+          $('.navbar-side').animate({left: '0px'});
+          $(this).removeClass('closed');
+          $('#page-wrapper').animate({'margin-left' : '260px'});
+        }else{
+          $(this).addClass('closed');
+          $('.navbar-side').animate({left: '-260px'});
+          $('#page-wrapper').animate({'margin-left' : '0px'}); 
+        }
+      })
+
       $(document).ready(function () {
           $('#dataTables-example').dataTable();
       });
@@ -301,20 +292,5 @@
       }
 
     </script>
-
-    {#<script src="{{ asset('assets/js/jquery.metisMenu.js') }}"></script>
-    <script src="{{ asset('assets/js/dataTables/jquery.dataTables.js') }}"></script>
-    <script src="{{ asset('assets/js/dataTables/dataTables.bootstrap.js') }}"></script>
-
-    <script src="{{ asset('assets/js/morris/raphael-2.1.0.min.js') }}"></script>
-    <script src="{{ asset('assets/js/morris/morris.js') }}"></script>
-    <script src="{{ asset('assets/js/easypiechart.js') }}"></script>
-    <script src="{{ asset('assets/js/easypiechart-data.js') }}"></script>
-    <script src="{{
-        asset('assets/js/Lightweight-Chart/jquery.chart.js')
-      }}"></script>
-   <script src="{{ asset('assets/js/custom-scripts.js') }}"></script>
-   <script src="{{ asset('js/main.js') }}"></script>#}
-     
   </body>
 </html>
