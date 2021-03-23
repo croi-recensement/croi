@@ -15,7 +15,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class PersonneController extends AbstractController
 {
     /**
-     * @Route("/admin", name="app_dashboard")
+     * @Route("/admin", name="app_personne")
      */
     public function index(): Response
     {
@@ -26,7 +26,7 @@ class PersonneController extends AbstractController
         return $this->render('personne/index.html.twig', [
             'controller_name' => 'PersonneController',
             'personnes' => $personnes,
-            'title' => 'Inscription du Personne'
+            'title' => 'Ajout des Personnes'
         ]);
     }
 

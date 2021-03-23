@@ -12,17 +12,23 @@ class ChartService {
         $datasLabels =  isset($tabDatas) ? $tabDatas : [];
         sort($datasLabels);
         $getValues = array_count_values($datasLabels);
-        $nombreGlobal = count($datasPers);
-        $nombreWith = count($datasCas);
-        $nombreWithout = $nombreGlobal - $nombreWith;
-        foreach($getValues as $getVal){
-            $calculeWiht['calculeWithout'][] = ((($nombreWith - $getVal) + $nombreWithout) * 100) / $nombreGlobal;
-            $calculeWiht['calculeWiht'][] = ($getVal * 100) / $nombreGlobal;
+
+        if(isset($getValues) && $getValues != null){
+            $nombreGlobal = count($datasPers);
+            $nombreWith = count($datasCas);
+            $nombreWithout = $nombreGlobal - $nombreWith;
+            foreach($getValues as $getVal){
+                $calculeWiht['calculeWithout'][] = ((($nombreWith - $getVal) + $nombreWithout) * 100) / $nombreGlobal;
+                $calculeWiht['calculeWiht'][] = ($getVal * 100) / $nombreGlobal;
+            }
+            $calculeWiht['labels'] = array_unique($datasLabels);
+        }else{
+            $calculeWiht['labels'] = [];
+            $calculeWiht['calculeWithout'] = [];
+            $calculeWiht['calculeWiht'] = [];
         }
-        $calculeWiht['labels'] = array_unique($datasLabels);
-        $datas = isset($calculeWiht) ? $calculeWiht : [];
         
-        return $datas ; 
+        return $calculeWiht ; 
     }
 
     public function chartLogement($datasCas, $datasPers){
@@ -40,20 +46,26 @@ class ChartService {
         $nombreGlobal = count($datasPers);
         $nombreWith = count($datasCas);
         $nombreWithout = $nombreGlobal - $nombreWith;
-        foreach($getProprs as $getPropr){
-            foreach($getPropr as $p){
-               $dataProps['proprietaire'][] = ($p * 100) / $nombreGlobal;
-            }
-        }
-        foreach($getLocs as $getLoc){
-            foreach($getLoc as $l){
-               $dataProps['locataire'][] = ((($nombreWith - $l) + $nombreWithout) * 100) / $nombreGlobal;
-            }
-        }
-        $dataProps['labels'] = array_unique($labelsBlobs);
-        $datas =  isset($dataProps) ? $dataProps : [];
 
-        return $datas;   
+        if(isset($getProprs) && isset($getLocs) && $getProprs != null && $getLocs != null){
+            foreach($getProprs as $getPropr){
+                foreach($getPropr as $p){
+                   $dataProps['proprietaire'][] = ($p * 100) / $nombreGlobal;
+                }
+            }
+            foreach($getLocs as $getLoc){
+                foreach($getLoc as $l){
+                   $dataProps['locataire'][] = ((($nombreWith - $l) + $nombreWithout) * 100) / $nombreGlobal;
+                }
+            }
+            $dataProps['labels'] = array_unique($labelsBlobs);
+        }else{
+            $dataProps['labels'] = [];
+            $dataProps['proprietaire'] = [];
+            $dataProps['locataire'] = [];
+        }
+        
+        return $dataProps;   
     }
     
 }

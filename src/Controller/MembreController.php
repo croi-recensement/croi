@@ -4,6 +4,9 @@ namespace App\Controller;
 
 use App\Entity\Personne;
 use App\Entity\Membre;
+use App\Entity\Femme;
+use App\Entity\Enfants;
+
 use App\Form\MembreType;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -38,14 +41,15 @@ class MembreController extends AbstractController
      */
     public function create(Request $request)
     {
-       $membre = new Membre();
-
+       $membre = new Membre();       
 
         $form = $this->createForm(MembreType::class, $membre);
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            dd($membre);
+          
             $em->persist($membre);
             $em->flush();
             $this->addFlash('success', 'Ajout Membre avec succèss!!!');

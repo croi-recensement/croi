@@ -17,32 +17,6 @@ class Social
      */
     private $id;
 
-
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     */
-    private $conditionRsa;
-
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     */
-    private $rsaJeuneActif;
-
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     */
-    private $primeActivite;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $garantieJeunes;
-
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     */
-    private $chequeEnergie;
-
     /**
      * @ORM\Column(type="integer", nullable=true)
      */
@@ -52,21 +26,6 @@ class Social
      * @ORM\Column(type="integer", nullable=true)
      */
     private $prestationFamiliales;
-
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     */
-    private $boursePrimaireLycee;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $garantieVisale;
-
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     */
-    private $aidePaiementTelephoneInternet;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -108,79 +67,6 @@ class Social
         return $this->id;
     }
 
-    public function getConditionRsa(): ?int
-    {
-        return $this->conditionRsa;
-    }
-
-    public function setConditionRsa(?int $conditionRsa): self
-    {
-        $this->conditionRsa = $conditionRsa;
-
-        return $this;
-    }
-
-    public function getRsaJeuneActif(): ?int
-    {
-        return $this->rsaJeuneActif;
-    }
-
-    public function setRsaJeuneActif(?int $rsaJeuneActif): self
-    {
-        $this->rsaJeuneActif = $rsaJeuneActif;
-
-        return $this;
-    }
-
-    public function getPrimeActivite(): ?int
-    {
-        return $this->primeActivite;
-    }
-
-    public function setPrimeActivite(?int $primeActivite): self
-    {
-        $this->primeActivite = $primeActivite;
-
-        return $this;
-    }
-
-    public function getGarantieJeunes(): ?string
-    {
-        return $this->garantieJeunes;
-    }
-
-    public function setGarantieJeunes(?string $garantieJeunes): self
-    {
-        $this->garantieJeunes = $garantieJeunes;
-
-        return $this;
-    }
-
-    public function getChequeEnergie(): ?int
-    {
-        return $this->chequeEnergie;
-    }
-
-    public function setChequeEnergie(?int $chequeEnergie): self
-    {
-        $this->chequeEnergie = $chequeEnergie;
-
-        return $this;
-    }
-
-    public function getAideFinancierePaiementFactureEau(): ?int
-    {
-        return $this->aideFinancierePaiementFactureEau;
-    }
-
-    public function setAideFinancierePaiementFactureEau(?int $aideFinancierePaiementFactureEau): self
-    {
-        $this->aideFinancierePaiementFactureEau = $aideFinancierePaiementFactureEau;
-
-        return $this;
-    }
-    
-
     public function getPrestationFamiliales(): ?int
     {
         return $this->prestationFamiliales;
@@ -189,30 +75,6 @@ class Social
     public function setPrestationFamiliales(?int $prestationFamiliales): self
     {
         $this->prestationFamiliales = $prestationFamiliales;
-
-        return $this;
-    }
-
-    public function getBoursePrimaireLycee(): ?int
-    {
-        return $this->boursePrimaireLycee;
-    }
-
-    public function setBoursePrimaireLycee(?int $boursePrimaireLycee): self
-    {
-        $this->boursePrimaireLycee = $boursePrimaireLycee;
-
-        return $this;
-    }
-
-    public function getGarantieVisale(): ?string
-    {
-        return $this->garantieVisale;
-    }
-
-    public function setGarantieVisale(?string $garantieVisale): self
-    {
-        $this->garantieVisale = $garantieVisale;
 
         return $this;
     }

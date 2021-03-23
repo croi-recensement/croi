@@ -1,17 +1,21 @@
-{% extends 'base.html.twig' %} {% block title %}{{ title }}{% endblock %} {%
-block content %} {% if is_granted('ROLE_ADMIN') %}
+{% extends 'base.html.twig' %} 
+
+{% block title %}{{ title }}{% endblock %} 
+
+{% block content %} {% if is_granted('ROLE_ADMIN') %}
 <div id="page-inner">
   <div class="row">
     <div class="col-md-12">
       <div class="panel panel-default">
         <div class="panel-heading">
           <div class="row">
-            <div class="col-md-4">COMMUNAUTE</div>
+            <div class="col-md-4">Listes des Personnes entrants</div>
             <div class="col-md-4"></div>
             <div class="col-md-4">
               <a
                 href="{{ path('app_dashboard_admin_create') }}"
-                class="btn btn-primary"
+                class="btn btn-primary clsSante"
+                style="float:right; font-size: x-small;"
               >
                 Ajouter Personne
               </a>

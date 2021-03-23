@@ -1,4 +1,20 @@
-{% extends 'base.html.twig' %} {% block content %}
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+<style>
+  .btnMemb{
+    text-align: center;
+  }
+  .btnAjout{
+    display: flex;
+    justify-content: center;
+  }
+</style>
+{% endblock %}
+
+{% block title %}Ajout Membre{% endblock %}
+
+{% block content %}
 <div id="page-inner">
   <div class="row">
     <div class="col-xs-12">
@@ -16,10 +32,18 @@
                 <div class="sub-title">Qui peuvent dévenir membre :</div>
                 {{ form_widget(form.personne, {'attr' : {'class': 'form-control'}}) }}
               </div>
+              <div class="form-group col-md-12">
+                <div class="sub-title">La femmes du membre :</div>
+                {{ form_widget(form.femme, {'attr' : {'class': 'form-control'}}) }}
+              </div>
+              <div class="form-group col-md-12">
+                <div class="sub-title">Les Enfants du membre :</div>
+                {{ form_widget(form.enfant, {'attr' : {'class': 'form-control'}}) }}
+              </div>
             </div>
-            <div class="row justify-content-md-center">
-              <div class="form-group col-md-4">
-                <button type="submit" class="btn btn-primary align-self-center">
+            <div class="row btnAjout">
+              <div class="form-group col-md-4 btnMemb">
+                <button type="submit" class="btn btn-success btn-block">
                   Ajouter Membre
                 </button>
               </div>

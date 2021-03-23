@@ -5,7 +5,11 @@
 {% block content %}  
 <div id="page-inner">
   <div class="row">
-    <div class="col-sm-7" id="boxTab">
+   {% if labels != null and calculeWithout != null and calculeWiht != null %}
+      <div class="col-sm-7" id="boxTab">
+    {% else %}
+    <div class="col-sm-12" id="boxTab">
+    {% endif %}
       <div class="panel panel-default">
         <div class="panel-heading">
           <div class="row">
@@ -14,8 +18,8 @@
             <div class="col-md-4">
               <a
                 href="{{ path('app_dashboard_education_create') }}"
-                class="btn btn-light"
-                stype="float: right; font-size: x-small;"
+                class="btn btn-primary"
+                style="float: right; font-size: x-small;"
               >
                 Ajouter Education
               </a>
@@ -77,6 +81,7 @@
       </div>
     </div>
     {# charjs #}
+    {% if labels != null and calculeWithout != null and calculeWiht != null %}
     <div class="col-md-5 col-sm-6 col-xs-12 boxChart">  
       <div class="panel panel-default chartJs">
         <div class="panel-heading">
@@ -90,6 +95,7 @@
       </div>
     </div>
     {# endcharjs #}
+    {% endif %}
   </div>
 </div>
 {# popup #}

@@ -23,17 +23,37 @@ class MembreType extends AbstractType
             ->add("personne", EntityType::class, [
                 'class' => Personne::class,
                 'query_builder' => function($personne){
-                    return $personne->createQueryBuilder('p')
-                               ->where('p.sexe = :sexe')
-                               ->setParameter('sexe', 'masculin')
-                               ->andWhere('YEAR(CURRENT_DATE()) - YEAR(p.dateNaissance) >= 18')
-                               ->andWhere('p.situationMarital = :situationMarital')
-                               ->setParameter('situationMarital', 'Marié');
-                               
+                    return $this->sqlQuery($personne, 'masculin', 'Marié');          
                 },
                 'choice_label' => 'nom',
-                'multiple'      => false
+                'multiple'      => true
+            ])
+            ->add("femme", EntityType::class, [
+                'class' => Personne::class,
+                'query_builder' => function($femme){
+                    return $this->sqlQuery($femme, 'feminin', 'Marié');          
+                },
+                'choice_label' => 'nom',
+                'multiple'      => true
+            ])
+            ->add("enfant", EntityType::class, [
+                'class' => Personne::class,
+                'query_builder' => function($enfant){
+                    return $this->sqlQuery($enfant, 'feminin', 'Célibataire');
+                },
+                'choice_label' => 'nom',
+                'multiple'      => true
             ]);
+    }
+
+    private function sqlQuery($personne, $sexe, $situation){
+        
+            return $personne->createQueryBuilder('p')
+                            ->where('p.sexe = :sexe')
+                            ->setParameter('sexe', $sexe)
+                            ->andWhere("(YEAR(CURRENT_DATE()) - YEAR(p.dateNaissance) >= 18)")
+                            ->andWhere('p.situationMarital = :situationMarital')
+                            ->setParameter('situationMarital', $situation);
     }
 
     public function configureOptions(OptionsResolver $resolver)

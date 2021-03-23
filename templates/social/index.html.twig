@@ -2,14 +2,18 @@
 
 {% block title %}{{ title }}{% endblock %} 
 
-{% block content %} 
+{% block content %}
 <div id="page-inner">
   <div class="row">
-    <div class="col-sm-8" id="boxTab">
+    {% if labels != null and calculeWithout != null and calculeWiht != null %}
+      <div class="col-sm-8" id="boxTab">
+    {% else %}
+    <div class="col-sm-12" id="boxTab">
+    {% endif %}
       <div class="panel panel-default">
         <div class="panel-heading">
           <div class="row">
-            <div class="col-md-4">COMMERCE</div>
+            <div class="col-md-4">SOCIAL</div>
             <div class="col-md-4"></div>
             <div class="col-md-4">
               <a
@@ -28,17 +32,7 @@
               <thead>
                 <tr>
                   <th>Id</th>
-                  <th>ConditionRSA</th>
-                  <th>RSA Jeune Actif</th>
-                  <th>Prime Actif</th>
-                  <th>Garantie Jeune</th>
-                  <th>Prime Transitoire Solidaire</th>
-                  <th>Chéque Energie</th>
-                  <th>Aide Financière Paiement Eau</th>
                   <th>Préstation Familiale</th>
-                  <th>Bourse Primaire et Lycée</th>
-                  <th>Garantie Visal</th>
-                  <th>Aide Paiement Téléphone et Intérnet</th>
                   <th>Allocation Solidaire Personne Agée</th>
                   <th>Protection Maladie et Médicament</th>
                   <th>Complémentaire Santé</th>
@@ -50,17 +44,7 @@
               {% for social in socials %}
                 <tr>
                   <td>{{social.id}}</td>
-                  <td>{{social.conditionRsa}}</td>
-                  <td>{{social.rsaJeuneActif}}</td>
-                  <td>{{social.primeActivite}}</td>
-                  <td>{{social.garantieJeunes}}</td>
-                  <td>{{social.primeTransitoireSolidarite}}</td>
-                  <td>{{social.chequeEnergie}}</td>
-                  <td>{{social.aideFinancierePaiementFactureEau}}</td>
                   <td>{{social.prestationFamiliales}}</td>
-                  <td>{{social.boursePrimaireLycee}}</td>
-                  <td>{{social.garantieVisale}}</td>
-                  <td>{{social.aidePaiementTelephoneInternet}}</td>
                   <td>{{social.allocationSolidaritePersonneAgee}}</td>
                   <td>{{social.protectionMaladieEtMedicament}}</td>
                   <td>{{social.complementaireSante}}</td>
@@ -88,6 +72,7 @@
       </div>
     </div>
     {# charjs #}
+    {% if labels != null and calculeWithout != null and calculeWiht != null %}
     <div class="col-md-4 col-sm-6 col-xs-12 boxChart">  
       <div class="panel panel-default chartJs">
         <div class="panel-heading">
@@ -101,6 +86,7 @@
       </div>
     </div>
     {# endcharjs #}
+    {% endif %}
   </div>
 </div>
 {# popup #}
@@ -142,16 +128,7 @@
             html += '<th><strong>GROUPE SANGUIN</strong> : '+ response.personne.groupSangin +'</th><br />';
             html += '<th><strong>PAYS D\'ORIGINE</strong> : '+ response.personne.paysOrigin +'</th><br />';
             html += '<th><strong>SEXE</strong> : '+ response.personne.sexe +'</th><br />';
-            html += '<th><strong>CONDITION RSA</strong> : '+ response.conditionRsa +'</th><br />';
-            html += '<th><strong>RSA JEUNE ACTIF RSA</strong> : '+ response.rsaJeuneActif +'</th><br />';
-            html += '<th><strong>PRIME ACTIVITE</strong> : '+ response.primeActivite +'</th><br />';
-            html += '<th><strong>GARANTIE JEUNE</strong> : '+ response.garantieJeunes +'</th><br />';
-            html += '<th><strong>PRIME TRANSITOIRE SOLIDAIRE</strong> : '+ response.primeTransitoireSolidarite +'</th><br />';
-            html += '<th><strong>CHEQUE ENERGIE</strong> : '+ response.chequeEnergie +'</th><br />';
-            html += '<th><strong>AIDE FINANCIERE FACTURE JIRAMA</strong> : '+ response.aideFinancierePaiementFactureEau +'</th><br />';
             html += '<th><strong>PRESTATION FAMILLIALE</strong> : '+ response.prestationFamiliales +'</th><br />';
-            html += '<th><strong>BOURSE D\'ETUDE</strong> : '+ response.boursePrimaireLycee +'</th><br />';
-            html += '<th><strong>GARANTIE VISA</strong> : '+ response.garantieVisale +'</th><br />';
             html += '<th><strong>AIDE PAIEMENT TELEPHONIQUE</strong> : '+ response.aidePaiementTelephoneInternet +'</th><br />';
             html += '<th><strong>ALLOCATION SOLIDARITE PERSONNE AGE</strong> : '+ response.allocationSolidaritePersonneAgee +'</th><br />';
             html += '<th><strong>PROTECTION MEDICAL</strong> : '+ response.protectionMaladieEtMedicament +'</th><br />';

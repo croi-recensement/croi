@@ -1,4 +1,20 @@
-{% extends 'base.html.twig' %} {% block content %}
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+<style>
+  .btnSport{
+    text-align: center;
+  }
+  .btnAjout{
+    display: flex;
+    justify-content: center;
+  }
+</style>
+{% endblock %}
+
+{% block title %}Ajout Sport{% endblock %}
+
+{% block content %}
 <div id="page-inner">
   <div class="row">
     <div class="col-xs-12">
@@ -31,9 +47,9 @@
                 {{ form_widget(form.personne, {'attr' : {'class': 'form-control', 'id':'date-evacuation'}}) }}
               </div> 
             </div>
-            <div class="row justify-content-md-center">
-              <div class="form-group col-md-4">
-                <button type="submit" class="btn btn-primary align-self-center">
+            <div class="row btnAjout">
+              <div class="form-group col-md-4 btnSport">
+                <button type="submit" class="btn btn-success btn-block">
                   Ajouter Sport
                 </button>
               </div>

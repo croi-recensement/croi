@@ -5,7 +5,11 @@
 {% block content %}  
   <div id="page-inner">
       <div class="row">
-        <div id="boxTab" class="col-sm-8">
+        {% if labels != null and calculeWithout != null and calculeWiht != null %}
+          <div class="col-sm-8" id="boxTab">
+        {% else %}
+        <div class="col-sm-12" id="boxTab">
+        {% endif %}
           <div class="panel panel-default">
             <div class="panel-heading">
               <div class="row">
@@ -85,6 +89,7 @@
           </div>
         </div>
         {# charjs #}
+        {% if labels != null and calculeWithout != null and calculeWiht != null %}
         <div class="col-md-4 col-sm-6 col-xs-12 boxChart">  
           <div class="panel panel-default chartJs">
             <div class="panel-heading">
@@ -98,6 +103,7 @@
           </div>
         </div>
         {# endcharjs #}
+        {% endif %}
       </div>
     </div>
 {% endblock %}

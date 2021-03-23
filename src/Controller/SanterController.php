@@ -27,7 +27,7 @@ class SanterController extends AbstractController
                           ->getRepository('App\Entity\Personne')->findAll();
 
         $datas = $chartService->chart($persMalades, $personnes);
-
+        
         return $this->render('sante/index.html.twig', [
             'controller_name' => 'SanterController',
             'maladies' => $persMalades,

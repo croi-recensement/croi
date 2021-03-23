@@ -23,6 +23,16 @@ class Membre
      */
     private $personne;
 
+    /**
+     * @ORM\OneToOne(targetEntity=Femme::class, cascade={"persist", "remove"})
+     */
+    private $femme;
+
+    /**
+     * @ORM\OneToOne(targetEntity=Enfants::class, cascade={"persist", "remove"})
+     */
+    private $enfant;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -36,6 +46,30 @@ class Membre
     public function setPersonne(Personne $personne): self
     {
         $this->personne = $personne;
+
+        return $this;
+    }
+
+    public function getFemme(): ?Femme
+    {
+        return $this->femme;
+    }
+
+    public function setFemme(?Femme $femme): self
+    {
+        $this->femme = $femme;
+
+        return $this;
+    }
+
+    public function getEnfant(): ?Enfants
+    {
+        return $this->enfant;
+    }
+
+    public function setEnfant(?Enfants $enfant): self
+    {
+        $this->enfant = $enfant;
 
         return $this;
     }

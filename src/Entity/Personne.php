@@ -74,11 +74,6 @@ class Personne
      */
     private $sexe;
 
-    /**
-     * @ORM\OneToMany(targetEntity=Finance::class, mappedBy="personne")
-     */
-    private $finance;
-
     public function __construct()
     {
         //$this->maladies = new ArrayCollection();

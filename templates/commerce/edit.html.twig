@@ -1,4 +1,20 @@
-{% extends 'base.html.twig' %} {% block content %}
+{% extends 'base.html.twig' %} 
+
+{% block stylesheets %}
+<style>
+  .btnCom{
+    text-align: center;
+  }
+  .btnAjout{
+    display: flex;
+    justify-content: center;
+  }
+</style>
+{% endblock %}
+
+{% block title %}Edit commerce{% endblock %}
+
+{% block content %}
 <div id="page-inner">
   <div class="row">
     <div class="col-xs-12">
@@ -25,9 +41,9 @@
                 {{ form_widget(form.commerce, {'attr' : {'class': 'radio3 radio-check radio-inline'}}) }}
               </div>
             </div>
-            <div class="row justify-content-md-center">
-              <div class="form-group col-md-4">
-                <button type="submit" class="btn btn-primary align-self-center">
+            <div class="row btnAjout">
+              <div class="form-group col-md-4 btnCom">
+                <button type="submit" class="btn btn-warning btn-block">
                   Modifier Commerce
                 </button>
               </div>

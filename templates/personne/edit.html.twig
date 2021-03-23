@@ -1,11 +1,27 @@
-{% extends 'base.html.twig' %} {% block content %}
+{% extends 'base.html.twig' %} 
+
+{% block stylesheets %}
+<style>
+  .btnEducat{
+    text-align: center;
+  }
+  .btnAjout{
+    display: flex;
+    justify-content: center;
+  }
+</style>
+{% endblock %}
+
+{% block title %}Edit Personne{% endblock %} 
+
+{% block content %}
 <div id="page-inner">
   <div class="row">
     <div class="col-xs-12">
       <div class="panel panel-default">
         <div class="panel-heading">
           <div class="card-title">
-            <div class="title">Modifier Personne</div>
+            <div class="title">Editer Personne</div>
           </div>
         </div>
         {{ form_start(form) }}
@@ -36,19 +52,23 @@
               </div>
             </div>
             <div class="row">
-              <div class="form-group col-md-4">
+            <div class="form-group col-md-3">
+                <div class="sub-title">Sexe</div>
+                {{ form_widget(form.sexe, {'attr' : {'class': 'radio3 radio-check radio-inline'}}) }}
+              </div>
+              <div class="form-group col-md-3">
                 <div class="sub-title">Nationalité</div>
                 {{ form_widget(form.nationalite, {'attr' : {'class': 'form-control'
 
                 }}) }}
               </div>
-              <div class="form-group col-md-4">
+              <div class="form-group col-md-3">
                 <div class="sub-title">Situation Marital</div>
                 {{ form_widget(form.situationMarital, {'attr' : {'class': 'form-control'
 
                 }}) }}
               </div>
-              <div class="form-group col-md-4">
+              <div class="form-group col-md-3">
                 <div class="sub-title">Spécialité</div>
                 {{ form_widget(form.specialite, {'attr' : {'class': 'form-control'
 
@@ -75,11 +95,10 @@
                 }}) }}
               </div>
             </div>
-
-            <div class="row justify-content-md-center">
-              <div class="form-group col-md-4">
-                <button type="submit" class="btn btn-primary align-self-center">
-                  Modifier Personne
+            <div class="row btnAjout">
+              <div class="form-group col-md-4 btnEducat">
+                <button type="submit" class="btn btn-warning btn-block">
+                  Editer Personne
                 </button>
               </div>
             </div>

@@ -1,5 +1,8 @@
-{% extends 'base.html.twig' %} {% block title %}{{ title }}{% endblock %} {%
-block content %} {% if is_granted('ROLE_ADMIN') %}
+{% extends 'base.html.twig' %} 
+
+{% block title %}{{ title }}{% endblock %} 
+
+{% block content %} {% if is_granted('ROLE_ADMIN') %}
 <div id="page-inner">
   <div class="row">
     <div class="col-md-12">
@@ -7,15 +10,6 @@ block content %} {% if is_granted('ROLE_ADMIN') %}
         <div class="panel-heading">
           <div class="row">
             <div class="col-md-4">FEMME DU MEMBRE</div>
-            <div class="col-md-4"></div>
-            <div class="col-md-4">
-              <a
-                href="{{ path('app_dashboard_femme_create') }}"
-                class="btn btn-primary"
-              >
-                Ajouter Enfant
-              </a>
-            </div>
           </div>
         </div>
         <div class="panel-body">
