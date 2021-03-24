@@ -1,27 +1,27 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}" />
+    <link rel="stylesheet" href="{{ asset('styles/css/bootstrap.css') }}" />
     <link
       rel="stylesheet"
-      href="{{ asset('fonts/font-awesome-4.7.0/css/font-awesome.min.css') }}"
+      href="{{ asset('styles/font-awesome-4.7.0/css/font-awesome.min.css') }}"
     />
     <link
       rel="stylesheet"
-      href="{{ asset('js/morris/morris-0.4.3.min.css') }}"
+      href="{{ asset('styles/js/morris/morris-0.4.3.min.css') }}"
     />
-    <link rel="stylesheet" href="{{ asset('css/custom-styles.css') }}" />
+    <link rel="stylesheet" href="{{ asset('styles/css/custom-styles.css') }}" />
     <link
       rel="stylesheet"
-      href="{{ asset('js/Lightweight-Chart/cssCharts.css') }}"
+      href="{{ asset('styles/js/Lightweight-Chart/cssCharts.css') }}"
     />
     <link
       rel="stylesheet"
-      href="{{ asset('fonts/iconic/css/material-design-iconic-font.min.css') }}"
+      href="{{ asset('styles/fonts/iconic/css/material-design-iconic-font.min.css') }}"
     />
-    <link href="{{ asset('assets/js/dataTables/dataTables.bootstrap.css') }}" rel="stylesheet" />
-    <link rel="stylesheet" href="{{ asset('css/main.css') }}" />
-    <link rel="stylesheet" href="{{ asset('css/util.css') }}" />
+    <link href="{{ asset('styles/js/dataTables/dataTables.bootstrap.css') }}" rel="stylesheet" />
+    <link rel="stylesheet" href="{{ asset('styles/css/main.css') }}" />
+    <link rel="stylesheet" href="{{ asset('styles/css/util.css') }}" />
 
     <meta charset="UTF-8" />
     <title>{% block title %}Welcome!{% endblock %}</title>
@@ -181,9 +181,15 @@
             <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
           </a>
           <ul class="dropdown-menu dropdown-user">
+          {% if  is_granted('ROLE_ADMIN') %}
             <li>
+              <a href="#"><i class="fa fa-user fa-fw"></i> INSCRIPTION</a>
+            </li>
+            <li class="divider"></li>
+             <li>
               <a href="{{ path('app_import_excel') }}"><i class="fa fa-file-excel-o fa-fw"></i> Import EXCEL</a>
             </li>
+            {% endif %}
             <li class="divider"></li>
             <li>
               <a href="{{ path('app_logout') }}"
@@ -336,7 +342,7 @@
       <a href="#" style="cursor:pointer;" id="bwp-scroll-two" class="bwp-two"><i class="fa fa-commenting-o comment"></i></a>
     {% endif %}
 
-{% endif %}
+
     {# chat #}
     <div class="page-content page-container" id="page-content">
       <div class="padding">
@@ -381,14 +387,14 @@
    
    {% block body %}{% endblock %}
 
-    <script src="{{ asset('vendor/jquery/jquery-3.2.1.min.js') }}"></script>
-    <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('styles/vendor/jquery/jquery-3.2.1.min.js') }}"></script>
+    <script src="{{ asset('styles/js/bootstrap.min.js') }}"></script>
 
-    <script src="{{ asset('assets/js/dataTables/jquery.dataTables.js') }}"></script>
-    <script src="{{ asset('assets/js/dataTables/dataTables.bootstrap.js') }}"></script>
+    <script src="{{ asset('styles/js/dataTables/jquery.dataTables.js') }}"></script>
+    <script src="{{ asset('styles/js/dataTables/dataTables.bootstrap.js') }}"></script>
 
-    <script src="{{ asset('assets/js/jquery.metisMenu.js') }}"></script>
-    <script src="{{ asset('assets/js/custom-scripts.js') }}"></script>
+    <script src="{{ asset('styles/js/jquery.metisMenu.js') }}"></script>
+    <script src="{{ asset('styles/js/custom-scripts.js') }}"></script>
     
 
     <script>
@@ -441,6 +447,7 @@
     div.className = 'active-menu';
 
   }
+  {% endif %}
 
     </script>
   </body>
