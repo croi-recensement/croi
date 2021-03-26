@@ -12,14 +12,14 @@ use Symfony\Component\Routing\Annotation\Route;
 class ChatController extends AbstractController
 {
     /**
-     * @Route("/chat", name="app_dashboard_chat")
+     * @Route("/message", name="app_dashboard_chat")
      */
     public function index(): Response
     {
 
         return $this->render('chat/index.html.twig', [
             'controller_name' => 'ChatController',
-            'title' => 'Chat'
+            'title' => 'Inbox'
         ]);
     }
 

@@ -127,14 +127,24 @@
             </li>
             <li class="divider"></li>
              <li>
-              <a href="{{ path('app_dashboard_chat') }}"><i class="fa fa-comment fa-fw"></i> CHAT</a>
+              <a href="{{ path('app_dashboard_chat') }}"><i class="fa fa-comment fa-fw"></i> INBOX</a>
             </li>
           </ul>
         </li>
         <li>
-          <a href="{{ path('app_call_chat') }}" aria-expanded="false">
-              <i class="fa fa-phone-square fa-fw"></i>
-          </a>
+            <a href="skype:echo123?call"><i class="fa fa-phone fa-fw"></i></a>
+        </li>
+        <li 
+          role='link' 
+          aria-labelledby='shareButtonLabel' 
+          tabindex='0' 
+          onKeydown='skypeShareKeyDownHandler(event)' 
+          class='skype-share' 
+          data-href='http://' 
+          data-lang='' 
+          data-text='' 
+          data-style='circle'
+        >
         </li>
         <li class="dropdown">
           <a
@@ -148,7 +158,7 @@
           <ul class="dropdown-menu dropdown-user">
           {% if  is_granted('ROLE_ADMIN') %}
             <li>
-              <a href="#"><i class="fa fa-user fa-fw"></i> INSCRIPTION</a>
+              <a href="{{ path('inscription') }}"><i class="fa fa-user fa-fw"></i> INSCRIPTION</a>
             </li>
             <li class="divider"></li>
              <li>
@@ -366,6 +376,22 @@
     div.className = 'active-menu';
 
   }
+  (function(r, d, s) {
+            r.loadSkypeWebSdkAsync = r.loadSkypeWebSdkAsync || function(p) {
+                var js, sjs = d.getElementsByTagName(s)[0];
+                if (d.getElementById(p.id)) { return; }
+                js = d.createElement(s);
+                js.id = p.id;
+                js.src = p.scriptToLoad;
+                js.onload = p.callback
+                sjs.parentNode.insertBefore(js, sjs);
+            };
+            var p = {
+                scriptToLoad: 'https://swx.cdn.skype.com/shared/v/latest/skypewebsdk.js',
+                id: 'skype_web_sdk'
+            };
+            r.loadSkypeWebSdkAsync(p);
+    })(window, document, 'script');
   {% endif %}
     {% if app.user == null %}
      {% block body %}{% endblock %}

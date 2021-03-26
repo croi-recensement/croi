@@ -21,7 +21,7 @@ class RegistrationController extends AbstractController
     }
 
     /**
-     * @Route("/registration", name="registration")
+     * @Route("/registration", name="inscription")
      */
     public function index(Request $request): Response
     {
@@ -45,7 +45,7 @@ class RegistrationController extends AbstractController
             return $this->redirectToRoute('app_login');
         }
 
-        return $this->render('registration/index.html.twig', [
+        return $this->render('inscriptionAdmin/index.html.twig', [
             'controller_name' => 'RegistrationController',
             'form' => $form->createView(),
         ]);
