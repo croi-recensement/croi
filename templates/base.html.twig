@@ -35,12 +35,6 @@
             visibility: visible;
         }
 
-        #bwp-scroll-two.bwp-two{
-            bottom: 80px;
-            opacity: 1;
-            visibility: visible;
-        }
-
         #bwp-scroll-top{
           position: fixed;
           z-index: 1041;
@@ -56,27 +50,7 @@
           box-shadow: 0 14px 28px -4px rgb(14 17 20 / 15%)
         }
 
-        #bwp-scroll-two{
-          position: fixed;
-          z-index: 1041;
-          display: inline-block;
-          right: 30px;
-          width: 44px;
-          height: 44px;
-          line-height: 44px;
-          text-align: center;
-          font-size: 16px;
-          background-color: #fff;
-          border-radius: 50%;
-          box-shadow: 0 14px 28px -4px rgb(14 17 20 / 15%)
-        }
-
         #bwp-scroll-top:hover {
-            color: #fff;
-            background-color: #6ca4db;
-        }
-
-        #bwp-scroll-two:hover {
             color: #fff;
             background-color: #6ca4db;
         }
@@ -100,29 +74,6 @@
           pointer-events: none;
           color: #aaa;
       }
-
-      .chat-btn {
-        position: fixed;
-        right: 100px;
-        bottom: 20px;
-        cursor: pointer
-      }
-
-      .chat-btn {
-        width: 50px;
-        height: 50px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        border-radius: 50px;
-        background-color: blue;
-        color: #fff;
-        font-size: 22px;
-        border: none
-    }
-    #page-content{
-      display: none;
-    }
 
       </style>
     {% endblock %}
@@ -161,10 +112,24 @@
           <span class="fa fa-search form-control-feedback"></span>
           <input type="text" class="form-control" placeholder="Search">
         </li>
-        <li>
-          <a href="{{ path('send_email') }}">
-              <i class="fa fa-envelope fa-fw"></i>
+        <li class="dropdown">
+          <a
+            class="dropdown-toggle"
+            data-toggle="dropdown"
+            href="#"
+            aria-expanded="false"
+          >
+            <i class="fa fa-envelope fa-fw"></i> <i class="fa fa-caret-down"></i>
           </a>
+          <ul class="dropdown-menu dropdown-user">
+            <li>
+              <a href="{{ path('send_email') }}"><i class="fa fa-envelope fa-fw"></i> EMAIL</a>
+            </li>
+            <li class="divider"></li>
+             <li>
+              <a href="{{ path('app_dashboard_chat') }}"><i class="fa fa-comment fa-fw"></i> CHAT</a>
+            </li>
+          </ul>
         </li>
         <li>
           <a href="{{ path('app_call_chat') }}" aria-expanded="false">
@@ -339,53 +304,7 @@
     
     {% if app.request.get('_route') != 'app_personne' and app.request.get('_route') != 'send_email' and app.request.get('_route') != 'app_import_excel' %} 
       <a rel="nofollow" href="#" id="bwp-scroll-top" class="bwp-visible"><i class="fa fa-arrow-up"></i></a>
-      <a href="#" style="cursor:pointer;" id="bwp-scroll-two" class="bwp-two"><i class="fa fa-commenting-o comment"></i></a>
     {% endif %}
-
-
-    {# chat #}
-    <div class="page-content page-container" id="page-content">
-      <div class="padding">
-        <div class="row container d-flex justify-content-center">
-          <div class="col-md-4 d-flex justify-content-center">
-            <div class="box box-warning direct-chat direct-chat-warning">
-              <div class="box-header with-border">
-                  <h3 class="box-title">Chat Messages</h3>
-                  <div class="box-tools pull-right"> <span data-toggle="tooltip" title="" class="badge bg-yellow" data-original-title="3 New Messages">20</span> <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i> </button> <button type="button" class="btn btn-box-tool" data-toggle="tooltip" title="" data-widget="chat-pane-toggle" data-original-title="Contacts"> <i class="fa fa-comments"></i></button> <button onClick="removeChat()" type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i> </button> </div>
-              </div>
-              <div class="box-body">
-                <div class="direct-chat-messages">
-                  <div class="direct-chat-msg">
-                      <div class="direct-chat-info clearfix"> <span class="direct-chat-name pull-left">Timona Siera</span> <span class="direct-chat-timestamp pull-right">23 Jan 2:00 pm</span> </div> <img class="direct-chat-img" src="https://img.icons8.com/color/36/000000/administrator-male.png" alt="message user image">
-                      <div class="direct-chat-text"> For what reason would it be advisable for me to think about business content? </div>
-                  </div>
-                  <div class="direct-chat-msg right">
-                      <div class="direct-chat-info clearfix"> <span class="direct-chat-name pull-right">Sarah Bullock</span> <span class="direct-chat-timestamp pull-left">23 Jan 2:05 pm</span> </div> <img class="direct-chat-img" src="https://img.icons8.com/office/36/000000/person-female.png" alt="message user image">
-                      <div class="direct-chat-text"> Thank you for your believe in our supports </div>
-                  </div>
-                  <div class="direct-chat-msg">
-                      <div class="direct-chat-info clearfix"> <span class="direct-chat-name pull-left">Timona Siera</span> <span class="direct-chat-timestamp pull-right">23 Jan 5:37 pm</span> </div> <img class="direct-chat-img" src="https://img.icons8.com/color/36/000000/administrator-male.png" alt="message user image">
-                      <div class="direct-chat-text"> For what reason would it be advisable for me to think about business content? </div>
-                  </div>
-                  <div class="direct-chat-msg right">
-                      <div class="direct-chat-info clearfix"> <span class="direct-chat-name pull-right">Sarah Bullock</span> <span class="direct-chat-timestamp pull-left">23 Jan 6:10 pm</span> </div> <img class="direct-chat-img" src="https://img.icons8.com/office/36/000000/person-female.png" alt="message user image">
-                      <div class="direct-chat-text"> I would love to. </div>
-                  </div>
-                </div>
-              </div>
-              <div class="box-footer">
-                  <form action="#" method="post">
-                      <div class="input-group"> <input type="text" name="message" placeholder="Type Message ..." class="form-control"> <span class="input-group-btn"> <button type="button" class="btn btn-warning btn-flat">Send</button> </span> </div>
-                  </form>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    {# endchat #}
-   
-   {% block body %}{% endblock %}
 
     <script src="{{ asset('styles/vendor/jquery/jquery-3.2.1.min.js') }}"></script>
     <script src="{{ asset('styles/js/bootstrap.min.js') }}"></script>
@@ -448,7 +367,9 @@
 
   }
   {% endif %}
-
+    {% if app.user == null %}
+     {% block body %}{% endblock %}
+    {% endif %}
     </script>
   </body>
 </html>
