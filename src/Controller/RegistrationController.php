@@ -21,7 +21,7 @@ class RegistrationController extends AbstractController
     }
 
     /**
-     * @Route("/registration", name="inscription")
+     * @Route("/inscription", name="inscription")
      */
     public function index(Request $request): Response
     {
@@ -34,7 +34,12 @@ class RegistrationController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $user->setPassword($this->passwordEncoder->encodePassword($user, $user->getPassword()));
             $user->setRoles(['ROLE_ADMIN']);
-            $user->setNomRoute('app_dashboard_santer');
+            $user->setNomRoute('app_dashboard_membre');
+            $user->setFname('Zhoo');
+            $user->setLname('Abel');
+            $user->setImage('');
+            $user->setUniqueId(1233355);
+            $user->setStatus('Online');
             //$user->setRoles(['ROLE_USER']);
             //$user->setRoles(['ROLE_USER']);
 
@@ -45,7 +50,7 @@ class RegistrationController extends AbstractController
             return $this->redirectToRoute('app_login');
         }
 
-        return $this->render('inscriptionAdmin/index.html.twig', [
+        return $this->render('registration/index.html.twig', [
             'controller_name' => 'RegistrationController',
             'form' => $form->createView(),
         ]);

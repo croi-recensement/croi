@@ -3,7 +3,8 @@
 namespace App\Form;
 
 use App\Entity\Logement;
-use App\Entity\Personne;
+use App\Entity\Pays;
+use App\Form\PaysType;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -17,9 +18,6 @@ class LogementType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add("ville", TextType::class)
-            ->add("province", TextType::class)
-            ->add("region", TextType::class)
             ->add("adressePermanente", TextType::class)
             ->add("adresseTemporaire", TextType::class)
             ->add("proprietaire", ChoiceType::class,[
@@ -29,8 +27,6 @@ class LogementType extends AbstractType
                 ],
                 'expanded' => true,
             ])
-            ->add('annee', TextType::class)
-            ->add("codePostale", TextType::class)
             ->add("maisonAllouer", ChoiceType::class, [
                 'choices' => [
                     'Oui' => 1,
@@ -38,10 +34,11 @@ class LogementType extends AbstractType
                 ],
                 'expanded' => true,
             ])
-            ->add("personne", EntityType::class, [
-                'class' => Personne::class,
-                'choice_label' => 'nom',
-            ]);
+            ->add("email", TextType::class)
+            ->add("pays", TextType::class)
+            ->add("province", TextType::class)
+            ->add("region", TextType::class)
+            ->add("quartier", TextType::class);
     }
 
     public function configureOptions(OptionsResolver $resolver)

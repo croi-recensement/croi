@@ -18,147 +18,142 @@ class Social
     private $id;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="string", length=255)
      */
-    private $aideFinancierePaiementFactureEau;
+    private $aideEducation;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="string", length=255)
      */
-    private $prestationFamiliales;
+    private $aideNouriture;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255)
      */
-    private $allocationSolidaritePersonneAgee;
+    private $aideFinance;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255)
      */
-    private $protectionMaladieEtMedicament;
+    private $aideSante;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255)
      */
-    private $complementaireSante;
+    private $aideVisa;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="string", length=255)
      */
-    private $primeTransitoireSolidarite;
+    private $aideSport;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255)
      */
-    private $annee;
+    private $aideTravail;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Finance::class, inversedBy="socials")
+     * @ORM\Column(type="string", length=255)
      */
-    private $finance;
+    private $aideSocial;
 
-     /**
-     * @ORM\ManyToOne(targetEntity=Personne::class, inversedBy="personne")
+    /**
+     * @ORM\ManyToOne(targetEntity=Personne::class, inversedBy="socials")
      */
     private $personne;
 
-    public function getId(): ?int
+    public function getAideEducation(): ?string
     {
-        return $this->id;
+        return $this->aideEducation;
     }
 
-    public function getPrestationFamiliales(): ?int
+    public function setAideEducation(string $aideEducation): self
     {
-        return $this->prestationFamiliales;
-    }
-
-    public function setPrestationFamiliales(?int $prestationFamiliales): self
-    {
-        $this->prestationFamiliales = $prestationFamiliales;
+        $this->aideEducation = $aideEducation;
 
         return $this;
     }
 
-    public function getAidePaiementTelephoneInternet(): ?int
+    public function getAideNouriture(): ?string
     {
-        return $this->aidePaiementTelephoneInternet;
+        return $this->aideNouriture;
     }
 
-    public function setAidePaiementTelephoneInternet(?int $aidePaiementTelephoneInternet): self
+    public function setAideNouriture(string $aideNouriture): self
     {
-        $this->aidePaiementTelephoneInternet = $aidePaiementTelephoneInternet;
+        $this->aideNouriture = $aideNouriture;
 
         return $this;
     }
 
-    public function getAllocationSolidaritePersonneAgee(): ?string
+    public function getAideFinance(): ?string
     {
-        return $this->allocationSolidaritePersonneAgee;
+        return $this->aideFinance;
     }
 
-    public function setAllocationSolidaritePersonneAgee(?string $allocationSolidaritePersonneAgee): self
+    public function setAideFinance(string $aideFinance): self
     {
-        $this->allocationSolidaritePersonneAgee = $allocationSolidaritePersonneAgee;
+        $this->aideFinance = $aideFinance;
 
         return $this;
     }
 
-    public function getProtectionMaladieEtMedicament(): ?string
+    public function getAideSante(): ?string
     {
-        return $this->protectionMaladieEtMedicament;
+        return $this->aideSante;
     }
 
-    public function setProtectionMaladieEtMedicament(?string $protectionMaladieEtMedicament): self
+    public function setAideSante(string $aideSante): self
     {
-        $this->protectionMaladieEtMedicament = $protectionMaladieEtMedicament;
+        $this->aideSante = $aideSante;
 
         return $this;
     }
 
-    public function getComplementaireSante(): ?string
+    public function getAideVisa(): ?string
     {
-        return $this->complementaireSante;
+        return $this->aideVisa;
     }
 
-    public function setComplementaireSante(?string $complementaireSante): self
+    public function setAideVisa(string $aideVisa): self
     {
-        $this->complementaireSante = $complementaireSante;
+        $this->aideVisa = $aideVisa;
 
         return $this;
     }
 
-    public function getPrimeTransitoireSolidarite(): ?int
+    public function getAideSport(): ?string
     {
-        return $this->primeTransitoireSolidarite;
+        return $this->aideSport;
     }
 
-    public function setPrimeTransitoireSolidarite(?int $primeTransitoireSolidarite): self
+    public function setAideSport(string $aideSport): self
     {
-        $this->primeTransitoireSolidarite = $primeTransitoireSolidarite;
+        $this->aideSport = $aideSport;
 
         return $this;
     }
 
-    public function getAnnee(): ?string
+    public function getAideTravail(): ?string
     {
-        return $this->annee;
+        return $this->aideTravail;
     }
 
-    public function setAnnee(?string $annee): self
+    public function setAideTravail(string $aideTravail): self
     {
-        $this->annee = $annee;
+        $this->aideTravail = $aideTravail;
 
         return $this;
     }
 
-    public function getFinance(): ?Finance
+    public function getAideSocial(): ?string
     {
-        return $this->finance;
+        return $this->aideSocial;
     }
 
-    public function setFinance(?Finance $finance): self
+    public function setAideSocial(string $aideSocial): self
     {
-        $this->finance = $finance;
+        $this->aideSocial = $aideSocial;
 
         return $this;
     }
@@ -174,4 +169,6 @@ class Social
 
         return $this;
     }
+
+    
 }

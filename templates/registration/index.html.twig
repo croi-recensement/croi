@@ -1,5 +1,8 @@
-{% extends 'base.html.twig' %} {% block title %}Hello RegistrationController!{%
-endblock %} {% block body %}
+{% extends 'base.html.twig' %} 
+
+{% block title %}Inscription{% endblock %} 
+
+{% block body %}
 <div class="limiter">
   <div
     class="container-login100"
@@ -15,32 +18,17 @@ endblock %} {% block body %}
       <span class="login100-form-title p-b-34 p-t-27">Inscription</span>
 
       <div class="wrap-input100 validate-input" data-validate="Enter email">
-        {{ form_row(form.email, {'attr': {'class': 'input100', 'placeholder': 'Email'
-
-
-        }}) }}
+        {{ form_row(form.email, {'attr': {'class': 'input100', 'placeholder': 'Email' }}) }}
         <span class="focus-input100" data-placeholder="&#xf207;"></span>
       </div>
 
       <div class="wrap-input100 validate-input" data-validate="Enter password">
-        {{ form_row(form.password.first, {'attr': {'class':'input100', 'placeholder': 'Password'
-
-
-
-
-
-        }}) }}
+        {{ form_row(form.password.first, {'attr': {'class':'input100', 'placeholder': 'Password'}}) }}
         <span class="focus-input100" data-placeholder="&#xf191;"></span>
       </div>
 
       <div class="wrap-input100 validate-input" data-validate="Enter password">
-        {{ form_row(form.password.second, {'attr': {'class':'input100', 'placeholder': 'Password'
-
-
-
-
-
-        }}) }}
+        {{ form_row(form.password.second, {'attr': {'class':'input100', 'placeholder': 'Password'}}) }}
         <span class="focus-input100" data-placeholder="&#xf191;"></span>
       </div>
 

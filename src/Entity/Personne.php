@@ -2,12 +2,17 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\PersonneRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
+ * @ApiResource(
+ *      collectionOperations={"post"},
+ *      itemOperations={}
+ * )
  * @ORM\Entity(repositoryClass=PersonneRepository::class)
  */
 class Personne
@@ -45,21 +50,6 @@ class Personne
     private $situationMarital;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $specialite;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $groupSangin;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $paysOrigin;
-
-    /**
      * @ORM\Column(type="date", nullable=true)
      */
     private $dateNaissance;
@@ -67,19 +57,43 @@ class Personne
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $situationProfessionnel;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
     private $sexe;
 
-    public function __construct()
-    {
-        //$this->maladies = new ArrayCollection();
-        //$this->enfants = new ArrayCollection();
-        $this->finance = new ArrayCollection();
-    }
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $cin;
+
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $AutreNationalite;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $phone;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $passport;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $numeroPassport;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $numeroCin;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $nbrEnfant;
 
     public function getId(): ?int
     {
@@ -146,42 +160,6 @@ class Personne
         return $this;
     }
 
-    public function getSpecialite(): ?string
-    {
-        return $this->specialite;
-    }
-
-    public function setSpecialite(string $specialite): self
-    {
-        $this->specialite = $specialite;
-
-        return $this;
-    }
-
-    public function getGroupSangin(): ?string
-    {
-        return $this->groupSangin;
-    }
-
-    public function setGroupSangin(string $group_sangin): self
-    {
-        $this->groupSangin = $group_sangin;
-
-        return $this;
-    }
-
-    public function getPaysOrigin(): ?string
-    {
-        return $this->paysOrigin;
-    }
-
-    public function setPaysOrigin(string $pays_origin): self
-    {
-        $this->paysOrigin = $pays_origin;
-
-        return $this;
-    }
-
     public function getDateNaissance(): ?\DateTimeInterface
     {
         return $this->dateNaissance;
@@ -190,18 +168,6 @@ class Personne
     public function setDateNaissance(?\DateTimeInterface $dateNaissance): self
     {
         $this->dateNaissance = $dateNaissance;
-
-        return $this;
-    }
-
-    public function getSituationProfessionnel(): ?string
-    {
-        return $this->situationProfessionnel;
-    }
-
-    public function setSituationProfessionnel(?string $situationProfessionnel): self
-    {
-        $this->situationProfessionnel = $situationProfessionnel;
 
         return $this;
     }
@@ -218,33 +184,88 @@ class Personne
         return $this;
     }
 
-    /**
-     * @return Collection|Finance[]
-     */
-    public function getFinance(): Collection
+    public function getCin(): ?int
     {
-        return $this->finance;
+        return $this->cin;
     }
 
-    public function addFinance(Finance $finance): self
+    public function setCin(?int $cin): self
     {
-        if (!$this->finance->contains($finance)) {
-            $this->finance[] = $finance;
-            $finance->setPersonne($this);
-        }
+        $this->cin = $cin;
 
         return $this;
     }
 
-    public function removeFinance(Finance $finance): self
+    public function getAutreNationalite(): ?string
     {
-        if ($this->finance->removeElement($finance)) {
-            // set the owning side to null (unless already changed)
-            if ($finance->getPersonne() === $this) {
-                $finance->setPersonne(null);
-            }
-        }
+        return $this->AutreNationalite;
+    }
+
+    public function setAutreNationalite(string $AutreNationalite): self
+    {
+        $this->AutreNationalite = $AutreNationalite;
 
         return $this;
     }
+
+    public function getPhone(): ?int
+    {
+        return $this->phone;
+    }
+
+    public function setPhone(int $phone): self
+    {
+        $this->phone = $phone;
+
+        return $this;
+    }
+
+    public function getPassport(): ?string
+    {
+        return $this->passport;
+    }
+
+    public function setPassport(string $passport): self
+    {
+        $this->passport = $passport;
+
+        return $this;
+    }
+
+    public function getNumeroPassport(): ?int
+    {
+        return $this->numeroPassport;
+    }
+
+    public function setNumeroPassport(int $numeroPassport): self
+    {
+        $this->numeroPassport = $numeroPassport;
+
+        return $this;
+    }
+
+    public function getNumeroCin(): ?int
+    {
+        return $this->numeroCin;
+    }
+
+    public function setNumeroCin(int $numeroCin): self
+    {
+        $this->numeroCin = $numeroCin;
+
+        return $this;
+    }
+
+    public function getNbrEnfant(): ?int
+    {
+        return $this->nbrEnfant;
+    }
+
+    public function setNbrEnfant(int $nbrEnfant): self
+    {
+        $this->nbrEnfant = $nbrEnfant;
+
+        return $this;
+    }
+
 }

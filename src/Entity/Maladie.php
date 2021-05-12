@@ -76,6 +76,11 @@ class Maladie
      */
     private $annee;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $nomPays;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -211,6 +216,18 @@ class Maladie
     public function setAnnee(string $annee): self
     {
         $this->annee = $annee;
+
+        return $this;
+    }
+
+    public function getNomPays(): ?string
+    {
+        return $this->nomPays;
+    }
+
+    public function setNomPays(string $nomPays): self
+    {
+        $this->nomPays = $nomPays;
 
         return $this;
     }

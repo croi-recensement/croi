@@ -35,12 +35,17 @@ class Sport
     /**
      * @ORM\Column(type="boolean", nullable=true)
      */
-    private $lecture;
+    private $loisir;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
     private $annee;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $club;
 
     public function getId(): ?int
     {
@@ -83,14 +88,14 @@ class Sport
         return $this;
     }
 
-    public function getLecture(): ?bool
+    public function getLoisir(): ?bool
     {
-        return $this->lecture;
+        return $this->loisir;
     }
 
-    public function setLecture(?bool $lecture): self
+    public function setLoisir(?bool $loisir): self
     {
-        $this->lecture = $lecture;
+        $this->loisir = $loisir;
 
         return $this;
     }
@@ -103,6 +108,18 @@ class Sport
     public function setAnnee(string $annee): self
     {
         $this->annee = $annee;
+
+        return $this;
+    }
+
+    public function getClub(): ?string
+    {
+        return $this->club;
+    }
+
+    public function setClub(string $club): self
+    {
+        $this->club = $club;
 
         return $this;
     }

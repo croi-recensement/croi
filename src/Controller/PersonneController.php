@@ -3,7 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\Personne;
-use App\Entity\Finance;
+use App\Entity\Logement;
+use App\Form\LogementType;
 use App\Form\PersonneType;
 
 use Doctrine\ORM\EntityManagerInterface;
@@ -40,7 +41,7 @@ class PersonneController extends AbstractController
 
         $form = $this->createForm(PersonneType::class, $personne);
         $form->handleRequest($request);
-        
+
         if ($form->isSubmitted() && $form->isValid()) {
 
             $em = $this->getDoctrine()->getManager();
@@ -49,6 +50,7 @@ class PersonneController extends AbstractController
             $this->addFlash('success', 'Ajout personne avec succèss!!!');
             return $this->redirectToRoute('app_dashboard');
         }
+        
         return $this->render('personne/create.html.twig', [
             'controller_name' => 'PersonneController',
             'form' => $form->createView(),

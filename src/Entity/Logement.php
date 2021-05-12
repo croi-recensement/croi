@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\LogementRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -33,14 +35,19 @@ class Logement
     private $adresseTemporaire;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="boolean")
      */
-    private $ville;
+    private $maisonAllouer;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $email;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $codePostale;
+    private $pays;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -53,19 +60,14 @@ class Logement
     private $region;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $maisonAllouer;
+    private $quartier;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Personne::class)
-     */
-    private $personne;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $annee;
+    public function __toString()
+    {
+        return "";
+    }
 
     public function getId(): ?int
     {
@@ -108,78 +110,6 @@ class Logement
         return $this;
     }
 
-    public function getVille(): ?string
-    {
-        return $this->ville;
-    }
-
-    public function setVille(?string $ville): self
-    {
-        $this->ville = $ville;
-
-        return $this;
-    }
-
-    public function getCodePostale(): ?string
-    {
-        return $this->codePostale;
-    }
-
-    public function setCodePostale(?string $codePostale): self
-    {
-        $this->codePostale = $codePostale;
-
-        return $this;
-    }
-
-    public function getProvince(): ?string
-    {
-        return $this->province;
-    }
-
-    public function setProvince(?string $province): self
-    {
-        $this->province = $province;
-
-        return $this;
-    }
-
-    public function getRegion(): ?string
-    {
-        return $this->region;
-    }
-
-    public function setRegion(?string $region): self
-    {
-        $this->region = $region;
-
-        return $this;
-    }
-
-    public function getPersonne(): ?Personne
-    {
-        return $this->personne;
-    }
-
-    public function setPersonne(?Personne $personne): self
-    {
-        $this->personne = $personne;
-
-        return $this;
-    }
-
-    public function getPropriete(): ?Personne
-    {
-        return $this->propriete;
-    }
-
-    public function setPropriete(?Personne $propriete): self
-    {
-        $this->propriete = $propriete;
-
-        return $this;
-    }
-
     public function getMaisonAllouer(): ?bool
     {
         return $this->maisonAllouer;
@@ -192,15 +122,64 @@ class Logement
         return $this;
     }
 
-    public function getAnnee(): ?string
+    public function getEmail(): ?string
     {
-        return $this->annee;
+        return $this->email;
     }
 
-    public function setAnnee(string $annee): self
+    public function setEmail(string $email): self
     {
-        $this->annee = $annee;
+        $this->email = $email;
 
         return $this;
     }
+
+    public function getPays(): ?string
+    {
+        return $this->pays;
+    }
+
+    public function setPays(string $pays): self
+    {
+        $this->pays = $pays;
+
+        return $this;
+    }
+
+    public function getProvince(): ?string
+    {
+        return $this->province;
+    }
+
+    public function setProvince(string $province): self
+    {
+        $this->province = $province;
+
+        return $this;
+    }
+
+    public function getRegion(): ?string
+    {
+        return $this->region;
+    }
+
+    public function setRegion(string $region): self
+    {
+        $this->region = $region;
+
+        return $this;
+    }
+
+    public function getQuartier(): ?string
+    {
+        return $this->quartier;
+    }
+
+    public function setQuartier(?string $quartier): self
+    {
+        $this->quartier = $quartier;
+
+        return $this;
+    }
+
 }

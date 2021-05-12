@@ -20,17 +20,12 @@ class Education
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $ecole;
+    private $nomEcole;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $classe;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $niveau;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -48,19 +43,44 @@ class Education
      */
     private $annee;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $adresseEcole;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $adresseUnivrs;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $nomUnivrs;
+
+    /**
+     * @ORM\OneToOne(targetEntity=Pays::class, cascade={"persist", "remove"})
+     */
+    private $pays;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $cartEtud;
+
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getEcole(): ?string
+    public function getNomEcole(): ?string
     {
-        return $this->ecole;
+        return $this->nomEcole;
     }
 
-    public function setEcole(?string $ecole): self
+    public function setNomEcole(?string $ecole): self
     {
-        $this->ecole = $ecole;
+        $this->nomEcole = $ecole;
 
         return $this;
     }
@@ -73,18 +93,6 @@ class Education
     public function setClasse(?string $classe): self
     {
         $this->classe = $classe;
-
-        return $this;
-    }
-
-    public function getNiveau(): ?string
-    {
-        return $this->niveau;
-    }
-
-    public function setNiveau(?string $niveau): self
-    {
-        $this->niveau = $niveau;
 
         return $this;
     }
@@ -121,6 +129,66 @@ class Education
     public function setAnnee(?string $annee): self
     {
         $this->annee = $annee;
+
+        return $this;
+    }
+
+    public function getAdresseEcole(): ?string
+    {
+        return $this->adresseEcole;
+    }
+
+    public function setAdresseEcole(string $adresseEcole): self
+    {
+        $this->adresseEcole = $adresseEcole;
+
+        return $this;
+    }
+
+    public function getAdresseUnivrs(): ?string
+    {
+        return $this->adresseUnivrs;
+    }
+
+    public function setAdresseUnivrs(string $adresseUnivrs): self
+    {
+        $this->adresseUnivrs = $adresseUnivrs;
+
+        return $this;
+    }
+
+    public function getNomUnivrs(): ?string
+    {
+        return $this->nomUnivrs;
+    }
+
+    public function setNomUnivrs(string $nomUnivrs): self
+    {
+        $this->nomUnivrs = $nomUnivrs;
+
+        return $this;
+    }
+
+    public function getPays(): ?Pays
+    {
+        return $this->pays;
+    }
+
+    public function setPays(?Pays $pays): self
+    {
+        $this->pays = $pays;
+
+        return $this;
+    }
+
+    public function getCartEtud(): ?string
+    {
+        return $this->cartEtud;
+    }
+
+    public function setCartEtud(string $cartEtud): self
+    {
+        $this->cartEtud = $cartEtud;
 
         return $this;
     }

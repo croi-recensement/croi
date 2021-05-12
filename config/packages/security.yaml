@@ -33,7 +33,6 @@ security:
         ROLE_EDUCATION,
         ROLE_SOCIAL,
         ROLE_SPORT,
-        ROLE_FINANCE,
         ROLE_LOGEMENT,
         ROLE_COMMERCE,
         ROLE_TABLIGH,

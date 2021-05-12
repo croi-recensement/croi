@@ -9,7 +9,7 @@
       <div class="panel panel-default">
         <div class="panel-heading">
           <div class="row">
-            <div class="col-md-4">Listes des Personnes entrants</div>
+            <div class="col-md-4">Apropos du Personne</div>
             <div class="col-md-4"></div>
             <div class="col-md-4">
               <a
@@ -33,15 +33,18 @@
                   <th>Id</th>
                   <th>Nom</th>
                   <th>Prenom</th>
-                  <th>Date de naissance</th>
                   <th>Lieu de naissance</th>
-                  <th>Sexe</th>
+                  <th>Date de naissance</th>
                   <th>Nationalite</th>
                   <th>Situation marital</th>
-                  <th>Specialité</th>
-                  <th>Situation Professionnel</th>
-                  <th>Groupe sanguin</th>
-                  <th>Pays d'origine</th>
+                  <th>Sexe</th>
+                  <th>CIN</th>
+                  <th>Autre Nationalite</th>
+                  <th>Phone</th>
+                  <th>Passport</th>
+                  <th>Numéro Passport</th>
+                  <th>Numéro CIN</th>
+                  <th>Nombre Enfant</th>
                   <th>ACTION</th>
                 </tr>
               </thead>
@@ -51,15 +54,18 @@
                   <td>{{ person.id }}</td>
                   <td>{{ person.nom }}</td>
                   <td>{{ person.prenom }}</td>
-                  <td>{{ person.dateNaissance|date('m/d/Y') }}</td>
                   <td>{{ person.lieuNaissance }}</td>
-                  <td>{{ person.sexe }}</td>
+                  <td>{{ person.dateNaissance|date('m/d/Y') }}</td>
                   <td>{{ person.nationalite }}</td>
                   <td>{{ person.situationMarital }}</td>
-                  <td>{{ person.specialite }}</td>
-                  <td>{{ person.situationProfessionnel }}</td>
-                  <td>{{ person.groupSangin }}</td>
-                  <td>{{ person.paysOrigin }}</td>
+                  <td>{{ person.sexe }}</td>
+                  <td>{{ person.cin }}</td>
+                  <td>{{ person.autreNationalite }}</td>
+                  <td>{{ person.phone }}</td>
+                  <td>{{ person.passport }}</td>
+                  <td>{{ person.numeroPassport }}</td>
+                  <td>{{ person.numeroCin }}</td>
+                  <td>{{ person.nombreEnfant }}</td>
                   <th>
                     <a href="{{ path('app_dashboard_admin_delete', {'id': person.id}) }}" style="cursor:pointer"
                       onClick="return confirm('Voulez-vous supprimer vraiment cette ligne ??')"

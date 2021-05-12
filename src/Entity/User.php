@@ -40,6 +40,31 @@ class User implements UserInterface
      */
     private $nomRoute;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $fname;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $lname;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $image;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $uniqueId;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $status;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -129,6 +154,66 @@ class User implements UserInterface
     public function setNomRoute(?string $nomRoute): self
     {
         $this->nomRoute = $nomRoute;
+
+        return $this;
+    }
+
+    public function getFname(): ?string
+    {
+        return $this->fname;
+    }
+
+    public function setFname(string $fname): self
+    {
+        $this->fname = $fname;
+
+        return $this;
+    }
+
+    public function getLname(): ?string
+    {
+        return $this->lname;
+    }
+
+    public function setLname(string $lname): self
+    {
+        $this->lname = $lname;
+
+        return $this;
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(string $image): self
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    public function getUniqueId(): ?int
+    {
+        return $this->uniqueId;
+    }
+
+    public function setUniqueId(int $unique_id): self
+    {
+        $this->uniqueId = $unique_id;
+
+        return $this;
+    }
+
+    public function getStatus(): ?string
+    {
+        return $this->status;
+    }
+
+    public function setStatus(string $status): self
+    {
+        $this->status = $status;
 
         return $this;
     }

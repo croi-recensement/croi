@@ -12,7 +12,7 @@
 </style>
 {% endblock %}
 
-{% block title %}Edit Logement{% endblock %}
+{% block title %}Ajout Logement{% endblock %}
 
 {% block content %}
 <div id="page-inner">
@@ -21,26 +21,12 @@
       <div class="panel panel-default">
         <div class="panel-heading">
           <div class="card-title">
-            <div class="title">Modifier Logement</div>
+            <div class="title">Edit Logement</div>
           </div>
         </div>
         {{ form_start(form) }}
         <div>
           <div class="panel-body">
-            <div class="row">
-              <div class="form-group col-md-4">
-                <div class="sub-title">Ville</div>
-                {{ form_widget(form.ville, {'attr': {'class': 'form-control'}}) }}
-              </div>
-              <div class="form-group col-md-4">
-                <div class="sub-title">Province</div>
-                {{ form_widget(form.province, {'attr': {'class': 'form-control'}}) }}
-              </div>
-              <div class="form-group col-md-4">
-                <div class="sub-title">Région</div>
-                {{ form_widget(form.region, {'attr': {'class': 'form-control'}}) }}
-              </div>
-            </div>
             <div class="row">
               <div class="form-group col-md-4">
                 <div class="sub-title">Adresse Permanente</div>
@@ -51,31 +37,41 @@
                 {{ form_widget(form.adresseTemporaire, {'attr' : {'class': 'form-control'}}) }}
               </div>
               <div class="form-group col-md-4">
-                <div class="sub-title">Personne Rattaché</div>
-                {{ form_widget(form.personne, {'attr' : {'class': 'form-control'}}) }}
-              </div> 
+                <div class="sub-title">Email</div>
+                {{ form_widget(form.email, {'attr' : {'class': 'form-control'}}) }}
+              </div>
             </div>
             <div class="row">
-              <div class="form-group col-md-2">
-                <div class="sub-title">Vous êtes propriétaire ?</div>
+              <fieldset class="form-group col-md-6">
+                <legend class="sub-title">Vous êtes propriétaire ?</legend>
                 {{ form_widget(form.proprietaire, {'attr' : {'class': 'radio3 radio-check radio-inline'}} ) }}
-              </div>
-              <div class="form-group col-md-2">
-                <div class="sub-title">Vous avez une maison alloué ?</div>
+              </fieldset>
+              <fieldset class="form-group col-md-6">
+                <legend class="sub-title">Vous avez une maison alloué ?</legend>
                 {{ form_widget(form.maisonAllouer, {'attr' : {'class': 'radio3 radio-check radio-inline'}}) }}
-              </div> 
-              <div class="form-group col-md-4">
-                <div class="sub-title">Code Postal</div>
-                {{ form_widget(form.codePostale, {'attr' : {'class': 'form-control'}}) }}
+              </fieldset>
+            </div>
+            <div class="row">
+              <div class="form-group col-md-3">
+                <div class="sub-title">Pays</div>
+                {{ form_widget(form.pays, {'attr' : {'class': 'form-control'}}) }}
               </div>
-              <div class="form-group col-md-4">
-                <div class="sub-title">Année</div>
-                {{ form_widget(form.annee, {'attr' : {'class': 'form-control'}}) }}
+              <div class="form-group col-md-3">
+                <div class="sub-title">Province</div>
+                {{ form_widget(form.province, {'attr': {'class': 'form-control'}}) }}
+              </div>
+              <div class="form-group col-md-3">
+                <div class="sub-title">Région</div>
+                {{ form_widget(form.region, {'attr': {'class': 'form-control'}}) }}
+              </div>
+              <div class="form-group col-md-3">
+                <div class="sub-title">Quartier</div>
+                {{ form_widget(form.quartier, {'attr': {'class': 'form-control'}}) }}
               </div>
             </div>
             <div class="row btnAjout">
               <div class="form-group col-md-4 btnEducat">
-                <button type="submit" class="btn btn-warning btn-block">
+                <button type="submit" class="btn btn-success btn-block">
                   Modifier Logement
                 </button>
               </div>

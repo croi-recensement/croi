@@ -4,7 +4,7 @@ namespace App\Form;
 
 use App\Entity\Social;
 use App\Entity\Personne;
-use App\Entity\Finance;
+//use App\Entity\Finance;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -25,10 +25,6 @@ class SocialType extends AbstractType
             ->add("personne", EntityType::class, [
                 'class' => Personne::class,
                 'choice_label' => 'nom',
-            ])
-            ->add("finance", EntityType::class, [
-                'class' => Finance::class,
-                'choice_label' => 'salaire',
             ])
             ->add('annee', TextType::class);
     }

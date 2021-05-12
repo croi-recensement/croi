@@ -27,14 +27,15 @@ class LogementController extends AbstractController
                             ->getManager()
                             ->getRepository('App\Entity\Personne')->findAll();
 
-        $datas = $chartService->chartLogement($persLogers, $personnes);
-
+        //$datas = $chartService->chartLogement($persLogers, $personnes);
+        /*'labels' => $datas['labels'],
+        'proprietaires' => $datas['proprietaire'],
+        'locataires' => $datas['locataire'], */
+        
         return $this->render('logement/index.html.twig', [
             'controller_name' => 'LogementController',
             'logements' => $persLogers,
-            'labels' => $datas['labels'],
-            'proprietaires' => $datas['proprietaire'],
-            'locataires' => $datas['locataire'],
+            
             'title' => 'Département Logement'
         ]);
     }
