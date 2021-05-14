@@ -2,7 +2,7 @@
 
 namespace App\Form;
 
-use App\Entity\Femme;
+use App\Entity\Marie;
 use App\Entity\Personne;
 
 use Symfony\Component\Form\AbstractType;
@@ -10,7 +10,7 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class FemmesType extends AbstractType
+class MarieType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -32,7 +32,7 @@ class FemmesType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Femme::class,
+            'data_class' => Marie::class,
         ]);
     }
 }

@@ -32,11 +32,12 @@
               <thead>
                 <tr>
                   <th>Id</th>
-                  <th>Préstation Familiale</th>
-                  <th>Allocation Solidaire Personne Agée</th>
-                  <th>Protection Maladie et Médicament</th>
-                  <th>Complémentaire Santé</th>
-                  <th>Année</th>
+                  <th>Education</th>
+                  <th>Santé</th>
+                  <th>Logement</th>
+                  <th>Nourriture</th>
+                  <th>Finance</th>
+                  <th>Profession</th>
                   <th>ACTION</th>
                 </tr>
               </thead>
@@ -44,10 +45,12 @@
               {% for social in socials %}
                 <tr>
                   <td>{{social.id}}</td>
-                  <td>{{social.prestationFamiliales}}</td>
-                  <td>{{social.allocationSolidaritePersonneAgee}}</td>
-                  <td>{{social.protectionMaladieEtMedicament}}</td>
-                  <td>{{social.complementaireSante}}</td>
+                  <td>{{social.education}}</td>
+                  <td>{{social.sante}}</td>
+                  <td>{{social.logement}}</td>
+                  <td>{{social.nouriture}}</td>
+                  <td>{{social.finance}}</td>
+                  <td>{{social.profession}}</td>
                   <td>{{social.annee}}</td>
                   {% if is_granted('ROLE_SOCIAL') %}
                     <th>

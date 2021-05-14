@@ -18,142 +18,108 @@ class Social
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="boolean", nullable=true)
      */
-    private $aideEducation;
+    private $education;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="boolean", nullable=true)
      */
-    private $aideNouriture;
+    private $sante;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="boolean", nullable=true)
      */
-    private $aideFinance;
+    private $logement;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="boolean", nullable=true)
      */
-    private $aideSante;
+    private $nouriture;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="boolean", nullable=true)
      */
-    private $aideVisa;
+    private $finance;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="boolean", nullable=true)
      */
-    private $aideSport;
+    private $profession;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $aideTravail;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $aideSocial;
-
-    /**
-     * @ORM\ManyToOne(targetEntity=Personne::class, inversedBy="socials")
+     * @ORM\OneToOne(targetEntity=Personne::class, cascade={"persist", "remove"})
      */
     private $personne;
 
-    public function getAideEducation(): ?string
+    public function getEducation(): ?bool
     {
-        return $this->aideEducation;
+        return $this->education;
     }
 
-    public function setAideEducation(string $aideEducation): self
+    public function setEducation(?bool $education): self
     {
-        $this->aideEducation = $aideEducation;
+        $this->education = $education;
 
         return $this;
     }
 
-    public function getAideNouriture(): ?string
+    public function getSante(): ?bool
     {
-        return $this->aideNouriture;
+        return $this->sante;
     }
 
-    public function setAideNouriture(string $aideNouriture): self
+    public function setSante(?bool $sante): self
     {
-        $this->aideNouriture = $aideNouriture;
+        $this->sante = $sante;
 
         return $this;
     }
 
-    public function getAideFinance(): ?string
+    public function getLogement(): ?bool
     {
-        return $this->aideFinance;
+        return $this->logement;
     }
 
-    public function setAideFinance(string $aideFinance): self
+    public function setLogement(?bool $logement): self
     {
-        $this->aideFinance = $aideFinance;
+        $this->logement = $logement;
 
         return $this;
     }
 
-    public function getAideSante(): ?string
+    public function getNouriture(): ?bool
     {
-        return $this->aideSante;
+        return $this->nouriture;
     }
 
-    public function setAideSante(string $aideSante): self
+    public function setNouriture(?bool $nouriture): self
     {
-        $this->aideSante = $aideSante;
+        $this->nouriture = $nouriture;
 
         return $this;
     }
 
-    public function getAideVisa(): ?string
+    public function getFinance(): ?bool
     {
-        return $this->aideVisa;
+        return $this->finance;
     }
 
-    public function setAideVisa(string $aideVisa): self
+    public function setFinance(?bool $finance): self
     {
-        $this->aideVisa = $aideVisa;
+        $this->finance = $finance;
 
         return $this;
     }
 
-    public function getAideSport(): ?string
+    public function getProfession(): ?bool
     {
-        return $this->aideSport;
+        return $this->profession;
     }
 
-    public function setAideSport(string $aideSport): self
+    public function setProfession(?bool $profession): self
     {
-        $this->aideSport = $aideSport;
-
-        return $this;
-    }
-
-    public function getAideTravail(): ?string
-    {
-        return $this->aideTravail;
-    }
-
-    public function setAideTravail(string $aideTravail): self
-    {
-        $this->aideTravail = $aideTravail;
-
-        return $this;
-    }
-
-    public function getAideSocial(): ?string
-    {
-        return $this->aideSocial;
-    }
-
-    public function setAideSocial(string $aideSocial): self
-    {
-        $this->aideSocial = $aideSocial;
+        $this->profession = $profession;
 
         return $this;
     }
@@ -169,6 +135,4 @@ class Social
 
         return $this;
     }
-
-    
 }

@@ -25,79 +25,79 @@ class Personne
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $nom;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $prenom;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $lieuNaissance;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $nationalite;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $situationMarital;
-
-    /**
-     * @ORM\Column(type="date", nullable=true)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $dateNaissance;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $sexe;
+    private $nationalite;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
-     */
-    private $cin;
-
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $AutreNationalite;
-
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $phone;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $passport;
-
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $numeroPassport;
-
-    /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $numeroCin;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $nbrEnfant;
+    private $numeroTelephone;
 
-    public function getId(): ?int
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $documentVoyage;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $numeroPassport;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $situationMarital;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $nombreEnfants;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $hierarchie;
+
+    /**
+     * @ORM\OneToOne(targetEntity=Marie::class, mappedBy="personne", cascade={"persist", "remove"})
+     */
+    private $marie;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Sport::class, mappedBy="personne")
+     */
+    private $sports;
+
+
+    public function __construct()
     {
-        return $this->id;
+        $this->sports = new ArrayCollection();
     }
 
     public function getNom(): ?string
@@ -105,7 +105,7 @@ class Personne
         return $this->nom;
     }
 
-    public function setNom(string $nom): self
+    public function setNom(?string $nom): self
     {
         $this->nom = $nom;
 
@@ -117,7 +117,7 @@ class Personne
         return $this->prenom;
     }
 
-    public function setPrenom(string $prenom): self
+    public function setPrenom(?string $prenom): self
     {
         $this->prenom = $prenom;
 
@@ -129,9 +129,21 @@ class Personne
         return $this->lieuNaissance;
     }
 
-    public function setLieuNaissance(string $lieu_naissance): self
+    public function setLieuNaissance(?string $lieuNaissance): self
     {
-        $this->lieuNaissance = $lieu_naissance;
+        $this->lieuNaissance = $lieuNaissance;
+
+        return $this;
+    }
+
+    public function getDateNaissance(): ?string
+    {
+        return $this->dateNaissance;
+    }
+
+    public function setDateNaissance(?string $dateNaissance): self
+    {
+        $this->dateNaissance = $dateNaissance;
 
         return $this;
     }
@@ -141,9 +153,57 @@ class Personne
         return $this->nationalite;
     }
 
-    public function setNationalite(string $nationalite): self
+    public function setNationalite(?string $nationalite): self
     {
         $this->nationalite = $nationalite;
+
+        return $this;
+    }
+
+    public function getNumeroCin(): ?string
+    {
+        return $this->numeroCin;
+    }
+
+    public function setNumeroCin(?string $numeroCin): self
+    {
+        $this->numeroCin = $numeroCin;
+
+        return $this;
+    }
+
+    public function getNumeroTelephone(): ?string
+    {
+        return $this->numeroTelephone;
+    }
+
+    public function setNumeroTelephone(?string $numeroTelephone): self
+    {
+        $this->numeroTelephone = $numeroTelephone;
+
+        return $this;
+    }
+
+    public function getDocumentVoyage(): ?string
+    {
+        return $this->documentVoyage;
+    }
+
+    public function setDocumentVoyage(?string $documentVoyage): self
+    {
+        $this->documentVoyage = $documentVoyage;
+
+        return $this;
+    }
+
+    public function getNumeroPassport(): ?string
+    {
+        return $this->numeroPassport;
+    }
+
+    public function setNumeroPassport(?string $numeroPassport): self
+    {
+        $this->numeroPassport = $numeroPassport;
 
         return $this;
     }
@@ -153,119 +213,87 @@ class Personne
         return $this->situationMarital;
     }
 
-    public function setSituationMarital(string $situation_marital): self
+    public function setSituationMarital(?string $situationMarital): self
     {
-        $this->situationMarital = $situation_marital;
+        $this->situationMarital = $situationMarital;
 
         return $this;
     }
 
-    public function getDateNaissance(): ?\DateTimeInterface
+    public function getNombreEnfants(): ?int
     {
-        return $this->dateNaissance;
+        return $this->nombreEnfants;
     }
 
-    public function setDateNaissance(?\DateTimeInterface $dateNaissance): self
+    public function setNombreEnfants(?int $nombreEnfants): self
     {
-        $this->dateNaissance = $dateNaissance;
+        $this->nombreEnfants = $nombreEnfants;
 
         return $this;
     }
 
-    public function getSexe(): ?string
+    public function getHierarchie(): ?string
     {
-        return $this->sexe;
+        return $this->hierarchie;
     }
 
-    public function setSexe(?string $sexe): self
+    public function setHierarchie(string $hierarchie): self
     {
-        $this->sexe = $sexe;
+        $this->hierarchie = $hierarchie;
 
         return $this;
     }
 
-    public function getCin(): ?int
+    public function getMarie(): ?Marie
     {
-        return $this->cin;
+        return $this->marie;
     }
 
-    public function setCin(?int $cin): self
+    public function setMarie(?Marie $marie): self
     {
-        $this->cin = $cin;
+        // unset the owning side of the relation if necessary
+        if ($marie === null && $this->marie !== null) {
+            $this->marie->setPersonne(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($marie !== null && $marie->getPersonne() !== $this) {
+            $marie->setPersonne($this);
+        }
+
+        $this->marie = $marie;
 
         return $this;
     }
 
-    public function getAutreNationalite(): ?string
+    /**
+     * @return Collection|Sport[]
+     */
+    public function getSports(): Collection
     {
-        return $this->AutreNationalite;
+        return $this->sports;
     }
 
-    public function setAutreNationalite(string $AutreNationalite): self
+    public function addSport(Sport $sport): self
     {
-        $this->AutreNationalite = $AutreNationalite;
+        if (!$this->sports->contains($sport)) {
+            $this->sports[] = $sport;
+            $sport->setPersonne($this);
+        }
 
         return $this;
     }
 
-    public function getPhone(): ?int
+    public function removeSport(Sport $sport): self
     {
-        return $this->phone;
-    }
-
-    public function setPhone(int $phone): self
-    {
-        $this->phone = $phone;
+        if ($this->sports->removeElement($sport)) {
+            // set the owning side to null (unless already changed)
+            if ($sport->getPersonne() === $this) {
+                $sport->setPersonne(null);
+            }
+        }
 
         return $this;
-    }
-
-    public function getPassport(): ?string
-    {
-        return $this->passport;
-    }
-
-    public function setPassport(string $passport): self
-    {
-        $this->passport = $passport;
-
-        return $this;
-    }
-
-    public function getNumeroPassport(): ?int
-    {
-        return $this->numeroPassport;
-    }
-
-    public function setNumeroPassport(int $numeroPassport): self
-    {
-        $this->numeroPassport = $numeroPassport;
-
-        return $this;
-    }
-
-    public function getNumeroCin(): ?int
-    {
-        return $this->numeroCin;
-    }
-
-    public function setNumeroCin(int $numeroCin): self
-    {
-        $this->numeroCin = $numeroCin;
-
-        return $this;
-    }
-
-    public function getNbrEnfant(): ?int
-    {
-        return $this->nbrEnfant;
-    }
-
-    public function setNbrEnfant(int $nbrEnfant): self
-    {
-        $this->nbrEnfant = $nbrEnfant;
-
-        return $this;
-    }
+    }    
 
 }

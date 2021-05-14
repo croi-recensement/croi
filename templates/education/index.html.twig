@@ -32,16 +32,14 @@
               <thead>
                 <tr>
                   <th>Id</th>
-                  <th>NOM</th>
-                  <th>PRENOM</th>
-                  <th>NATIONALITE</th>
-                  <th>DATE NAISSANCE</th>
-                  <th>PAYS ORIGINE</th>
-                  <th>ECOLE</th>
-                  <th>CLASSE</th>
-                  <th>NIVEAU</th>
-                  <th>DIPLOME</th>
-                  <th>ANNEE SCOLAIRE</th>
+                  <th>Ecole</th>
+                  <th>Université</th>
+                  <th>Classe</th>
+                  <th>Carte d'Etudiant(e)</th>
+                  <th>Adresse d'Ecole</th>
+                  <th>Adresse de l'Université</th>
+                  <th>Diplôme</th>
+                  <th>Année Scolaire</th>
                   <th>ACTION</th>
                 </tr>
               </thead>
@@ -49,16 +47,14 @@
               {% for education in educations %}
                 <tr>
                   <td>{{education.id}}</td>
-                  <td>{{education.personne.nom}}</td>
-                  <td>{{education.personne.prenom}}</td>
-                  <td>{{education.personne.nationalite}}</td>
-                  <td>{{education.personne.dateNaissance|date('m/d/Y')}}</td>
-                  <td>{{education.personne.paysOrigin}}</td>
-                  <td>{{education.ecole}}</td>
+                  <td>{{education.nomEcole}}</td>
+                  <td>{{education.nomUniversite}}</td>
                   <td>{{education.classe}}</td>
-                  <td>{{education.niveau}}</td>
+                  <td>{{education.carteEtudiant}}</td>
+                  <td>{{education.adresseEcole}}</td>
+                  <td>{{education.adresseUniversite}}</td>
                   <td>{{education.diplome}}</td>
-                  <td>{{education.annee}}</td>
+                  <td>{{education.anneeScolaire}}</td>
                   {% if is_granted('ROLE_EDUCATION') %}
                     <th>
                         {% if is_granted('ROLE_ADMIN') %}

@@ -20,14 +20,9 @@ class Logement
     private $id;
 
     /**
-     * @ORM\Column(type="boolean")
-     */
-    private $proprietaire;
-
-    /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $adressePermanente;
+    private $adressePermanante;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -35,65 +30,48 @@ class Logement
     private $adresseTemporaire;
 
     /**
-     * @ORM\Column(type="boolean")
-     */
-    private $maisonAllouer;
-
-    /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $email;
 
     /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $proprietaire;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $maisonAlloue;
+
+    /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $montantLoyer;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $montantSyndic;
+
+    /**
+     * @ORM\OneToOne(targetEntity=Pays::class, cascade={"persist", "remove"})
      */
     private $pays;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\OneToOne(targetEntity=Personne::class, cascade={"persist", "remove"})
      */
-    private $province;
+    private $personne;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $region;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $quartier;
-
-    public function __toString()
+    public function getAdressePermanante(): ?string
     {
-        return "";
+        return $this->adressePermanante;
     }
 
-    public function getId(): ?int
+    public function setAdressePermanante(?string $adressePermanante): self
     {
-        return $this->id;
-    }
-
-    public function getProprietaire(): ?bool
-    {
-        return $this->proprietaire;
-    }
-
-    public function setProprietaire(bool $proprietaire): self
-    {
-        $this->proprietaire = $proprietaire;
-
-        return $this;
-    }
-
-    public function getAdressePermanente(): ?string
-    {
-        return $this->adressePermanente;
-    }
-
-    public function setAdressePermanente(?string $adressePermanente): self
-    {
-        $this->adressePermanente = $adressePermanente;
+        $this->adressePermanante = $adressePermanante;
 
         return $this;
     }
@@ -110,74 +88,86 @@ class Logement
         return $this;
     }
 
-    public function getMaisonAllouer(): ?bool
-    {
-        return $this->maisonAllouer;
-    }
-
-    public function setMaisonAllouer(bool $maisonAllouer): self
-    {
-        $this->maisonAllouer = $maisonAllouer;
-
-        return $this;
-    }
-
     public function getEmail(): ?string
     {
         return $this->email;
     }
 
-    public function setEmail(string $email): self
+    public function setEmail(?string $email): self
     {
         $this->email = $email;
 
         return $this;
     }
 
-    public function getPays(): ?string
+    public function getProprietaire(): ?bool
+    {
+        return $this->proprietaire;
+    }
+
+    public function setProprietaire(?bool $proprietaire): self
+    {
+        $this->proprietaire = $proprietaire;
+
+        return $this;
+    }
+
+    public function getMaisonAlloue(): ?bool
+    {
+        return $this->maisonAlloue;
+    }
+
+    public function setMaisonAlloue(?bool $maisonAlloue): self
+    {
+        $this->maisonAlloue = $maisonAlloue;
+
+        return $this;
+    }
+
+    public function getMontantLoyer(): ?string
+    {
+        return $this->montantLoyer;
+    }
+
+    public function setMontantLoyer(?string $montantLoyer): self
+    {
+        $this->montantLoyer = $montantLoyer;
+
+        return $this;
+    }
+
+    public function getMontantSyndic(): ?string
+    {
+        return $this->montantSyndic;
+    }
+
+    public function setMontantSyndic(?string $montantSyndic): self
+    {
+        $this->montantSyndic = $montantSyndic;
+
+        return $this;
+    }
+
+    public function getPays(): ?Pays
     {
         return $this->pays;
     }
 
-    public function setPays(string $pays): self
+    public function setPays(?Pays $pays): self
     {
         $this->pays = $pays;
 
         return $this;
     }
 
-    public function getProvince(): ?string
+    public function getPersonne(): ?Personne
     {
-        return $this->province;
+        return $this->personne;
     }
 
-    public function setProvince(string $province): self
+    public function setPersonne(?Personne $personne): self
     {
-        $this->province = $province;
-
-        return $this;
-    }
-
-    public function getRegion(): ?string
-    {
-        return $this->region;
-    }
-
-    public function setRegion(string $region): self
-    {
-        $this->region = $region;
-
-        return $this;
-    }
-
-    public function getQuartier(): ?string
-    {
-        return $this->quartier;
-    }
-
-    public function setQuartier(?string $quartier): self
-    {
-        $this->quartier = $quartier;
+        $this->personne = $personne;
 
         return $this;
     }

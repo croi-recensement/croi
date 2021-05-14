@@ -20,18 +20,25 @@ class Enfants
     private $id;
 
     /**
-     * @ORM\OneToOne(targetEntity=Personne::class)
-     */
-    private $enfant;
-
-    /**
-     * @ORM\OneToOne(targetEntity=Femme::class)
+     * @ORM\ManyToOne(targetEntity=Marie::class, inversedBy="enfants")
      */
     private $parent;
 
-    public function getId(): ?int
+    /**
+     * @ORM\OneToOne(targetEntity=Personne::class, cascade={"persist", "remove"})
+     */
+    private $enfant;
+
+    public function getParent(): ?Marie
     {
-        return $this->id;
+        return $this->parent;
+    }
+
+    public function setParent(?Marie $parent): self
+    {
+        $this->parent = $parent;
+
+        return $this;
     }
 
     public function getEnfant(): ?Personne
@@ -42,18 +49,6 @@ class Enfants
     public function setEnfant(?Personne $enfant): self
     {
         $this->enfant = $enfant;
-
-        return $this;
-    }
-
-    public function getParent(): ?Femme
-    {
-        return $this->parent;
-    }
-
-    public function setParent(?Femme $parent): self
-    {
-        $this->parent = $parent;
 
         return $this;
     }

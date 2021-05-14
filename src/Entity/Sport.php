@@ -18,60 +18,125 @@ class Sport
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="boolean", nullable=true)
      */
-    private $nom;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $frequence;
-
-    /**
-     * @ORM\ManyToOne(targetEntity=Personne::class)
-     */
-    private $personne;
+    private $pratiqueSport;
 
     /**
      * @ORM\Column(type="boolean", nullable=true)
      */
-    private $loisir;
+    private $aimeLoisir;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $annee;
+    private $typeSport;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $club;
+    private $frequenceSport;
 
-    public function getId(): ?int
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $typeLoisir;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $anneeDebutSport;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $anneeDebutLoisir;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Personne::class, inversedBy="sports")
+     */
+    private $personne;
+
+    public function getPratiqueSport(): ?bool
     {
-        return $this->id;
+        return $this->pratiqueSport;
     }
 
-    public function getNom(): ?string
+    public function setPratiqueSport(?bool $pratiqueSport): self
     {
-        return $this->nom;
-    }
-
-    public function setNom(string $nom): self
-    {
-        $this->nom = $nom;
+        $this->pratiqueSport = $pratiqueSport;
 
         return $this;
     }
 
-    public function getFrequence(): ?string
+    public function getAimeLoisir(): ?bool
     {
-        return $this->frequence;
+        return $this->aimeLoisir;
     }
 
-    public function setFrequence(string $frequence): self
+    public function setAimeLoisir(?bool $aimeLoisir): self
     {
-        $this->frequence = $frequence;
+        $this->aimeLoisir = $aimeLoisir;
+
+        return $this;
+    }
+
+    public function getTypeSport(): ?string
+    {
+        return $this->typeSport;
+    }
+
+    public function setTypeSport(?string $typeSport): self
+    {
+        $this->typeSport = $typeSport;
+
+        return $this;
+    }
+
+    public function getFrequenceSport(): ?string
+    {
+        return $this->frequenceSport;
+    }
+
+    public function setFrequenceSport(?string $frequenceSport): self
+    {
+        $this->frequenceSport = $frequenceSport;
+
+        return $this;
+    }
+
+    public function getTypeLoisir(): ?string
+    {
+        return $this->typeLoisir;
+    }
+
+    public function setTypeLoisir(?string $typeLoisir): self
+    {
+        $this->typeLoisir = $typeLoisir;
+
+        return $this;
+    }
+
+    public function getAnneeDebutSport(): ?string
+    {
+        return $this->anneeDebutSport;
+    }
+
+    public function setAnneeDebutSport(?string $anneeDebutSport): self
+    {
+        $this->anneeDebutSport = $anneeDebutSport;
+
+        return $this;
+    }
+
+    public function getAnneeDebutLoisir(): ?string
+    {
+        return $this->anneeDebutLoisir;
+    }
+
+    public function setAnneeDebutLoisir(?string $anneeDebutLoisir): self
+    {
+        $this->anneeDebutLoisir = $anneeDebutLoisir;
 
         return $this;
     }
@@ -84,42 +149,6 @@ class Sport
     public function setPersonne(?Personne $personne): self
     {
         $this->personne = $personne;
-
-        return $this;
-    }
-
-    public function getLoisir(): ?bool
-    {
-        return $this->loisir;
-    }
-
-    public function setLoisir(?bool $loisir): self
-    {
-        $this->loisir = $loisir;
-
-        return $this;
-    }
-
-    public function getAnnee(): ?string
-    {
-        return $this->annee;
-    }
-
-    public function setAnnee(string $annee): self
-    {
-        $this->annee = $annee;
-
-        return $this;
-    }
-
-    public function getClub(): ?string
-    {
-        return $this->club;
-    }
-
-    public function setClub(string $club): self
-    {
-        $this->club = $club;
 
         return $this;
     }

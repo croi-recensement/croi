@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Entity\Societe;
+use App\Entity\Commerce;
 use App\Form\CommerceType;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -22,7 +22,7 @@ class CommerceController extends AbstractController
     {
         $commerces = $this->getDoctrine()
                             ->getManager()
-                            ->getRepository('App\Entity\Societe')->findAll();
+                            ->getRepository('App\Entity\Commerce')->findAll();
 
         return $this->render('commerce/index.html.twig', [
             'controller_name' => 'CommerceController',
@@ -37,7 +37,7 @@ class CommerceController extends AbstractController
     public function create(Request $request)
     {
 
-        $societe = new Societe();
+        $societe = new Commerce();
 
         $form = $this->createForm(CommerceType::class, $societe);
         $form->handleRequest($request);
@@ -57,7 +57,7 @@ class CommerceController extends AbstractController
     /**
      * @Route("/commerce/edit/{id}", name="app_dashboard_commerce_edit")
      */
-    public function edit(Societe $societe, Request $request, EntityManagerInterface $em)
+    public function edit(Commerce $societe, Request $request, EntityManagerInterface $em)
     {
         $form = $this->createForm(CommerceType::class, $societe);
         $form->handleRequest($request);

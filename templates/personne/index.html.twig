@@ -36,15 +36,13 @@
                   <th>Lieu de naissance</th>
                   <th>Date de naissance</th>
                   <th>Nationalite</th>
-                  <th>Situation marital</th>
-                  <th>Sexe</th>
-                  <th>CIN</th>
-                  <th>Autre Nationalite</th>
-                  <th>Phone</th>
-                  <th>Passport</th>
-                  <th>Numéro Passport</th>
                   <th>Numéro CIN</th>
+                  <th>Numéro Téléphone</th>
+                  <th>Document Voyage</th>
+                  <th>Numéro Passport</th>
+                  <th>Situation marital</th>
                   <th>Nombre Enfant</th>
+                  <th>Hiérarchie</th>
                   <th>ACTION</th>
                 </tr>
               </thead>
@@ -57,15 +55,13 @@
                   <td>{{ person.lieuNaissance }}</td>
                   <td>{{ person.dateNaissance|date('m/d/Y') }}</td>
                   <td>{{ person.nationalite }}</td>
-                  <td>{{ person.situationMarital }}</td>
-                  <td>{{ person.sexe }}</td>
-                  <td>{{ person.cin }}</td>
-                  <td>{{ person.autreNationalite }}</td>
-                  <td>{{ person.phone }}</td>
-                  <td>{{ person.passport }}</td>
-                  <td>{{ person.numeroPassport }}</td>
                   <td>{{ person.numeroCin }}</td>
+                  <td>{{ person.numeroTelephone }}</td>
+                  <td>{{ person.documentVoyage }}</td>
+                  <td>{{ person.numeroPassport }}</td>
+                  <td>{{ person.situationMarital }}</td>
                   <td>{{ person.nombreEnfant }}</td>
+                  <td>{{ person.hierarchie }}</td>
                   <th>
                     <a href="{{ path('app_dashboard_admin_delete', {'id': person.id}) }}" style="cursor:pointer"
                       onClick="return confirm('Voulez-vous supprimer vraiment cette ligne ??')"
