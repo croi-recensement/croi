@@ -1,114 +1,92 @@
 <?php
 
 namespace App\Controller;
-use App\Entity\Enfants;
-use App\Form\EnfantsType;
+use App\Entity\Enfant;
+use App\Form\EnfantType;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-
+/**
+* @Route("/admin")
+*/
 class EnfantController extends AbstractController
 {
     /**
-     * @Route("/enfant", name="app_dashboard_enfant")
+     * @Route("/enfant", name="app_dashboard_read_child")
      */
     public function index(): Response
     {
         $enfants = $this->getDoctrine()
-                            ->getManager()
-                            ->getRepository('App\Entity\Enfants')->findAll();
+            ->getManager()
+            ->getRepository('App\Entity\Enfant')->findAll();
 
         return $this->render('enfant/index.html.twig', [
             'controller_name' => 'EnfantController',
             'enfants' => $enfants,
-            'title' => 'Enfant du membre'
+            'title' => "ENFANT DU MEMBRE"
         ]);
     }
 
     /**
-     * @Route("/enfant/create", name="app_dashboard_enfant_create")
-     */
+    * @Route("/enfant/ajout", name="app_dashboard_create_child")
+    */
     public function create(Request $request)
     {
-        $enfant = new Enfants();
-
-       
-        $form = $this->createForm(EnfantsType::class, $enfant);
+        $enfant = new Enfant();
+        $form = $this->createForm(EnfantType::class, $enfant);
         $form->handleRequest($request);
+
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($enfant);
             $em->flush();
-            $this->addFlash('success', 'Ajout Enfant avec succèss!!!');
-            return $this->redirectToRoute('app_dashboard_enfant');
+            return $this->redirectToRoute('app_dashboard_read_child');
         }
-        return $this->render('enfant/create.html.twig', [
+        
+        return $this->render('enfant/ajouter.html.twig', [
             'controller_name' => 'EnfantController',
             'form' => $form->createView(),
         ]);
     }
 
-    /**
-     * @Route("/enfant/{id}", name="app_dashboard_enfant_id")
-     */
-    public function show(Request $request): Response
+    /*
+    * @Route("/admin/edit/{id}", name="app_dashboard_admin_edit")
+     
+    public function edit(Personne $personne, Request $request, EntityManagerInterface $em)
     {
-
-        if($request->isXMLHttpRequest()){
-            $id = $request->request->get('id');
-            $enfant = $this->getDoctrine()
-                            ->getManager()
-                            ->getRepository('App\Entity\Enfants')->find((int)$id);
-                                
-            //return $this->json($jsonContent, 200);
-            return new JsonResponse($enfant);
-        }
-        return new Response('ok');
-    }
-
-    /**
-     * @Route("/enfant/edit/{id}", name="app_dashboard_enfant_edit")
-     */
-    public function edit(Enfants $enfant, Request $request, EntityManagerInterface $em)
-    {
-        $form = $this->createForm(EnfantsType::class, $enfant);
+        $form = $this->createForm(PersonneType::class, $personne);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
 
             $em->flush();
-            $this->addFlash('success', 'Editer Enfant succèss!!!');
-            return $this->redirectToRoute('app_dashboard_enfant');
+            $this->addFlash('success', 'Editer Personne succèss!!!');
+            return $this->redirectToRoute('app_dashboard');
         }
 
-        return $this->render('enfant/edit.html.twig', [
+        return $this->render('personne/edit.html.twig', [
             'form' => $form->createView()
         ]);
-    }
+    }*/
 
     /**
-     * @Route("/enfant/delete/{id}", name="app_dashboard_enfant_delete")
-     */
+    * @Route("/enfant/delete/{id}", name="app_dashboard_delete_child")
+    */
     public function delete($id, Request $request){
-
         $em = $this->getDoctrine()->getManager();
-        $enfantRepo = $em->getRepository('App\Entity\Personne');
-        $enfant = $enfantRepo->find($id);
+        $enfants = $em->getRepository('App\Entity\Enfant');
+        $enfant = $enfants->find($id);
         
         if($enfant){
             $em->remove($enfant);
             $em->flush();
-            $this->addFlash('success', 'Enfant supprimer avec success !!!');
-            return $this->redirectToRoute('app_dashboard_enfant');
+            return $this->redirectToRoute('app_dashboard_read_child');
         }
         return new Response(null, 204);
     
     }
 }
-
-?>

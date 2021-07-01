@@ -34,14 +34,12 @@ class RegistrationController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $user->setPassword($this->passwordEncoder->encodePassword($user, $user->getPassword()));
             $user->setRoles(['ROLE_ADMIN']);
-            $user->setNomRoute('app_dashboard_membre');
+            $user->setNomRoute('app_dashboard_home');
             $user->setFname('Zhoo');
             $user->setLname('Abel');
             $user->setImage('');
             $user->setUniqueId(1233355);
             $user->setStatus('Online');
-            //$user->setRoles(['ROLE_USER']);
-            //$user->setRoles(['ROLE_USER']);
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);

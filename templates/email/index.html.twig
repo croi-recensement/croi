@@ -18,31 +18,27 @@
                 </ol>
             </div>
             {% endfor %}  
-            {{ form_start(form) }}  
-        </div>
+            {{ form_start(contactForm) }}  
+            </div>
                 <div class="panel-body">
                     <div class="row">
-                        <div class="form-group col-sm-offset-2 col-md-8">
+                        <div class="contactform-group col-sm-offset-2 col-md-8">
                             <div class="sub-title">Email</div>
-                            {{ form_widget(form.email, {'attr': {'class': 'form-control'}}) }}
+                            {{ form_widget(contactForm.email, {'attr': {'class': 'form-control'}}) }}
                         </div>
-                        <div class="form-group col-sm-offset-2 col-md-8">
+                        <div class="contactform-group col-sm-offset-2 col-md-8">
                             <div class="sub-title">Message</div>
-                            {{ form_widget(form.message, {'attr': {'class': 'form-control'}}) }}
+                            {{ form_widget(contactForm.message, {'attr': {'class': 'form-control'}}) }}
                         </div>
-                        <div class="form-group col-sm-offset-2 col-md-8">
-                            <div class="sub-title">Fichier</div>
-                            {{ form_widget(form.file, {'attr': {'class': 'form-control'}}) }}
-                        </div>
-                        <div class="form-group">
+                        <div class="contactform-group">
                             <div class="col-sm-offset-5 col-sm-6">
-                                {{ form_widget(form.envoyer, {'attr': {'class': 'btn btn-primary'}}) }}
+                                {{ form_widget(contactForm.envoyer, {'attr': {'class': 'btn btn-primary'}}) }}
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-             {{ form_end(form) }}
+             {{ form_end(contactForm) }}
         </div>
     </div>
 </div

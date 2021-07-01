@@ -2,20 +2,22 @@
 
 namespace App\Form;
 
-use App\Entity\Maladie;
+use App\Entity\Sante;
 use App\Entity\Personne;
+use App\Form\MembreType;
+
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\RadioType;
+use Symfony\Component\Form\Extension\Core\Type\CountryType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\MoneyType;
-
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-
 use Symfony\Component\Form\FormBuilderInterface;
-
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class SanteType extends AbstractType
@@ -23,55 +25,47 @@ class SanteType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add("nom",TextType::class)
-            ->add("evacuation", ChoiceType::class,[
+            ->add("typeMaladie",CollectionType::class)
+            ->add("categorie", CollectionType::class)
+            ->add("maladie", CollectionType::class)
+            ->add('groupeSanguin', CollectionType::class)
+            ->add("evacuerounon", ChoiceType::class,[
                 'choices' => [
-                    'Oui' => 1,
-                    'Non' => 0
+                    'Oui' => "oui",
+                    'Non' => "non"
                 ],
-                'expanded' => true,
+                'expanded' => false,
+
             ])
-            ->add("chirurgie", ChoiceType::class, [
+            ->add("chirurgieounon", ChoiceType::class,[
                 'choices' => [
-                    'Oui' => 1,
-                    'Non' => 0
+                    'Oui' => "oui",
+                    'Non' => "non"
                 ],
-                'expanded' => true,
-            ])
-            ->add('annee', TextType::class)
-            ->add("nomChirurgie",TextType::class)
-            ->add("coutDiagnostique", MoneyType:: class, [
-                'divisor' => 100,
-                'currency' => false
+                'expanded' => false,
+
             ])
             ->add("coutEvacuation", MoneyType::class, [
                 'divisor' => 100,
                 'currency' => false
             ])
-            ->add("dateChirurgie", DateType::class,[
-                'widget' => 'single_text',
-                'required' => false
+            ->add("poids", TextType::class)
+            ->add("taille", TextType::class)
+            ->add("nomChirurgie", TextType::class)
+            ->add("coutChirurgie", MoneyType::class, [
+                'divisor' => 100,
+                'currency' => false
             ])
-            ->add("dateEvacuation", DateType::class, [
-                'widget' => 'single_text',
-                'required' => false
-            ])
-            ->add("type", ChoiceType::class,[
-                'choices' => [
-                    'CHRONIQUE' => 1,
-                    'PONCTUELLE' => 0
-                ],
-            ])
-            ->add("Personne", EntityType::class, [
-                'class' => Personne::class,
-                'choice_label' => 'nom',
-            ]);
+            ->add("nomPays", CountryType::class)
+            ->add("province", CountryType::class)
+            ->add("region", CountryType::class)
+            ->add("fokotany", CountryType::class);
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Maladie::class,
+            'data_class' => Sante::class,
         ]);
     }
 }

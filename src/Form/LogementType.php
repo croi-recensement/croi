@@ -8,6 +8,8 @@ use App\Form\PaysType;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\MoneyType;
+use Symfony\Component\Form\Extension\Core\Type\CountryType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -20,25 +22,33 @@ class LogementType extends AbstractType
         $builder
             ->add("adressePermanente", TextType::class)
             ->add("adresseTemporaire", TextType::class)
-            ->add("proprietaire", ChoiceType::class,[
+            ->add("adresseEmail", TextType::class)
+            ->add("proprietaireounon", ChoiceType::class,[
                 'choices' => [
                     'Oui' => 1,
                     'Non' => 0
                 ],
-                'expanded' => true,
+                'expanded' => false,
             ])
-            ->add("maisonAllouer", ChoiceType::class, [
+            ->add("maisonalloueounon", ChoiceType::class,[
                 'choices' => [
                     'Oui' => 1,
                     'Non' => 0
                 ],
-                'expanded' => true,
+                'expanded' => false,
             ])
-            ->add("email", TextType::class)
-            ->add("pays", TextType::class)
-            ->add("province", TextType::class)
-            ->add("region", TextType::class)
-            ->add("quartier", TextType::class);
+            ->add("montantLoyer", MoneyType::class, [
+                'divisor' => 100,
+                'currency' => false
+            ])
+            ->add("montantSyndic", MoneyType::class, [
+                'divisor' => 100,
+                'currency' => false
+            ])
+            ->add("nomPays", CountryType::class)
+            ->add("province", CountryType::class)
+            ->add("region", CountryType::class)
+            ->add("fokotany", CountryType::class);
     }
 
     public function configureOptions(OptionsResolver $resolver)

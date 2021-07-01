@@ -2,10 +2,19 @@
 
 namespace App\Entity;
 
+
+use ApiPlatform\Core\Annotation\ApiResource;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+use Symfony\Component\Serializer\Annotation\Groups;
 use App\Repository\SportRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
+ * @ApiResource(
+ *      normalizationContext={"groups"={"sport_read"}},
+ *      denormalizationContext={"groups"={"sport_write"}}
+ * )
  * @ORM\Entity(repositoryClass=SportRepository::class)
  */
 class Sport
@@ -18,77 +27,54 @@ class Sport
     private $id;
 
     /**
+     * @Groups({"sport_read","sport_write", "membre_read"})
      * @ORM\Column(type="boolean", nullable=true)
      */
-    private $pratiqueSport;
+    private $pratiqueSportounon;
 
     /**
-     * @ORM\Column(type="boolean", nullable=true)
-     */
-    private $aimeLoisir;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $typeSport;
-
-    /**
+     * @Groups({"sport_read","sport_write", "membre_read"})
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $frequenceSport;
 
     /**
+     * @Groups({"sport_read","sport_write", "membre_read"})
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $typeLoisir;
+    private $nomSport;
 
     /**
+     * @Groups({"sport_read","sport_write"})
+     * @ORM\ManyToOne(targetEntity=Membre::class, inversedBy="pratique")
+     */
+    private $membre;
+
+    /**
+     * @Groups({"sport_read","sport_write", "membre_read"})
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $pratiqueLoisirouinon;
+
+    /**
+     * @Groups({"sport_read","sport_write", "membre_read"})
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $anneeDebutSport;
+    private $nomLoisir;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $anneeDebutLoisir;
-
-    /**
-     * @ORM\ManyToOne(targetEntity=Personne::class, inversedBy="sports")
-     */
-    private $personne;
-
-    public function getPratiqueSport(): ?bool
+    public function getId(): ?int
     {
-        return $this->pratiqueSport;
+        return $this->id;
     }
 
-    public function setPratiqueSport(?bool $pratiqueSport): self
+    public function getPratiqueSportounon(): ?bool
     {
-        $this->pratiqueSport = $pratiqueSport;
-
-        return $this;
+        return $this->pratiqueSportounon;
     }
 
-    public function getAimeLoisir(): ?bool
+    public function setPratiqueSportounon(?bool $pratiqueSportounon): self
     {
-        return $this->aimeLoisir;
-    }
-
-    public function setAimeLoisir(?bool $aimeLoisir): self
-    {
-        $this->aimeLoisir = $aimeLoisir;
-
-        return $this;
-    }
-
-    public function getTypeSport(): ?string
-    {
-        return $this->typeSport;
-    }
-
-    public function setTypeSport(?string $typeSport): self
-    {
-        $this->typeSport = $typeSport;
+        $this->pratiqueSportounon = $pratiqueSportounon;
 
         return $this;
     }
@@ -105,50 +91,50 @@ class Sport
         return $this;
     }
 
-    public function getTypeLoisir(): ?string
+    public function getNomSport(): ?string
     {
-        return $this->typeLoisir;
+        return $this->nomSport;
     }
 
-    public function setTypeLoisir(?string $typeLoisir): self
+    public function setNomSport(?string $nomSport): self
     {
-        $this->typeLoisir = $typeLoisir;
+        $this->nomSport = $nomSport;
 
         return $this;
     }
 
-    public function getAnneeDebutSport(): ?string
+    public function getMembre(): ?Membre
     {
-        return $this->anneeDebutSport;
+        return $this->membre;
     }
 
-    public function setAnneeDebutSport(?string $anneeDebutSport): self
+    public function setMembre(?Membre $membre): self
     {
-        $this->anneeDebutSport = $anneeDebutSport;
+        $this->membre = $membre;
 
         return $this;
     }
 
-    public function getAnneeDebutLoisir(): ?string
+    public function getPratiqueLoisirouinon(): ?bool
     {
-        return $this->anneeDebutLoisir;
+        return $this->pratiqueLoisirouinon;
     }
 
-    public function setAnneeDebutLoisir(?string $anneeDebutLoisir): self
+    public function setPratiqueLoisirouinon(?bool $pratiqueLoisirouinon): self
     {
-        $this->anneeDebutLoisir = $anneeDebutLoisir;
+        $this->pratiqueLoisirouinon = $pratiqueLoisirouinon;
 
         return $this;
     }
 
-    public function getPersonne(): ?Personne
+    public function getNomLoisir(): ?string
     {
-        return $this->personne;
+        return $this->nomLoisir;
     }
 
-    public function setPersonne(?Personne $personne): self
+    public function setNomLoisir(?string $nomLoisir): self
     {
-        $this->personne = $personne;
+        $this->nomLoisir = $nomLoisir;
 
         return $this;
     }

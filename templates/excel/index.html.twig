@@ -1,5 +1,5 @@
 {% extends 'base.html.twig' %}
-
+{% block title %}{{ title }}{% endblock %} 
 {% block content %}
 <div id="page-inner">
     <div class="row">
@@ -20,16 +20,13 @@
                     {{ form_start(form) }}
                         <div class="panel-body">
                             <div class="row">
-                                <div class="form-group col-md-6">
+                                <div class="form-group col-md-12">
                                     {{ form_widget(form.data, {'attr' : {'class': 'form-control'}}) }}
-                                </div>
-                                <div class="form-group col-md-6">
-                                    {{ form_widget(form.file, {'attr' : {'class': 'form-control'}}) }}
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="form-group col-md-4 ">
-                                    {{ form_widget(form.importer, {'attr' : {'class': 'btn btn-primary'}}) }}
+                                    {{ form_widget(form.exporter, {'attr' : {'class': 'btn btn-primary'}}) }}
                                 </div>
                             </div>
                         </div>

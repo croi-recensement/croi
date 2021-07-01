@@ -2,10 +2,16 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiResource;
+use Symfony\Component\Serializer\Annotation\Groups;
 use App\Repository\TablighRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
+ * @ApiResource(
+ *      normalizationContext={"groups"={"read"}},
+ *      denormalizationContext={"groups"={"write"}}
+ * )
  * @ORM\Entity(repositoryClass=TablighRepository::class)
  */
 class Tabligh
@@ -18,35 +24,42 @@ class Tabligh
     private $id;
 
     /**
-     * @ORM\Column(type="array")
+     * @Groups({"read"})
+     * @ORM\Column(type="boolean", nullable=true)
      */
-    private $reponse = [];
+    private $questionCroyant;
 
     /**
-     * @ORM\OneToOne(targetEntity=Personne::class, cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity=Membre::class, inversedBy="tabligh", cascade={"persist", "remove"})
      */
-    private $personne;
+    private $croyance;
 
-    public function getReponse(): ?array
+
+    public function getId(): ?int
     {
-        return $this->reponse;
+        return $this->id;
     }
 
-    public function setReponse(array $reponse): self
+    public function getQuestionCroyant(): ?bool
     {
-        $this->reponse = $reponse;
+        return $this->questionCroyant;
+    }
+
+    public function setQuestionCroyant(?bool $questionCroyant): self
+    {
+        $this->questionCroyant = $questionCroyant;
 
         return $this;
     }
 
-    public function getPersonne(): ?Personne
+    public function getCroyance(): ?Membre
     {
-        return $this->personne;
+        return $this->croyance;
     }
 
-    public function setPersonne(?Personne $personne): self
+    public function setCroyance(?Membre $croyance): self
     {
-        $this->personne = $personne;
+        $this->croyance = $croyance;
 
         return $this;
     }

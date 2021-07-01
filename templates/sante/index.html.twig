@@ -2,195 +2,133 @@
 
 {% block title %}{{ title }}{% endblock %} 
 
-{% block content %}
+{% block content %}  
 <div id="page-inner">
   <div class="row">
-    {% if labels != null and calculeWithout != null and calculeWiht != null %}
-      <div class="col-sm-7" id="boxTab">
-    {% else %}
-    <div class="col-sm-12" id="boxTab">
-    {% endif %}
+    <div class="col-md-12">
       <div class="panel panel-default">
         <div class="panel-heading">
           <div class="row">
-            <div class="col-md-4">SANTER</div>
-            <div class="col-md-4"></div>
-            <div class="col-md-4">
-              <a
-                href="{{ path('app_dashboard_sante_create') }}"
-                class="btn btn-primary clsSante"
-                style="float:right; font-size: x-small;"
-              >
-                Ajouter Santer
-              </a>
+          <div class="col-md-4">DEPARTEMENT SANTE</div>
+          <div class="col-md-4"></div>
+          <div class="col-md-4">
+            <a
+              href="{{path('app_dashboard_create_sante')}}"
+              class="btn btn-primary"
+              style="float: right; font-size: x-small;"
+            >
+              Ajouter Sante
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="panel-body">
+        <div class="table-responsive">
+          <table class="table table-striped table-bordered table-hover" id="dataTables-example" style="font-size: 10px">
+            <thead>
+              <tr>
+                <th>Id</th>
+                <th>TYPE MALADIE</th>
+                <th>CATEGORIE</th>
+                <th>MALADIE</th>
+                <th>GROUPE SANGUIN</th>
+                <th>EVACUATION</th>
+                <th>CHIRURGIE</th>
+                <th>COUT EVACUATION</th>
+                <th>POIDS</th>
+                <th>TAILLES</th>
+                <th>NOM CHIRURGIE</th>
+                <th>COUT CHIRURGIE</th>
+                <th>QUESTION MALADIE</th>
+                <th>PAYS</th>
+                <th>PROVINCE</th>
+                <th>REGION</th>
+                <th>FOKOTANY</th>
+                <th>ACTIONS</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for sante in santes %}
+                  <tr>
+                      <td>{{sante.id}}</td>
+                      <td>
+                        {% for t in sante.typeMaladie %}
+                            {{t}}
+                        {% endfor %}
+                      </td>
+                      <td>
+                        {% for c in sante.categorie %}
+                            {{c}}
+                        {% endfor %}
+                      </td>
+                      <td>
+                        {% for m in sante.maladie %}
+                            {{m}}
+                        {% endfor %}
+                      </td>
+                      <td>
+                        {% for g in sante.groupeSanguin %}
+                            {{g}}
+                        {% endfor %}
+                      </td>
+                      <td>{{sante.evacuerounon  == 1 ? "OUI" : "NON"  }}</td>
+                      <td>{{sante.chirurgieounon == 1 ? "OUI" : "NON" }}</td>
+                      <td>{{sante.coutEvacuation}}</td>
+                      <td>{{sante.poids}}</td>
+                      <td>{{sante.taille}}</td>
+                      <td>{{sante.nomChirurgie}}</td>
+                      <td>{{sante.coutChirurgie}}</td>
+                      <td>{{sante.questionMaladie}}</td>
+                      <td>
+                        {% for p in sante.nomPays %}
+                            {{p}}
+                        {% endfor %}
+                      </td>
+                      <td>
+                        {% for pr in sante.province %}
+                            {{pr}}
+                        {% endfor %}
+                      </td>
+                      <td>
+                        {% for r in sante.region %}
+                            {{r}}
+                        {% endfor %}
+                      </td>
+                      <td>
+                        {% for fkt in sante.fokotany %}
+                            {{fkt}}
+                        {% endfor %}
+                      </td>
+                      <td>
+                        <a href="{{path('app_dashboard_delete_sante', {'id': sante.id})}}" data-toggle="modal" data-target="#exampleModalCenter"><i class="fa fa-trash text-danger"></i></a>
+                        <a href="{{path('app_dashboard_edit_sante', {'id': sante.id})}}"><i class="fa fa-pencil-square-o text-primary"></i></a>
+                      </td>
+                  </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+      </div>
+      <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h3>Confirmation de la suppression</h3>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <p>Etes-vous sûr de vouloir supprimer cette ligne?</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+              <button type="button" class="btn btn-primary" >Confirmer</button>
             </div>
           </div>
         </div>
-        <div class="panel-body">
-          <div class="table-responsive">
-            <table class="table table-striped table-bordered table-hover" id="dataTables-example">
-              <thead>
-                <tr>
-                  <th>Id</th>
-                  <th>Maladie</th>
-                  <th>Type Maladie</th>
-                  <th>Catégorie</th>
-                  <th>Autre Maladie</th>
-                  <th>Evacuation</th>
-                  <th>Chirurgie</th>
-                  <th>Coût Evacuation</th>
-                  <th>Nom Chirurgie</th>
-                  <th>Coût Chirurgie</th>
-                  <th>Poids</th>
-                  <th>Tailles</th>
-                  <th>Question</th>
-                  <th>Groupe Sanguin</th>
-                  <th>ACTION</th>
-                </tr>
-              </thead>
-              <tbody>
-              {% for maladie in maladies %}
-                <tr>
-                  <td>{{maladie.id}}</td>
-                  <td>{{maladie.personne.nom}}</td>
-                  <td>{{maladie.personne.prenom}}</td>
-                  <td>{{maladie.personne.groupSangin}}</td>
-                  <td>{{maladie.nom}}</td>
-                  <td>{{maladie.evacuation == 1 ? 'Oui' : 'Non'}}</td>
-                  <td>{{maladie.chirurgie == 1 ? 'Oui' : 'Non' }}</td>
-                  <td>{{maladie.nomChirurgie}}</td>
-                  <td>{{maladie.coutDiagnostique}} €</td>
-                  <td>{{maladie.coutEvacuation}} €</td>
-                  <td>{{maladie.type == 1 ? 'CHRONIQUE' : 'PONCTUELLE' }}</td>
-                  <td>{{maladie.dateEvacuation != null ? maladie.dateEvacuation|date("m/d/Y") : 'Non renseigné'}}</td>
-                  <td>{{maladie.dateChirurgie != null ? maladie.dateChirurgie|date("m/d/Y") : 'Non renseigné'}}</td>
-                  <td>{{maladie.annee}}</td>
-                  {% if is_granted('ROLE_SANTE') %}
-                    <th>
-                        {% if is_granted('ROLE_ADMIN') %}
-                        <a href="{{ path('app_dashboard_sante_delete', {'id': maladie.id}) }}" onClick="return confirm('Voulez-vous supprimer vraiment cette ligne ??')" style="cursor:pointer;color:red;margin-right: 3px" ><i class="fa fa-trash" aria-hidden="true"></i></a>
-                        <a href="{{ path('app_dashboard_sante_edit', {'id': maladie.id}) }}" style="color:green;margin-right: 3px;cursor:pointer"><i class="fa fa-edit" aria-hidden="true"></i></a>
-                        {% endif %}
-                        <a onClick="showPerson('{{maladie.personne.id}}', '{{ path('app_dashboard_sante_id', {'id': maladie.personne.id}) }}')" data-toggle="modal" data-target="#myModal" style="cursor:pointer"><i class="fa fa-eye" style="color:sky;" aria-hidden="true"></i></a>
-                    </th>
-                  {% endif %}
-                </tr>
-              {% endfor %}   
-              </tbody>
-            </table>
-          </div>
-        </div>
       </div>
-    </div>
-    {# charjs #}
-    {% if labels != null and calculeWithout != null and calculeWiht != null %}
-    <div class="col-md-5 col-sm-6 col-xs-12 boxChart">  
-      <div class="panel panel-default chartJs">
-        <div class="panel-heading">
-          <div class="card-title">
-            <div class="title">Line Chart</div>
-          </div>
-        </div>
-        <div class="panel-body">
-          <canvas id="line-chart" class="chart"></canvas>
-        </div>
-      </div>
-    </div>
-    {# endcharjs #}
-    {% endif %}
-  </div>
-</div>
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" onClick="loadFonction()" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-          <h4 class="modal-title" id="myModalLabel">Detail de Personne</h4>
-      </div>
-      <div class="modal-body" id="modal-body"></div>
     </div>
   </div>
-</div>
-{% endblock %}
-
-{% block javascripts %}
- <script src="{{ asset('styles/vendor/jquery/jquery-3.2.1.min.js') }}"></script>
-    <script src="{{ asset('styles/js/Chart.min.js') }}"></script>
-  <script>
-
-      function showPerson(id, pathRoute){
-        $.ajax({
-          type: "POST",
-          url: pathRoute,
-          data:{ id : id},
-          async: true,
-          success: function(response){
-            var html = '';
-            html += '<ul>';
-            html += '<th><strong>ID</strong>: '+ response.id +'</th><br />';
-            html += '<th><strong>NOM</strong>: '+ response.nom +'</th><br />';
-            html += '<th><strong>PRENOM</strong>: '+ response.prenom +'</th><br />';
-            html += '<th><strong>DATE DE NAISSANCE</strong>: '+ response.dateNaissance +'</th><br />';
-            html += '<th><strong>LIEU DE NAISSANCE</strong>: '+ response.lieuNaissance + '</th><br />';
-            html += '<th><strong>NATIONALITE</strong>:  '+ response.nationalite +' </th><br />';
-            html += '<th><strong>SITUATION MARITAL</strong> : '+ response.situationMarital +'</th><br />';
-            html += '<th><strong>GROUPE SANGUIN</strong> : '+ response.groupSangin +'</th><br />';
-            html += '<th><strong>PAYS D\'ORIGINE</strong> : '+ response.paysOrigin +'</th><br />';
-            html += '<th><strong>SEXE</strong> : '+ response.sexe +'</th>';
-            $("#modal-body").html(html);
-          }
-        })
-      }
-
-      $(function() {
-
-        var ctx, data, myLineChart, options;
-        Chart.defaults.global.responsive = true;
-        ctx = $('#line-chart').get(0).getContext('2d');
-        options = {
-          scaleShowGridLines: true,
-          scaleGridLineColor: "rgba(0,0,0,.05)",
-          scaleGridLineWidth: 1,
-          scaleShowHorizontalLines: true,
-          scaleShowVerticalLines: true,
-          bezierCurve: false,
-          bezierCurveTension: 0.4,
-          pointDot: true,
-          pointDotRadius: 4,
-          pointDotStrokeWidth: 1,
-          pointHitDetectionRadius: 20,
-          datasetStroke: true,
-          datasetStrokeWidth: 2,
-          datasetFill: true,
-          //legendTemplate: ""
-        };
-        data = {
-          labels: [0, {% for label in labels %} {{ label }}, {% endfor %}] ,
-          datasets: [
-            {
-              label: "Personne Malade",
-              fillColor: "rgba(26, 188, 156,0.2)",
-              strokeColor: "#35AD11",
-              pointColor: "#35AD11",
-              pointStrokeColor: "#fff",
-              pointHighlightFill: "#fff",
-              pointHighlightStroke: "#1ABC9C",
-              data: [0, {% for data in calculeWithout %} {{ data|number_format }}, {% endfor %}]
-            },
-            {
-              label: "Personne Santer",
-              fillColor: "rgba(26, 188, 156,0.2)",
-              strokeColor: "#FF0000",
-              pointColor: "#FF0000",
-              pointStrokeColor: "#fff",
-              pointHighlightFill: "#fff",
-              pointHighlightStroke: "#1ABC9C",
-              data: [0, {% for data in calculeWiht %} {{ data|number_format }}, {% endfor %}]
-            }
-          ]
-        };
-        myLineChart = new Chart(ctx).Line(data, options);
-      });
-
-  </script>
 {% endblock %}

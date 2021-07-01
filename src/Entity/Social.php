@@ -2,10 +2,16 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiResource;
+use Symfony\Component\Serializer\Annotation\Groups;
 use App\Repository\SocialRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
+ * @ApiResource(
+ *      normalizationContext={"groups"={"social_read"}},
+ *      denormalizationContext={"groups"={"social_write"}}
+ * )
  * @ORM\Entity(repositoryClass=SocialRepository::class)
  */
 class Social
@@ -18,120 +24,96 @@ class Social
     private $id;
 
     /**
+     * @Groups({"social_read","social_write", "membre_read"})
      * @ORM\Column(type="boolean", nullable=true)
      */
-    private $education;
+    private $aideNouriture;
 
     /**
+     * @Groups({"social_read","social_write","membre_read"})
      * @ORM\Column(type="boolean", nullable=true)
      */
-    private $sante;
+    private $aideEducation;
 
     /**
+     * @Groups({"social_read","social_write","membre_read"})
      * @ORM\Column(type="boolean", nullable=true)
      */
-    private $logement;
+    private $aideSante;
 
     /**
+     * @Groups({"social_read","social_write","membre_read"})
      * @ORM\Column(type="boolean", nullable=true)
      */
-    private $nouriture;
+    private $aideTravail;
 
     /**
-     * @ORM\Column(type="boolean", nullable=true)
+     * @Groups({"social_read","social_write"})
+     * @ORM\ManyToOne(targetEntity=Membre::class, inversedBy="avoirSocial")
      */
-    private $finance;
+    private $membre;
 
-    /**
-     * @ORM\Column(type="boolean", nullable=true)
-     */
-    private $profession;
-
-    /**
-     * @ORM\OneToOne(targetEntity=Personne::class, cascade={"persist", "remove"})
-     */
-    private $personne;
-
-    public function getEducation(): ?bool
+    public function getId(): ?int
     {
-        return $this->education;
+        return $this->id;
     }
 
-    public function setEducation(?bool $education): self
+    public function getAideNouriture(): ?bool
     {
-        $this->education = $education;
+        return $this->aideNouriture;
+    }
+
+    public function setAideNouriture(?bool $aideNouriture): self
+    {
+        $this->aideNouriture = $aideNouriture;
 
         return $this;
     }
 
-    public function getSante(): ?bool
+    public function getAideEducation(): ?bool
     {
-        return $this->sante;
+        return $this->aideEducation;
     }
 
-    public function setSante(?bool $sante): self
+    public function setAideEducation(?bool $aideEducation): self
     {
-        $this->sante = $sante;
+        $this->aideEducation = $aideEducation;
 
         return $this;
     }
 
-    public function getLogement(): ?bool
+    public function getAideSante(): ?bool
     {
-        return $this->logement;
+        return $this->aideSante;
     }
 
-    public function setLogement(?bool $logement): self
+    public function setAideSante(?bool $aideSante): self
     {
-        $this->logement = $logement;
+        $this->aideSante = $aideSante;
 
         return $this;
     }
 
-    public function getNouriture(): ?bool
+    public function getAideTravail(): ?bool
     {
-        return $this->nouriture;
+        return $this->aideTravail;
     }
 
-    public function setNouriture(?bool $nouriture): self
+    public function setAideTravail(?bool $aideTravail): self
     {
-        $this->nouriture = $nouriture;
+        $this->aideTravail = $aideTravail;
 
         return $this;
     }
 
-    public function getFinance(): ?bool
+    public function getMembre(): ?Membre
     {
-        return $this->finance;
+        return $this->membre;
     }
 
-    public function setFinance(?bool $finance): self
+    public function setMembre(?Membre $membre): self
     {
-        $this->finance = $finance;
-
-        return $this;
-    }
-
-    public function getProfession(): ?bool
-    {
-        return $this->profession;
-    }
-
-    public function setProfession(?bool $profession): self
-    {
-        $this->profession = $profession;
-
-        return $this;
-    }
-
-    public function getPersonne(): ?Personne
-    {
-        return $this->personne;
-    }
-
-    public function setPersonne(?Personne $personne): self
-    {
-        $this->personne = $personne;
+        $this->membre = $membre;
 
         return $this;
     }

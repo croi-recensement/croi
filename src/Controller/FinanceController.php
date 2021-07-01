@@ -15,7 +15,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class FinanceController extends AbstractController
 {
     /**
-     * @Route("/finance", name="app_dashboard_finance")
+     * @Route("/admin/finance", name="app_dashboard_finance")
      */
     public function finance(): Response
     {

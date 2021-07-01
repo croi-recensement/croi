@@ -52,10 +52,10 @@
           name="_csrf_token"
           value="{{ csrf_token('authenticate') }}"
         />
-
         <div class="container-login100-form-btn">
           <button class="login100-form-btn">Login</button>
         </div>
+        <p class="d-flex justify-content-center"><a href="{{app.request.uri}}recensement">S'inscrire au recensement</a></p>
       </form>
     </div>
   </div>

@@ -16,7 +16,9 @@ class ExcelType extends AbstractType
         $builder
             ->add("data", ChoiceType::class, [
                 'choices'  => [
-                    'PERSONNE' => 'personne',
+                    'PERE' => 'pere',
+                    'MERE' => 'mere',
+                    'ENFANT' => 'enfant',
                     'SANTE' => 'sante',
                     'EDUCATION' => 'education',
                     'SOCIAL' => 'social',
@@ -28,8 +30,7 @@ class ExcelType extends AbstractType
                 ],
                 'multiple'      => true
             ])
-            ->add('file', FileType::class)
-            ->add('importer', SubmitType::class);
+            ->add('exporter', SubmitType::class);
     }
 
     public function configureOptions(OptionsResolver $resolver)

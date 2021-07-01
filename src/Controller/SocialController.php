@@ -12,77 +12,53 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
+/** 
+* @Route("/admin")
+*/
 class SocialController extends AbstractController
 {
     /**
-     * @Route("/social", name="app_dashboard_social")
+     * @Route("/social", name="app_dashboard_social_read")
      */
     public function index(): Response
     {
-        $aideSocials = $this->getDoctrine()
-                            ->getManager()
-                            ->getRepository('App\Entity\Social')->findBy([], ['id' => 'ASC']);
 
-        $personnes = $this->getDoctrine()
+        $socials = $this->getDoctrine()
                           ->getManager()
-                          ->getRepository('App\Entity\Personne')->findAll();
-
-        foreach($aideSocials as $aideSocial){
-            $tabsAideSocials[] = $aideSocial->getAnnee();
-        }
-
-        $datasLabels =  isset($tabsAideSocials) ? $tabsAideSocials : [];
-        sort($datasLabels);
-        $getValues = array_count_values($datasLabels);
-
-        $nbr_pers = count($personnes);
-        $nbr_pers_aide_social = count($aideSocials);
-        $nbr_pers_non_aide_social = $nbr_pers - $nbr_pers_aide_social;
-
-        foreach($getValues as $getValue){
-            $datasNonAideSocials[] = ((($nbr_pers_aide_social - $getValue) + $nbr_pers_non_aide_social) * 100) / $nbr_pers;
-            $datasAideSocials[] = ($getValue * 100) / $nbr_pers;
-        }
-
-        $datasData1 =  isset($datasNonAideSocials) ? $datasNonAideSocials : [];
-        $datasData2 =  isset($datasAideSocials) ? $datasAideSocials : [];
+                          ->getRepository('App\Entity\Social')->findAll();
         
         return $this->render('social/index.html.twig', [
             'controller_name' => 'SocialController',
-            'socials' => $aideSocials,
-            'labels' => array_unique($datasLabels),
-            'datasData1' => $datasData1,
-            'datasData2' => $datasData2,
-            'title' => 'Département Social'
+            'socials' => $socials,
+            'title' => 'DEPARTEMENT SOCIAL'
         ]);
     }
 
     /**
-     * @Route("/social/create", name="app_dashboard_social_create")
-     */
+    * @Route("/social/create", name="app_dashboard_social_create") 
+    */
+
     public function create(Request $request)
     {
-
         $social = new Social();
-
         $form = $this->createForm(SocialType::class, $social);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($social);
             $em->flush();
-            $this->addFlash('success', 'Ajout Social avec succèss!!!');
             return $this->redirectToRoute('app_dashboard_social');
         }
-        return $this->render('social/create.html.twig', [
+        return $this->render('social/ajouter.html.twig', [
             'controller_name' => 'SocialController',
             'form' => $form->createView(),
         ]);
     }
 
     /**
-     * @Route("/social/edit/{id}", name="app_dashboard_social_edit")
-     */
+    * @Route("/social/edit/{id}", name="app_dashboard_social_edit") 
+    */
+
     public function edit(Social $social, Request $request, EntityManagerInterface $em):Response
     {
         $form = $this->createForm(SocialType::class, $social);
@@ -95,14 +71,15 @@ class SocialController extends AbstractController
             return $this->redirectToRoute('app_dashboard_social');
         }
 
-        return $this->render('social/edit.html.twig',[
+        return $this->render('social/modifier.html.twig',[
             'form' => $form->createView()
         ]);
     }
 
     /**
-     * @Route("/social/{id}", name="app_dashboard_social_id")
-     */
+    * @Route("/social/{id}", name="app_dashboard_social_get")
+    */
+    
     public function show(Request $request): Response
     {
         if($request->isXMLHttpRequest()){
@@ -118,8 +95,8 @@ class SocialController extends AbstractController
     }
 
     /**
-     * @Route("/social/delete/{id}", name="app_dashboard_social_delete")
-     */
+    * @Route("/social/delete/{id}", name="app_dashboard_social_delete")
+    */
     public function delete($id, Request $request): Response
     {
         $em = $this->getDoctrine()->getManager();
@@ -129,8 +106,7 @@ class SocialController extends AbstractController
         if($social){
             $em->remove($social);
             $em->flush();
-            $this->addFlash('success', 'Social supprimer avec success !!!');
-            return $this->redirectToRoute('app_dashboard_social');
+            return $this->redirectToRoute('app_dashboard_social_read');
         }
         return new Response(null, 204);
     }

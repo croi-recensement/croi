@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %} 
+
+{% block title %}{{ title }}{% endblock %} 
+
+{% block content %}  
+<div id="page-inner">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <div class="row">
+          <div class="col-md-4">DEPARTEMENT COMMERCE</div>
+          <div class="col-md-4"></div>
+          <div class="col-md-4">
+            <a
+              href=""
+              class="btn btn-primary"
+              style="float: right; font-size: x-small;"
+            >
+              Ajouter Commerce
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="panel-body">
+        <div class="table-responsive">
+          <table class="table table-striped table-bordered table-hover" id="dataTables-example" style="font-size: 10px">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>DOMAINE ACTIVITE</th>
+                <th>SALAIRE</th>
+                <th>PRIME</th>
+                <th>LOYER</th>
+                <th>PROFESSION</th>
+                <th>ACTIONS</th>
+              </tr>
+            </thead>
+            <tbody> 
+              {% for profession in professions %}
+                <tr>
+                    <td>{{profession.id}}</td>
+                    <td>{{profession.domaineActivite}}</td>
+                    <td>{{profession.salaire}}</td>
+                    <td>{{profession.prime}}</td>
+                    <td>{{profession.loyer}}</td>
+                    <td>{{profession.profession}}</td>
+                    <td>
+                        <a href="#"><i class="fa fa-trash text-danger"></i></a>
+                        <a href="#"><i class="fa fa-pencil-square-o text-primary"></i></a>
+                    </td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

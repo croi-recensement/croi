@@ -1,197 +1,106 @@
 {% extends 'base.html.twig' %} 
 
-{% block title %}{% if title is defined %} {{ title }} {% endif %}{% endblock %} 
+{% block title %}{{ title }}{% endblock %} 
 
 {% block content %}  
 <div id="page-inner">
   <div class="row">
-   {% if labels != null and calculeWithout != null and calculeWiht != null %}
-      <div class="col-sm-7" id="boxTab">
-    {% else %}
-    <div class="col-sm-12" id="boxTab">
-    {% endif %}
+    <div class="col-md-12">
       <div class="panel panel-default">
         <div class="panel-heading">
           <div class="row">
-            <div class="col-md-4">EDUCATION</div>
-            <div class="col-md-4"></div>
-            <div class="col-md-4">
-              <a
-                href="{{ path('app_dashboard_education_create') }}"
-                class="btn btn-primary"
-                style="float: right; font-size: x-small;"
-              >
-                Ajouter Education
-              </a>
-            </div>
+          <div class="col-md-4">DEPARTEMENT EDUCATION</div>
+          <div class="col-md-4"></div>
+          <div class="col-md-4">
+            <a
+              href="{{path('app_dashboard_education_create')}}"
+              class="btn btn-primary"
+              style="float: right; font-size: x-small;"
+            >
+              Ajouter Education
+            </a>
           </div>
         </div>
-        <div class="panel-body">
-          <div class="table-responsive">
-            <table class="table table-striped table-bordered table-hover" id="dataTables-example">
-              <thead>
-                <tr>
-                  <th>Id</th>
-                  <th>Ecole</th>
-                  <th>Université</th>
-                  <th>Classe</th>
-                  <th>Carte d'Etudiant(e)</th>
-                  <th>Adresse d'Ecole</th>
-                  <th>Adresse de l'Université</th>
-                  <th>Diplôme</th>
-                  <th>Année Scolaire</th>
-                  <th>ACTION</th>
-                </tr>
-              </thead>
-              <tbody>
+      </div>
+      <div class="panel-body">
+        <div class="table-responsive">
+          <table class="table table-striped table-bordered table-hover" id="dataTables-example" style="font-size: 10px">
+            <thead>
+              <tr>
+                <th>Id</th>
+                <th>NOM ECOLE</th>
+                <th>ADRESSE ECOLE</th>
+                <th>NOM UNIVERSITE</th>
+                <th>ADRESSE UNIVERSITE</th>
+                <th>CLASSE</th>
+                <th>CARTE ETUDIANT</th>
+                <th>DIPLOME</th>
+                <th>ANNEES SCOLAIRE</th>
+                <th>PAYS</th>
+                <th>PROVINCE</th>
+                <th>REGION</th>
+                <th>FOKOTANY</th>
+                <th>ACTIONS</th>
+              </tr>
+            </thead>
+            <tbody>
               {% for education in educations %}
                 <tr>
-                  <td>{{education.id}}</td>
-                  <td>{{education.nomEcole}}</td>
-                  <td>{{education.nomUniversite}}</td>
-                  <td>{{education.classe}}</td>
-                  <td>{{education.carteEtudiant}}</td>
-                  <td>{{education.adresseEcole}}</td>
-                  <td>{{education.adresseUniversite}}</td>
-                  <td>{{education.diplome}}</td>
-                  <td>{{education.anneeScolaire}}</td>
-                  {% if is_granted('ROLE_EDUCATION') %}
-                    <th>
-                        {% if is_granted('ROLE_ADMIN') %}
-                          <a  href="{{ path('app_dashboard_education_delete', {'id': education.id}) }}" onClick="return confirm('Voulez-vous supprimer vraiment cette ligne ??')" style="cursor:pointer">
-                            <i class="fa fa-trash" style="color:red;margin-right: 5px" aria-hidden="true"></i>
-                          </a>
-                          <a href="{{ path('app_dashboard_education_edit', {'id': education.id}) }}" style="cursor:pointer">
-                            <i class="fa fa-edit" style="color:green;" aria-hidden="true"></i>
-                          </a>
-                        {% endif %}
-                        <a onClick="showPersonneEduquer('{{education.id}}', '{{ path('app_dashboard_education_id', {'id': education.id}) }}')" data-toggle="modal" data-target="#myModal" style="cursor:pointer"><i class="fa fa-eye" aria-hidden="true"></i></a>
-                    </th>
-                  {% endif %}
+                    <td>{{education.id}}</td>
+                    <td>{{education.nomEcole}}</td>
+                    <td>{{education.nomUniversite}}</td>
+                    <td>{{education.classe}}</td>
+                    <td>{{education.carteEtudiant}}</td>
+                    <td>{{education.adresseEcole}}</td>
+                    <td>{{education.adresseUniversite}}</td>
+                    <td>{{education.diplome}}</td>
+                    <td>{{education.anneeScolaire}}</td>
+                    <td>
+                        {% for n in education.nomPays %}
+                          {{n}}
+                        {% endfor %}
+                    </td>
+                    <td>
+                        {% for p in education.province %}
+                          {{p}}
+                        {% endfor %}
+                    </td>
+                    <td>
+                        {% for r in education.region %}
+                          {{r}}
+                        {% endfor %}
+                    </td>
+                    <td>{{education.fokotany}}</td>
+                    <td>
+                        <a href="{{path('app_dashboard_delete_sante', {'id': education.id})}}" data-toggle="modal" data-target="#exampleModalCenter"><i class="fa fa-trash text-danger"></i></a>
+                        <a href="{{path('app_dashboard_education_edit', {'id': education.id})}}"><i class="fa fa-pencil-square-o text-primary"></i></a>
+                    </td>
                 </tr>
-              {% endfor %}   
-              </tbody>
-            </table>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h3>Confirmation de la suppression</h3>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p>Etes-vous sûr de vouloir supprimer cette ligne?</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+            <button type="button" class="btn btn-primary" >Confirmer</button>
           </div>
         </div>
       </div>
     </div>
-    {# charjs #}
-    {% if labels != null and calculeWithout != null and calculeWiht != null %}
-    <div class="col-md-5 col-sm-6 col-xs-12 boxChart">  
-      <div class="panel panel-default chartJs">
-        <div class="panel-heading">
-          <div class="card-title">
-            <div class="title">EDUCATION</div>
-          </div>
-        </div>
-        <div class="panel-body">
-          <canvas id="line-chart" class="chart"></canvas>
-        </div>
-      </div>
-    </div>
-    {# endcharjs #}
-    {% endif %}
   </div>
 </div>
-{# popup #}
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" onClick="loadFonction()" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-          <h4 class="modal-title" id="myModalLabel">Detail de Personne</h4>
-      </div>
-      <div class="modal-body" id="modal-body"></div>
-    </div>
-  </div>
-</div>
-{# endpopup #}
-{% endblock %}
-
-{% block javascripts %}
-    <script src="{{ asset('styles/vendor/jquery/jquery-3.2.1.min.js') }}"></script>
-    <script src="{{ asset('styles/js/Chart.min.js') }}"></script>
-
-  <script>
-
-      function showPersonneEduquer(id, pathRoute){
-        $.ajax({
-          type: "POST",
-          url: pathRoute,
-          data:{ id : id},
-          async: true,
-          success: function(response){
-            var html = '';
-            html += '<ul>';
-            html += '<th><strong>ID</strong>: '+ response.id +'</th><br />';
-            html += '<th><strong>NOM</strong>: '+ response.personne.nom +'</th><br />';
-            html += '<th><strong>PRENOM</strong>: '+ response.personne.prenom +'</th><br />';
-            html += '<th><strong>DATE DE NAISSANCE</strong>: '+ response.personne.dateNaissance +'</th><br />';
-            html += '<th><strong>LIEU DE NAISSANCE</strong>: '+ response.personne.lieuNaissance + '</th><br />';
-            html += '<th><strong>NATIONALITE</strong>:  '+ response.personne.nationalite +' </th><br />';
-            html += '<th><strong>SITUATION MARITAL</strong> : '+ response.personne.situationMarital +'</th><br />';
-            html += '<th><strong>GROUPE SANGUIN</strong> : '+ response.personne.groupSangin +'</th><br />';
-            html += '<th><strong>PAYS D\'ORIGINE</strong> : '+ response.personne.paysOrigin +'</th><br />';
-            html += '<th><strong>SEXE</strong> : '+ response.personne.sexe +'</th><br />';
-            html += '<th><strong>DIPLOME</strong>: '+ response.diplome +'</th><br />';
-            html += '<th><strong>ECOLE</strong>: '+ response.ecole +'</th><br />';
-            html += '<th><strong>NIVEAU</strong>: '+ response.niveau +'</th><br />';
-            html += '<th><strong>CLASSE</strong>: '+ response.classe +'</th>';
-            $("#modal-body").html(html);
-          }
-        })
-      }
-
-     
-      $(function() {
-
-        var ctx, data, myLineChart, options;
-        Chart.defaults.global.responsive = true;
-        ctx = $('#line-chart').get(0).getContext('2d');
-        options = {
-          scaleShowGridLines: true,
-          scaleGridLineColor: "rgba(0,0,0,.05)",
-          scaleGridLineWidth: 1,
-          scaleShowHorizontalLines: true,
-          scaleShowVerticalLines: true,
-          bezierCurve: false,
-          bezierCurveTension: 0.4,
-          pointDot: true,
-          pointDotRadius: 4,
-          pointDotStrokeWidth: 1,
-          pointHitDetectionRadius: 20,
-          datasetStroke: true,
-          datasetStrokeWidth: 2,
-          datasetFill: true,
-          //legendTemplate: ""
-        };
-        data = {
-          labels: [0, {% for label in labels %} {{ label }}, {% endfor %}] ,
-          datasets: [
-            {
-              label: "Sans éducation",
-              fillColor: "rgba(26, 188, 156,0.2)",
-              strokeColor: "#FF0000",
-              pointColor: "#FF0000",
-              pointStrokeColor: "#fff",
-              pointHighlightFill: "#fff",
-              pointHighlightStroke: "#1ABC9C",
-              data: [0, {% for data in datasOne %} {{ data|number_format }}, {% endfor %}]
-            },
-            {
-              label: "Avec éducation",
-              fillColor: "rgba(26, 188, 156,0.2)",
-              strokeColor: "#35AD11",
-              pointColor: "#35AD11",
-              pointStrokeColor: "#fff",
-              pointHighlightFill: "#fff",
-              pointHighlightStroke: "#1ABC9C",
-              data: [0, {% for data in datasTwo %} {{ data|number_format }}, {% endfor %}]
-            }
-          ]
-        };
-        myLineChart = new Chart(ctx).Line(data, options);
-      });
-  </script>
 {% endblock %}

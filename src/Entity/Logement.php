@@ -2,12 +2,18 @@
 
 namespace App\Entity;
 
-use App\Repository\LogementRepository;
+use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Symfony\Component\Serializer\Annotation\Groups;
+use App\Repository\LogementRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
+ * @ApiResource(
+ *      normalizationContext={"groups"={"logement_read"}},
+ *      denormalizationContext={"groups"={"logement_write"}}
+ * )
  * @ORM\Entity(repositoryClass=LogementRepository::class)
  */
 class Logement
@@ -16,62 +22,95 @@ class Logement
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"logement_read", "membre_read"})
      */
     private $id;
 
     /**
+     * @Groups({"logement_read", "logement_write", "membre_read"})
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $adressePermanante;
+    private $adressePermanente;
 
     /**
+     * @Groups({"logement_read", "logement_write", "membre_read"})
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $adresseTemporaire;
 
     /**
+     * @Groups({"logement_read", "logement_write", "membre_read"})
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $email;
+    private $adresseEmail;
 
     /**
+     * @Groups({"logement_read", "logement_write", "membre_read"})
      * @ORM\Column(type="boolean", nullable=true)
      */
-    private $proprietaire;
+    private $proprietaireounon;
 
     /**
+     * @Groups({"logement_read", "logement_write", "membre_read"})
      * @ORM\Column(type="boolean", nullable=true)
      */
-    private $maisonAlloue;
+    private $maisonalloueounon;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"logement_read", "logement_write", "membre_read"})
+     * @ORM\Column(type="string", nullable=true)
      */
     private $montantLoyer;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     *  @Groups({"logement_read", "logement_write", "membre_read"})
+     * @ORM\Column(type="string", nullable=true)
      */
     private $montantSyndic;
 
     /**
-     * @ORM\OneToOne(targetEntity=Pays::class, cascade={"persist", "remove"})
+     * @Groups({"logement_read", "logement_write"})
+     * @ORM\ManyToOne(targetEntity=Membre::class, inversedBy="possede")
      */
-    private $pays;
+    private $membre;
 
     /**
-     * @ORM\OneToOne(targetEntity=Personne::class, cascade={"persist", "remove"})
+     *  @Groups({"logement_read", "logement_write", "membre_read"})
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $personne;
+    private $nomPays;
 
-    public function getAdressePermanante(): ?string
+    /**
+     *  @Groups({"logement_read", "logement_write", "membre_read"})
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $province;
+
+    /**
+     *  @Groups({"logement_read", "logement_write", "membre_read"})
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $region;
+
+    /**
+     *  @Groups({"logement_read", "logement_write", "membre_read"})
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $fokotany;
+
+    public function getId(): ?int
     {
-        return $this->adressePermanante;
+        return $this->id;
     }
 
-    public function setAdressePermanante(?string $adressePermanante): self
+    public function getAdressePermanente(): ?string
     {
-        $this->adressePermanante = $adressePermanante;
+        return $this->adressePermanente;
+    }
+
+    public function setAdressePermanente(?string $adressePermanente): self
+    {
+        $this->adressePermanente = $adressePermanente;
 
         return $this;
     }
@@ -88,38 +127,38 @@ class Logement
         return $this;
     }
 
-    public function getEmail(): ?string
+    public function getAdresseEmail(): ?string
     {
-        return $this->email;
+        return $this->adresseEmail;
     }
 
-    public function setEmail(?string $email): self
+    public function setAdresseEmail(?string $adresseEmail): self
     {
-        $this->email = $email;
+        $this->adresseEmail = $adresseEmail;
 
         return $this;
     }
 
-    public function getProprietaire(): ?bool
+    public function getProprietaireounon(): ?bool
     {
-        return $this->proprietaire;
+        return $this->proprietaireounon;
     }
 
-    public function setProprietaire(?bool $proprietaire): self
+    public function setProprietaireounon(?bool $proprietaireounon): self
     {
-        $this->proprietaire = $proprietaire;
+        $this->proprietaireounon = $proprietaireounon;
 
         return $this;
     }
 
-    public function getMaisonAlloue(): ?bool
+    public function getMaisonalloueounon(): ?bool
     {
-        return $this->maisonAlloue;
+        return $this->maisonalloueounon;
     }
 
-    public function setMaisonAlloue(?bool $maisonAlloue): self
+    public function setMaisonalloueounon(?bool $maisonalloueounon): self
     {
-        $this->maisonAlloue = $maisonAlloue;
+        $this->maisonalloueounon = $maisonalloueounon;
 
         return $this;
     }
@@ -148,28 +187,93 @@ class Logement
         return $this;
     }
 
-    public function getPays(): ?Pays
+    /**
+     * @return Collection|Membre[]
+     */
+    public function getPossede(): Collection
     {
-        return $this->pays;
+        return $this->possede;
     }
 
-    public function setPays(?Pays $pays): self
+    public function addPossede(Membre $possede): self
     {
-        $this->pays = $pays;
+        if (!$this->possede->contains($possede)) {
+            $this->possede[] = $possede;
+            $possede->setLogement($this);
+        }
 
         return $this;
     }
 
-    public function getPersonne(): ?Personne
+    public function removePossede(Membre $possede): self
     {
-        return $this->personne;
-    }
-
-    public function setPersonne(?Personne $personne): self
-    {
-        $this->personne = $personne;
+        if ($this->possede->removeElement($possede)) {
+            // set the owning side to null (unless already changed)
+            if ($possede->getLogement() === $this) {
+                $possede->setLogement(null);
+            }
+        }
 
         return $this;
     }
 
+    public function getMembre(): ?Membre
+    {
+        return $this->membre;
+    }
+
+    public function setMembre(?Membre $membre): self
+    {
+        $this->membre = $membre;
+
+        return $this;
+    }
+
+    public function getNomPays(): ?string
+    {
+        return $this->nomPays;
+    }
+
+    public function setNomPays(?string $nomPays): self
+    {
+        $this->nomPays = $nomPays;
+
+        return $this;
+    }
+
+    public function getProvince(): ?string
+    {
+        return $this->province;
+    }
+
+    public function setProvince(?string $province): self
+    {
+        $this->province = $province;
+
+        return $this;
+    }
+
+    public function getRegion(): ?string
+    {
+        return $this->region;
+    }
+
+    public function setRegion(?string $region): self
+    {
+        $this->region = $region;
+
+        return $this;
+    }
+
+    public function getFokotany(): ?string
+    {
+        return $this->fokotany;
+    }
+
+    public function setFokotany(?string $fokotany): self
+    {
+        $this->fokotany = $fokotany;
+
+        return $this;
+    }
 }

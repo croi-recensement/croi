@@ -19,6 +19,21 @@ class LogementRepository extends ServiceEntityRepository
         parent::__construct($registry, Logement::class);
     }
 
+    public function findByOwner(){
+        return $this->createQueryBuilder('l')
+                    ->where('l.proprietaireounon = 1')
+                    ->getQuery()
+                    ->getResult();
+    }
+
+    public function findByProvince($value){
+        return $this->createQueryBuilder('l')
+                    ->where('l.province = :val')
+                    ->setParameter('val', $value)
+                    ->getQuery()
+                    ->getResult();
+    }
+
     // /**
     //  * @return Logement[] Returns an array of Logement objects
     //  */

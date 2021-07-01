@@ -15,33 +15,24 @@ use Symfony\Component\Routing\Annotation\Route;
 class SportController extends AbstractController
 {
     /**
-     * @Route("sport", name="app_dashboard_sport")
+     * @Route("/admin/sport", name="app_dashboard_sport")
      */
     public function sport(ChartService $chartService): Response
     {
         $sports = $this->getDoctrine()
                             ->getManager()
-                            ->getRepository('App\Entity\Sport')->findBy([], ['id' => 'ASC']);
-
-        $personnes = $this->getDoctrine()
-                            ->getManager()
-                            ->getRepository('App\Entity\Personne')->findAll();
-
-        $datas = $chartService->chart($sports, $personnes);
+                            ->getRepository('App\Entity\Sport')->findAll();
 
         return $this->render('sport/index.html.twig', [
             'controller_name' => 'SportController',
             'sports' => $sports,
-            'labels' => $datas['labels'],
-            'whitSports' => $datas['calculeWiht'],
-            'WithoutSports' => $datas['calculeWithout'],
-            'title' => 'Département Sports'
+            'title' => 'DEPARTEMENT SPORT'
         ]);
     }
 
-    /**
-     * @Route("/sport/create", name="app_dashboard_sport_create")
-     */
+    /*
+     @Route("/sport/create", name="app_dashboard_sport_create")
+     
     public function create(Request $request)
     {
         $sport = new Sport();
@@ -61,9 +52,9 @@ class SportController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/sport/edit/{id}", name="app_dashboard_sport_edit")
-     */
+    
+     @Route("/sport/edit/{id}", name="app_dashboard_sport_edit")
+     
     public function edit(Sport $sport, Request $request, EntityManagerInterface $em):Response
     {
         $form = $this->createForm(SportType::class, $sport);
@@ -81,9 +72,9 @@ class SportController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/sport/delete/{id}", name="app_dashboard_sport_delete")
-     */
+    
+     @Route("/sport/delete/{id}", name="app_dashboard_sport_delete")
+     
     public function delete($id, Request $request): Response
     {
         $em = $this->getDoctrine()->getManager();
@@ -97,6 +88,6 @@ class SportController extends AbstractController
             return $this->redirectToRoute('app_dashboard_sport');
         }
         return new Response(null, 204);
-    }
+    }*/
 
 }

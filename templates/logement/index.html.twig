@@ -3,6 +3,7 @@
 {% block title %}{{ title }}{% endblock %}
 
 {% block stylesheets %}
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.css" integrity="sha512-/zs32ZEJh+/EO2N1b0PEdoA10JkdC3zJ8L5FTiQu82LR9S/rOQNfQN7U59U9BC12swNeRAz3HSzIL2vpp4fv3w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <style>
     area:hover{
       outline: 'none';
@@ -50,55 +51,49 @@
           <div class="panel-body">
             <div id="myTabContent" class="tab-content">
               <div class="tab-pane fade" id="logement">
+              <div class="d-flex">
+                  <a href="{{path('app_dashboard_logement_create')}}" class="btn btn-primary">Ajouter Logement</a>
+              </div>
                 <div class="table-responsive">
-                  <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                  <table class="table table-striped table-bordered table-hover" id="dataTables-example" style="font-size: 10px">
                     <thead>
                       <tr>
                         <th>ID</th>
-                        <th>Adresse Permanente</th>
-                        <th>Adresse Temporaire</th>
-                        <th>Email</th>
-                        <th>Proprietaire</th>
-                        <th>Maison Alloué</th>
-                        <th>Montant Loyer</th>
-                        <th>Maison Syndic</th>
-                        <th>Pays</th>
-                        <th>Province</th>
-                        <th>Région</th>
-                        <th>Fokotany</th>
-                        <th>ACTION</th>
+                        <th>ADRESSE PERMANENTE</th>
+                        <th>ADRESSE TEMPORAIRE</th>
+                        <th>ADRESSE EMAIL</th>
+                        <th>PROPRIETAIRE</th>
+                        <th>MAISSON ALLOUE</th>
+                        <th>MONTANT LOYER</th>
+                        <th>MONTANT SYNDIC</th>
+                        <th>PAYS</th>
+                        <th>PROVINCE</th>
+                        <th>REGION</th>
+                        <th>FOKOTANY</th>
+                        <th>ACTIONS</th>
                       </tr>
                     </thead>
                     <tbody>
-                    {% for logement in logements %}
-                    <tr>
-                      <td>{{ logement.id }}</td>
-                      <td>{{logement.adressePermanente}}</td>
-                      <td>{{logement.adresseTemporaire}}</td>
-                      <td>{{logement.email}}</td>
-                      <td>{{ logement.proprietaire == 1 ? 'Oui' : 'Non' }}</td>
-                      <td>{{logement.maisonAllouer == 1 ? 'Oui' : 'Non' }}</td>
-                      <td>{{logement.montantLoyer}}</td>
-                      <td>{{logement.montantSyndic}}</td>
-                      <td>{{logement.pays}}</td>
-                      <td>{{logement.province}}</td>
-                      <td>{{logement.region}}</td>
-                      <td>{{logement.fokotany}}</td>
-                      {% if is_granted('ROLE_LOGEMENT') %}
-                        <th>
-                            {% if is_granted('ROLE_ADMIN') %}
-                            <a href="{{ path('app_dashboard_logement_delete', {'id': logement.id}) }}" onClick="return confirm('Voulez-vous supprimer vraiment cette ligne ??')">
-                              <i class="fa fa-trash" style="color:red;margin-right: 3px" aria-hidden="true"></i>
-                            </a>
-                            <a href="{{ path('app_dashboard_logement_edit', {'id': logement.id}) }}">
-                              <i class="fa fa-edit" style="color:green;margin-right: 3px" aria-hidden="true"></i>
-                            </a>
-                            {% endif %}
-                            <a onClick="showLogement('{{logement.id}}', '{{ path('app_dashboard_sante_id', {'id': logement.id}) }}')" data-toggle="modal" data-target="#myModal" style="cursor:pointer"><i class="fa fa-eye" style="color:sky;" aria-hidden="true"></i></a>
-                        </th>
-                      {% endif %}
-                    </tr>
-                    {% endfor %}   
+                     {% for logement in logements %}
+                        <tr>
+                            <td>{{logement.id}}</td>
+                            <td>{{logement.adressePermanente}}</td>
+                            <td>{{logement.adresseTemporaire}}</td>
+                            <td>{{logement.adresseEmail}}</td>
+                            <td>{{logement.proprietaireounon == 1 ? "OUI" : "NON" }}</td>
+                            <td>{{logement.maisonalloueounon == 1 ? "OUI" : "NON" }}</td>
+                            <td>{{logement.montantLoyer}}</td>
+                            <td>{{logement.montantSyndic}}</td>
+                            <td>{{logement.nomPays}}</td>
+                            <td>{{logement.province}}</td>
+                            <td>{{logement.region}}</td>
+                            <td>{{logement.fokotany}}</td>
+                            <td>
+                              <a href="{{path('app_dashboard_logement_delete', {'id':logement.id})}}" data-toggle="modal" data-target="#exampleModalCenter"><i class="fa fa-trash text-danger"></i></a>
+                              <a href="{{path('app_dashboard_logement_edit', {'id':logement.id})}}"><i class="fa fa-pencil-square-o text-primary"></i></a>
+                          </td>
+                        </tr>
+                     {% endfor %}
                     </tbody>
                   </table>
                 </div>
@@ -110,7 +105,7 @@
                       <g transform="matrix(5.55556,0,0,5.55556,0,0)">
                           <g transform="matrix(0.579038,0,0,0.53381,371.037,91.6587)">
                             <path 
-                              id="region-Vatovavy-Fitovinany" 
+                              id="region-Vatovavy-Fitovinany"
                               d="M555.52,956.55L554.38,956.25L553.05,955.69L550.63,954.26L548.7,952.82L548.33,952.39L546.01,948.27L545.67,947.81L545.26,947.42L544.7,947.12L544.02,946.95L543.03,946.99L542.28,947.12L541.63,947.35L541.14,947.68L540.73,948.06L540.42,948.53L540.2,949.05L540.2,949.67L540.39,950.23L540.99,951.21L541.16,951.72L541.05,952.22L540.36,953.08L540.03,953.57L539.81,954.15L539.59,955.45L539.36,956.01L538.26,957.33L537.95,957.83L537.58,959.1L537.47,959.81L537.29,960.43L533.93,966L533.55,967.25L533.45,967.9L533.51,968.57L533.66,969.19L534.41,970.8L534.43,971.38L534.21,971.87L533.83,972.29L533.31,972.58L532.72,972.78L532.02,972.8L531.05,972.38L529.86,971.65L527.74,969.91L525.75,968.64L525.16,968.52L524.13,968.48L522.79,968.63L521.49,968.94L520.91,969.17L519.45,970.12L518.2,971.31L517.69,971.6L517.08,971.78L516.37,971.86L515.63,971.85L514.91,971.77L513.55,971.47L512.12,971.31L511.41,971.36L510.73,971.47L510.11,971.67L509.57,971.9L507.59,973.23L507.01,973.46L506.36,973.59L503.48,973.76L502.19,974.03L501.47,974.01L500.77,973.81L490.72,983.52L482.47,986.46L481.09,1002.62L479.72,1009.98L471.47,1011.45L465.96,1017.33L464.59,1036.48L460.46,1058.59L454.96,1071.87L457.71,1080.73L461.84,1091.08L454.96,1125.1L450.83,1142.88L446.7,1151.78L450.83,1160.68L434.32,1169.59L421.94,1177.01L427.45,1185.93L445.33,1194.85L454.96,1196.33L459.09,1191.87L468.71,1197.82L472.84,1211.21L486.6,1217.17L500.35,1217.17L511.9,1226.98L513.89,1213.37L517.51,1205.41L519.03,1197.59L533,1164.85L546.97,1132.17L560.83,1087.11L562.36,1084.18L563.97,1079.92L565.77,1069.82L565.98,1066.24L566.38,1064.63L570.35,1055.22L571.38,1051.22L571.75,1047.2L572.17,1045.16L574.11,1041.67L574.83,1039.93L575.03,1038.02L574.76,1036.46L573.94,1036.03L572.51,1037.52L572.04,1035.82L572.95,1034.04L574.42,1032.2L575.58,1030.3L586.54,988.6L592.47,970.16L591.56,969.73L582.52,967.23L574.74,967.3L569.23,966.05L568.38,965.64L567.41,964.66L567.04,963.83L566.9,962.99L566.97,962.25L566.97,960.74L566.83,960.08L566.37,958.93L566.03,958.45L565.49,957.96L563.61,956.66L562.98,956.07L562.3,955.65L561.6,955.44L560.43,955.54L557,956.46L556.28,956.54L555.52,956.55Z" />
                             <path 
                               id="region-Vakinankaratra" 
@@ -181,15 +176,47 @@
                   </div>
                     <div class="map__info">
                     <fieldset class="form-group border p-3">
-                      <legend>Région (<span id="infosRegion"></span>) </legend>                      
+                      <legend>Région (<span class="infosRegion"></span>) </legend>
+                      <div class="panel panel-default">
+                        <div class="panel-heading">Les nombres des personnes qui vivent dans la région de <span class="infosRegion text-success"></span> :  <span class="nombre"></span></div>
+                        <div class="panel-body"></div>
+                      </div>                   
                     </fieldset>
                       <span ></span>
                     </div>
                 </div>
               </div>
               <div class="tab-pane fade" id="graphique">
-                Salut
+                <div class="panel panel-default chartJs">
+                  <div class="panel-heading">
+                      <div class="card-title">
+                          <div class="title">Line Chart</div>
+                      </div>
+                  </div>
+                  <div class="panel-body">
+                      <canvas id="myChart" class="chart"></canvas>
+                  </div>
+                </div>
               </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h3>Confirmation de la suppression</h3>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <p>Etes-vous sûr de vouloir supprimer cette ligne?</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+              <button type="button" class="btn btn-primary" >Confirmer</button>
             </div>
           </div>
         </div>
@@ -200,47 +227,66 @@
 
 {% block javascripts %}
   <script src="{{ asset('styles/vendor/jquery/jquery-3.2.1.min.js') }}"></script>
-  <script src="{{ asset('styles/js/Chart.min.js') }}"></script>
-  <script src="https://js.arcgis.com/4.18/"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js" integrity="sha512-s+xg36jbIujB2S2VKfpGmlC3T5V2TF3lY48DX7u2r9XzGzgPsa6wTpOQA7J9iffvdeBN0q9tKzRxVxw1JviZPg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script>
-   
-   $(function(){
+    $(function(){
+      $('[id*=region-]').on('click', function(){
+       let region = $(this);
+        let regionId = $(this)[0].id;
+        let allRegion = $('[id*=region-]');
+        allRegion.css('fill', '#1e357d');
+        region.css('fill', '#FF6400')
+        regionId = regionId.replace('region-','');
+        let boucle = true;
+        while(boucle){
+          regionId = regionId.replace('-',' ');
+          if(regionId.indexOf('-') == -1)
+            boucle = false;
+        }
+        $('.infosRegion').text(regionId)
+        //dans la base de données
+        $('.nombre').text(22)
+      })
 
-     //selection tous id | avec un clique
-     $('[id*=region-]').on('click', function(){
-
-       console.log($(this))
-      //region current(click)
-      let region = $(this);
-
-      //id du region current
-      let regionId = $(this)[0].id;
-
-      //toutes region
-      let allRegion = $('[id*=region-]');
-
-      //region reste bleu, region cliqué orange
-      allRegion.css('fill', '#1e357d');
-      region.css('fill', '#FF6400')
-
-      //on enleve region-
-      regionId = regionId.replace('region-','');
-
-      //on enleve tous le "-" tant qu'il on a
-      let boucle = true;
-
-      while(boucle){
-        regionId = regionId.replace('-',' ');
-        if(regionId.indexOf('-') == -1)
-          boucle = false;
-      }
-
-      $('#infosRegion').text(regionId)
-
-
-     })
-
-   })
-
+      //line chart
+      var ctx = document.getElementById('myChart').getContext('2d');
+      var myChart = new Chart(ctx, {
+          type: 'bar',
+          data: {
+              labels: [10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
+              datasets: [
+                  {
+                    label: 'propriétaire',
+                    data: [{{ resProp }}],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)'
+                    ],
+                    borderWidth: 1
+                },
+                {
+                  label: 'Maison alloué',
+                    data: [{{ resAll }}],
+                    backgroundColor: [
+                        'rgba(255, 206, 86, 0.2)',
+                    ],
+                    borderColor: [
+                        'rgba(54, 162, 235, 1)',
+                    ],
+                    borderWidth: 1
+                }
+              ]
+          },
+          options: {
+              scales: {
+                  y: {
+                      beginAtZero: true
+                  }
+              }
+          }
+      });
+    });
   </script>
 {% endblock %}

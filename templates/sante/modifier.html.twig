@@ -1,0 +1,108 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier Sante{% endblock %}
+
+{% block content %}
+    <div id="page-inner">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <div class="card-title">
+                    <div class="title">Modifier SANTE</div>
+                </div>
+            </div>
+            {{ form_start(form) }}
+            <div class="panel-body">
+                <form>
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <label for="exampleInputTypeMaladie">Type Maladie :</label>
+                            {{ form_widget(form.typeMaladie, {'attr' : {'class': 'form-control', 'id': 'exampleInputTypeMaladie', 'aria-describedby': 'typemaladieHelp'}}) }}
+                            <small id="typemaladieHelp" class="form-text text-muted">*Champ type maladie vide</small>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="exampleInputCategorie">Catégorie :</label>
+                            {{ form_widget(form.categorie, {'attr' : {'class': 'form-control', 'id': 'exampleInputCategorie', 'aria-describedby': 'categorieHelp'}}) }}
+                            <small id="categorieHelp" class="form-text text-muted">*Champ catégorie vide</small>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="exampleInputMaladie">Maladie :</label>
+                            {{ form_widget(form.maladie, {'attr' : {'class': 'form-control', 'id': 'exampleInputMaladie', 'aria-describedby': 'maladieHelp'}}) }}
+                            <small id="maladieHelp" class="form-text text-muted">*Champ maladie vide</small>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-3">
+                            <label for="exampleInputGroup">Groupe Sanguin :</label>
+                            {{ form_widget(form.groupeSanguin, {'attr' : {'class': 'form-control', 'id': 'exampleInputGroup', 'aria-describedby': 'groupHelp'}}) }}
+                            <small id="groupHelp" class="form-text text-muted">*Champ group sanguin vide</small>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="exampleInputNomChirurgie">Nom chirurgie :</label>
+                            {{ form_widget(form.nomChirurgie, {'attr' : {'class': 'form-control', 'id': 'exampleInputNomChirurgie', 'aria-describedby': 'nomChirurgieHelp'}}) }}
+                            <small id="nomChirurgieHelp" class="form-text text-muted">*Champ nom chirurgie vide</small>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="exampleInputEvacuation">Evacuation : </label>
+                            {{ form_widget(form.evacuerounon, {'attr' : {'class': 'form-check-input', 'id': 'exampleInputEvacuation', 'aria-describedby': 'evacuationHelp'}}) }}
+                            <small id="evacuationHelp" class="form-text text-muted">*Champ Evacuation vide</small>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="exampleInputChirurgie">Chirurgie :</label>
+                            {{ form_widget(form.chirurgieounon, {'attr' : {'class': 'form-check-input', 'id': 'exampleInputChirurgie', 'aria-describedby': 'chirurgieHelp'}}) }}
+                            <small id="chirurgieHelp" class="form-text text-muted">*Champ Chirurgie vide</small>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-3">
+                            <label for="exampleInputCoutEv">Coût évacuation :</label>
+                            {{ form_widget(form.coutEvacuation, {'attr' : {'class': 'form-control', 'id': 'exampleInputCoutEv', 'aria-describedby': 'coutEvacHelp'}}) }}
+                            <small id="coutEvacHelp" class="form-text text-muted">*Champ Coût Evacuation vide</small>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="exampleInputEvacuation">Coût Chirurgie :</label>
+                            {{ form_widget(form.coutChirurgie, {'attr' : {'class': 'form-control', 'id': 'exampleInputChirurgie', 'aria-describedby': 'chirurgieHelp'}}) }}
+                            <small id="chirurgieHelp" class="form-text text-muted">*Champ Chirurgie vide</small>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="exampleInputPoids">Poids :</label>
+                            {{ form_widget(form.poids, {'attr' : {'class': 'form-control', 'id': 'exampleInputPoids', 'aria-describedby': 'poidsHelp'}}) }}
+                            <small id="poidsHelp" class="form-text text-muted">*Champ poids vide</small>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="exampleInputTaille">Tailles :</label>
+                            {{ form_widget(form.taille, {'attr' : {'class': 'form-control', 'id': 'exampleInputTaille', 'aria-describedby': 'tailleHelp'}}) }}
+                            <small id="tailleHelp" class="form-text text-muted">*Champ tailles vide</small>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-3">
+                            <label for="exampleInputPays">Pays :</label>
+                            {{ form_widget(form.nomPays, {'attr' : {'class': 'form-control', 'id': 'exampleInputPays', 'aria-describedby': 'paysHelp'}}) }}
+                            <small id="paysHelp" class="form-text text-muted">*Champ pays vide</small>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="exampleInputProvence">Provence :</label>
+                            {{ form_widget(form.province, {'attr' : {'class': 'form-control', 'id': 'exampleInputProvence', 'aria-describedby': 'provinceHelp'}}) }}
+                            <small id="provinceHelp" class="form-text text-muted">*Champ provence vide</small>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="exampleInputRegion">Region :</label>
+                            {{ form_widget(form.region, {'attr' : {'class': 'form-control', 'id': 'exampleInputRegion', 'aria-describedby': 'regionHelp'}}) }}
+                            <small id="regionHelp" class="form-text text-muted">*Champ region vide</small>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="exampleInputFokotany">Fokotany :</label>
+                            {{ form_widget(form.fokotany, {'attr' : {'class': 'form-control', 'id': 'exampleInputFokotany', 'aria-describedby': 'fokotanyHelp'}}) }}
+                            <small id="fokotanyHelp" class="form-text text-muted">*Champ fokotany vide</small>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <button type="submit" class="btn btn-primary text-center">Modifier Santer</button>
+                    </div>
+                </form>
+            </div>
+        {{ form_end(form) }}
+        </div>
+    </div>
+
+{% endblock %}

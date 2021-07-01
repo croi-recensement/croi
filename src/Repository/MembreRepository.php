@@ -22,16 +22,19 @@ class MembreRepository extends ServiceEntityRepository
     // /**
     //  * @return Membre[] Returns an array of Membre objects
     //  */
-    
-    /*public function findByPersonne($sexe)
+    /*
+    public function findByExampleField($value)
     {
-            return $this->createQueryBuilder('p')
-                    ->andWhere('p.sexe = m')
-                    ->setParameter('sexe', $sexe)
-                    ->getQuery()
-                    ->getArrayResult()
-                    ;
-    }*/
+        return $this->createQueryBuilder('m')
+            ->andWhere('m.exampleField = :val')
+            ->setParameter('val', $value)
+            ->orderBy('m.id', 'ASC')
+            ->setMaxResults(10)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+    */
 
     /*
     public function findOneBySomeField($value): ?Membre

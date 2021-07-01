@@ -2,12 +2,16 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiResource;
+use Symfony\Component\Serializer\Annotation\Groups;
 use App\Repository\EducationRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
+ * @ApiResource(
+ *      normalizationContext={"groups"={"education_read"}},
+ *      denormalizationContext={"groups"={"education_write"}}
+ * )
  * @ORM\Entity(repositoryClass=EducationRepository::class)
  */
 class Education
@@ -20,54 +24,104 @@ class Education
     private $id;
 
     /**
+     * @Groups({"education_read","education_write","membre_read"})
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $nomEcole;
 
     /**
+     * @Groups({"education_read","education_write","membre_read"})
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $nomUniversite;
 
     /**
+     * @Groups({"education_read","education_write","membre_read"})
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $classe;
 
     /**
+     * @Groups({"education_read","education_write","membre_read"})
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $carteEtudiant;
 
     /**
+     * @Groups({"education_read","education_write","membre_read"})
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $adresseEcole;
 
     /**
+     * @Groups({"education_read","education_write","membre_read"})
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $adresseUniversite;
 
     /**
+     * @Groups({"education_read","education_write","membre_read"})
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $diplome;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @Groups({"education_read","education_write","membre_read"})
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $anneeScolaire;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Pays::class, inversedBy="education")
+     * @Groups({"education_read","education_write","membre_read"})
+     * @ORM\Column(type="array", nullable=true)
      */
-    private $pays;
+    private $nomPays = [];
 
     /**
-     * @ORM\ManyToOne(targetEntity=Personne::class)
+     * @Groups({"education_read","education_write","membre_read"})
+     * @ORM\Column(type="array", nullable=true)
      */
-    private $personne;
+    private $province = [];
+
+    /**
+     * @Groups({"education_read","education_write","membre_read"})
+     * @ORM\Column(type="array", nullable=true)
+     */
+    private $region = [];
+
+    /**
+     * @Groups({"education_read","education_write","membre_read"})
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $fokotany;
+
+    /**
+     * @Groups({"education_read","education_write","membre_read"})
+     * @ORM\ManyToOne(targetEntity=Pere::class, inversedBy="education")
+     */
+    private $pere;
+
+    /**
+     * @Groups({"education_read","education_write","membre_read"})
+     * @ORM\ManyToOne(targetEntity=Mere::class, inversedBy="education")
+     */
+    private $mere;
+
+    /**
+     * @Groups({"education_read","education_write","membre_read"})
+     * @ORM\ManyToOne(targetEntity=Enfant::class, inversedBy="education")
+     */
+    private $enfant;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Membre::class, inversedBy="education")
+     */
+    private $eduquer;
+    
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
 
     public function getNomEcole(): ?string
     {
@@ -158,33 +212,105 @@ class Education
         return $this->anneeScolaire;
     }
 
-    public function setAnneeScolaire(string $anneeScolaire): self
+    public function setAnneeScolaire(?string $anneeScolaire): self
     {
         $this->anneeScolaire = $anneeScolaire;
 
         return $this;
     }
 
-    public function getPays(): ?Pays
+    public function getNomPays(): ?array
     {
-        return $this->pays;
+        return $this->nomPays;
     }
 
-    public function setPays(?Pays $pays): self
+    public function setNomPays(?array $nomPays): self
     {
-        $this->pays = $pays;
+        $this->nomPays = $nomPays;
 
         return $this;
     }
 
-    public function getPersonne(): ?Personne
+    public function getProvince(): ?array
     {
-        return $this->personne;
+        return $this->province;
     }
 
-    public function setPersonne(?Personne $personne): self
+    public function setProvince(?array $province): self
     {
-        $this->personne = $personne;
+        $this->province = $province;
+
+        return $this;
+    }
+
+    public function getRegion(): ?array
+    {
+        return $this->region;
+    }
+
+    public function setRegion(?array $region): self
+    {
+        $this->region = $region;
+
+        return $this;
+    }
+
+    public function getFokotany(): ?string
+    {
+        return $this->fokotany;
+    }
+
+    public function setFokotany(?string $fokotany): self
+    {
+        $this->fokotany = $fokotany;
+
+        return $this;
+    }
+
+    public function getPere(): ?Pere
+    {
+        return $this->pere;
+    }
+
+    public function setPere(?Pere $pere): self
+    {
+        $this->pere = $pere;
+
+        return $this;
+    }
+
+    public function getMere(): ?Mere
+    {
+        return $this->mere;
+    }
+
+    public function setMere(?Mere $mere): self
+    {
+        $this->mere = $mere;
+
+        return $this;
+    }
+
+    public function getEnfant(): ?Enfant
+    {
+        return $this->enfant;
+    }
+
+    public function setEnfant(?Enfant $enfant): self
+    {
+        $this->enfant = $enfant;
+
+        return $this;
+    }
+
+    public function getEduquer(): ?Membre
+    {
+        return $this->eduquer;
+    }
+
+    public function setEduquer(?Membre $eduquer): self
+    {
+        $this->eduquer = $eduquer;
 
         return $this;
     }

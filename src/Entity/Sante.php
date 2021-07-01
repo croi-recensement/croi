@@ -2,10 +2,17 @@
 
 namespace App\Entity;
 
+
+use ApiPlatform\Core\Annotation\ApiResource;
+use Symfony\Component\Serializer\Annotation\Groups;
 use App\Repository\SanteRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
+ * @ApiResource(
+ *      normalizationContext={"groups"={"sante_read"}},
+ *      denormalizationContext={"groups"={"sante_write"}}
+ * )
  * @ORM\Entity(repositoryClass=SanteRepository::class)
  */
 class Sante
@@ -18,153 +25,180 @@ class Sante
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"sante_read","sante_write"})
+     * @ORM\Column(type="array",  nullable=true)
      */
-    private $maladie;
+    private $typeMaladie = [];
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"sante_read","sante_write"})
+     * @ORM\Column(type="array", nullable=true)
      */
-    private $typeMaladie;
+    private $categorie = [];
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"sante_read","sante_write"})
+     * @ORM\Column(type="array", nullable=true)
      */
-    private $categorie;
+    private $maladie = [];
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"sante_read","sante_write"})
+     * @ORM\Column(type="array", length=255, nullable=true)
      */
-    private $autreMaladie;
+    private $groupeSanguin = [];
 
     /**
+     * @Groups({"sante_read","sante_write"})
      * @ORM\Column(type="boolean", nullable=true)
      */
-    private $evacuer;
+    private $evacuerounon;
 
     /**
+     * @Groups({"sante_read","sante_write"})
      * @ORM\Column(type="boolean", nullable=true)
      */
-    private $chirurgie;
+    private $chirurgieounon;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"sante_read","sante_write"})
+     * @ORM\Column(type="string", nullable=true)
      */
     private $coutEvacuation;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $nomDechirurgie;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $coutChirurgie;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"sante_read","sante_write"})
+     * @ORM\Column(type="string", nullable=true)
      */
     private $poids;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"sante_read","sante_write"})
+     * @ORM\Column(type="string", nullable=true)
      */
     private $taille;
 
     /**
-     * @ORM\Column(type="boolean", nullable=true)
-     */
-    private $questionSante;
-
-    /**
-     * @ORM\OneToOne(targetEntity=Pays::class, cascade={"persist", "remove"})
-     */
-    private $pays;
-
-    /**
-     * @ORM\OneToOne(targetEntity=Personne::class, cascade={"persist", "remove"})
-     */
-    private $personne;
-
-    /**
+     * @Groups({"sante_read","sante_write"})
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $groupeSanguin;
+    private $nomChirurgie;
+
+    /**
+     * @Groups({"sante_read","sante_write"})
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private $coutChirurgie;
+
+    /**
+     * @Groups({"sante_read","sante_write"})
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $questionMaladie;
+
+    /**
+     * @Groups({"sante_read","sante_write"})
+     * @ORM\Column(type="array", nullable=true)
+     */
+    private $nomPays = [];
+
+    /**
+     * @Groups({"sante_read","sante_write"})
+     * @ORM\Column(type="array", nullable=true)
+     */
+    private $province = [];
+
+    /**
+     * @Groups({"sante_read","sante_write"})
+     * @ORM\Column(type="array", nullable=true)
+     */
+    private $region = [];
+
+    /**
+     * @Groups({"sante_read","sante_write"})
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $fokotany;
+
+    /**
+     * @Groups({"sante_read","sante_write"})
+     * @ORM\OneToOne(targetEntity=Membre::class, inversedBy="sante", cascade={"persist", "remove"})
+     */
+    private $membre;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getMaladie(): ?string
-    {
-        return $this->maladie;
-    }
-
-    public function setMaladie(?string $maladie): self
-    {
-        $this->maladie = $maladie;
-
-        return $this;
-    }
-
-    public function getTypeMaladie(): ?string
+    public function getTypeMaladie(): ?array
     {
         return $this->typeMaladie;
     }
 
-    public function setTypeMaladie(?string $typeMaladie): self
+    public function setTypeMaladie(?array $typeMaladie): self
     {
         $this->typeMaladie = $typeMaladie;
 
         return $this;
     }
 
-    public function getCategorie(): ?string
+    public function getCategorie(): ?array
     {
         return $this->categorie;
     }
 
-    public function setCategorie(?string $categorie): self
+    public function setCategorie(?array $categorie): self
     {
         $this->categorie = $categorie;
 
         return $this;
     }
 
-    public function getAutreMaladie(): ?string
+    public function getMaladie(): ?array
     {
-        return $this->autreMaladie;
+        return $this->maladie;
     }
 
-    public function setAutreMaladie(?string $autreMaladie): self
+    public function setMaladie(?array $maladie): self
     {
-        $this->autreMaladie = $autreMaladie;
+        $this->maladie = $maladie;
 
         return $this;
     }
 
-    public function getEvacuer(): ?bool
+    public function getGroupeSanguin(): ?array
     {
-        return $this->evacuer;
+        return $this->groupeSanguin;
     }
 
-    public function setEvacuer(?bool $evacuer): self
+    public function setGroupeSanguin(?array $groupeSanguin): self
     {
-        $this->evacuer = $evacuer;
+        $this->groupeSanguin = $groupeSanguin;
 
         return $this;
     }
 
-    public function getChirurgie(): ?bool
+    public function getEvacuerounon(): ?bool
     {
-        return $this->chirurgie;
+        return $this->evacuerounon;
     }
 
-    public function setChirurgie(?bool $chirurgie): self
+    public function setEvacuerounon(?bool $evacuerounon): self
     {
-        $this->chirurgie = $chirurgie;
+        $this->evacuerounon = $evacuerounon;
+
+        return $this;
+    }
+
+    public function getChirurgieounon(): ?bool
+    {
+        return $this->chirurgieounon;
+    }
+
+    public function setChirurgieounon(?bool $chirurgieounon): self
+    {
+        $this->chirurgieounon = $chirurgieounon;
 
         return $this;
     }
@@ -177,30 +211,6 @@ class Sante
     public function setCoutEvacuation(?string $coutEvacuation): self
     {
         $this->coutEvacuation = $coutEvacuation;
-
-        return $this;
-    }
-
-    public function getNomDechirurgie(): ?string
-    {
-        return $this->nomDechirurgie;
-    }
-
-    public function setNomDechirurgie(?string $nomDechirurgie): self
-    {
-        $this->nomDechirurgie = $nomDechirurgie;
-
-        return $this;
-    }
-
-    public function getCoutChirurgie(): ?string
-    {
-        return $this->coutChirurgie;
-    }
-
-    public function setCoutChirurgie(?string $coutChirurgie): self
-    {
-        $this->coutChirurgie = $coutChirurgie;
 
         return $this;
     }
@@ -229,50 +239,98 @@ class Sante
         return $this;
     }
 
-    public function getQuestionSante(): ?bool
+    public function getNomChirurgie(): ?string
     {
-        return $this->questionSante;
+        return $this->nomChirurgie;
     }
 
-    public function setQuestionSante(?bool $questionSante): self
+    public function setNomChirurgie(?string $nomChirurgie): self
     {
-        $this->questionSante = $questionSante;
+        $this->nomChirurgie = $nomChirurgie;
 
         return $this;
     }
 
-    public function getPays(): ?Pays
+    public function getCoutChirurgie(): ?string
     {
-        return $this->pays;
+        return $this->coutChirurgie;
     }
 
-    public function setPays(?Pays $pays): self
+    public function setCoutChirurgie(?string $coutChirurgie): self
     {
-        $this->pays = $pays;
+        $this->coutChirurgie = $coutChirurgie;
 
         return $this;
     }
 
-    public function getPersonne(): ?Personne
+    public function getQuestionMaladie(): ?string
     {
-        return $this->personne;
+        return $this->questionMaladie;
     }
 
-    public function setPersonne(?Personne $personne): self
+    public function setQuestionMaladie(?string $questionMaladie): self
     {
-        $this->personne = $personne;
+        $this->questionMaladie = $questionMaladie;
 
         return $this;
     }
 
-    public function getGroupeSanguin(): ?string
+    public function getNomPays(): ?array
     {
-        return $this->groupeSanguin;
+        return $this->nomPays;
     }
 
-    public function setGroupeSanguin(?string $groupeSanguin): self
+    public function setNomPays(?array $nomPays): self
     {
-        $this->groupeSanguin = $groupeSanguin;
+        $this->nomPays = $nomPays;
+
+        return $this;
+    }
+
+    public function getProvince(): ?array
+    {
+        return $this->province;
+    }
+
+    public function setProvince(?array $province): self
+    {
+        $this->province = $province;
+
+        return $this;
+    }
+
+    public function getRegion(): ?array
+    {
+        return $this->region;
+    }
+
+    public function setRegion(?array $region): self
+    {
+        $this->region = $region;
+
+        return $this;
+    }
+
+    public function getFokotany(): ?string
+    {
+        return $this->fokotany;
+    }
+
+    public function setFokotany(?string $fokotany): self
+    {
+        $this->fokotany = $fokotany;
+
+        return $this;
+    }
+
+    public function getMembre(): ?Membre
+    {
+        return $this->membre;
+    }
+
+    public function setMembre(?Membre $membre): self
+    {
+        $this->membre = $membre;
 
         return $this;
     }

@@ -14,18 +14,18 @@ use Symfony\Component\Routing\Annotation\Route;
 class TablighController extends AbstractController
 {
     /**
-     * @Route("tabligh", name="app_dashboard_tabligh")
+     * @Route("/admin/tabligh", name="app_dashboard_tabligh")
      */
     public function index(): Response
     {
-        $tabligh = $this->getDoctrine()
+        $tablighs = $this->getDoctrine()
                             ->getManager()
                             ->getRepository('App\Entity\Tabligh')->findAll();
 
         return $this->render('tabligh/index.html.twig', [
             'controller_name' => 'TablighController',
-            'tablighs' => $tabligh,
-            'title' => 'Département Tabligh'
+            'tablighs' => $tablighs,
+            'title' => 'DEPARTEMENT TABLIGH'
         ]);
     }
 
