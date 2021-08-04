@@ -5,9 +5,462 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	  <meta content="" name="description" />
     <meta content="webthemez" name="author" />
+    <link href="{{ asset('assets/css/bootstrap.css') }}" rel="stylesheet" />
+    <link href="{{ asset('assets/font-awesome-4.7.0/css/font-awesome.css') }}" rel="stylesheet" />
+    <link href="{{ asset('assets/js/morris/morris-0.4.3.min.css') }}" rel="stylesheet" />
+    <link href="{{ asset('assets/css/custom-styles.css') }}" rel="stylesheet" />
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+    <link rel="stylesheet" href="{{ asset('assets/js/Lightweight-Chart/cssCharts.css') }}">
+
+    <link rel="stylesheet" href="{{ asset('assets/css/main0.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/jquery.steps.css') }}">
+
+    <!--===============================================================================================-->	
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/iconic/css/material-design-iconic-font.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/main.css') }}">
+ 
+    <script src="{{ asset('assets/js/jquery-3.2.1.min.js') }}"></script>
+    <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('assets/js/jquery.metisMenu.js') }}"></script>
+    <script src="{{ asset('assets/js/custom-scripts.js') }}"></script>
+    <script src="{{ asset('assets/js/morris/raphael-2.1.0.min.js')}}"></script>
+    <script src="{{ asset('assets/js/morris/morris.js')}}"></script>
+    <script src="{{ asset('assets/js/chart.min.js') }}" ></script>  
+    <script src="{{ asset('assets/js/chartjs.js') }}"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.js"></script>
+    <script src="{{ asset('assets/js/jquery.steps.min.js') }}"></script>
+    <!--===============================================================================================-->
+    <script src="{{ asset('assets/js/main.js') }}"></script>
+    <script src="{{ asset('assets/js/app.js') }}"></script>
     <title>RECENSEMENT CROI</title>
+      {% block stylesheets %}
+        <style>
+            html,
+            button,
+            input,
+            select,
+            textarea {
+                color: #222;
+            }
+
+            body {
+                font-size: 1em;
+                line-height: 1.4;
+            }
+
+            /*
+            * Remove text-shadow in selection highlight: h5bp.com/i
+            * These selection rule sets have to be separate.
+            * Customize the background color to match your design.
+            */
+
+            ::-moz-selection {
+                background: #b3d4fc;
+                text-shadow: none;
+            }
+
+            ::selection {
+                background: #b3d4fc;
+                text-shadow: none;
+            }
+
+            /*
+            * A better looking default horizontal rule
+            */
+
+            hr {
+                display: block;
+                height: 1px;
+                border: 0;
+                border-top: 1px solid #ccc;
+                margin: 1em 0;
+                padding: 0;
+            }
+
+            /*
+            * Remove the gap between images and the bottom of their containers: h5bp.com/i/440
+            */
+
+            img {
+                vertical-align: middle;
+            }
+
+            /*
+            * Remove default fieldset styles.
+            */
+
+            fieldset {
+                border: 0;
+                margin: 0;
+                padding: 0;
+            }
+
+            /*
+            * Allow only vertical resizing of textareas.
+            */
+
+            textarea {
+                resize: vertical;
+            }
+
+            /* ==========================================================================
+              Chrome Frame prompt
+              ========================================================================== */
+
+            .chromeframe {
+                margin: 0.2em 0;
+                background: #ccc;
+                color: #000;
+                padding: 0.2em 0;
+            }
+
+        </style>
+      
+      {% endblock %}
   </head>
   <body>
+  {% if app.user != null %}
+  <div id="wrapper">
+    <nav class="navbar navbar-default top-navbar" role="navigation">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="index.html"><strong><i class="icon fa fa-plane"></i>  CROI</strong></a>
+        <div id="sideNav" href="">
+          <i class="fa fa-bars icon"></i> 
+        </div>
+      </div>
+      <ul class="nav navbar-top-links navbar-right">
+        <li class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
+              <i class="fa fa-envelope fa-fw"></i> <i class="fa fa-caret-down"></i>
+          </a>
+          <ul class="dropdown-menu dropdown-user">
+            <li>
+              <a href="{{ path('send_email') }}"><i class="fa fa-envelope fa-fw"></i> EMAIL</a>
+            </li>
+            <li class="divider"></li>
+             <li>
+              <a href="{{ path('app_dashboard_chat') }}"><i class="fa fa-comment fa-fw"></i> INBOX</a>
+            </li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
+              <i class="fa fa-tasks fa-fw"></i> <i class="fa fa-caret-down"></i>
+          </a>
+          <ul class="dropdown-menu dropdown-tasks">
+            <li>
+                <a href="#">
+                    <div>
+                        <p>
+                            <strong>Task 1</strong>
+                            <span class="pull-right text-muted">60% Complete</span>
+                        </p>
+                        <div class="progress progress-striped active">
+                            <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%">
+                                <span class="sr-only">60% Complete (success)</span>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </li>
+            <li class="divider"></li>
+            <li>
+                <a href="#">
+                    <div>
+                        <p>
+                            <strong>Task 2</strong>
+                            <span class="pull-right text-muted">28% Complete</span>
+                        </p>
+                        <div class="progress progress-striped active">
+                            <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="28" aria-valuemin="0" aria-valuemax="100" style="width: 28%">
+                                <span class="sr-only">28% Complete</span>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </li>
+            <li class="divider"></li>
+            <li>
+                <a href="#">
+                    <div>
+                        <p>
+                            <strong>Task 3</strong>
+                            <span class="pull-right text-muted">60% Complete</span>
+                        </p>
+                        <div class="progress progress-striped active">
+                            <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%">
+                                <span class="sr-only">60% Complete (warning)</span>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </li>
+            <li class="divider"></li>
+            <li>
+                <a href="#">
+                    <div>
+                        <p>
+                            <strong>Task 4</strong>
+                            <span class="pull-right text-muted">85% Complete</span>
+                        </p>
+                        <div class="progress progress-striped active">
+                            <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100" style="width: 85%">
+                                <span class="sr-only">85% Complete (danger)</span>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </li>
+            <li class="divider"></li>
+            <li>
+                <a class="text-center" href="#">
+                    <strong>See All Tasks</strong>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
+              <i class="fa fa-bell fa-fw"></i> <i class="fa fa-caret-down"></i>
+          </a>
+          <ul class="dropdown-menu dropdown-alerts">
+            <li>
+                <a href="#">
+                    <div>
+                        <i class="fa fa-comment fa-fw"></i> New Comment
+                        <span class="pull-right text-muted small">4 min</span>
+                    </div>
+                </a>
+            </li>
+            <li class="divider"></li>
+            <li>
+                <a href="#">
+                    <div>
+                        <i class="fa fa-twitter fa-fw"></i> 3 New Followers
+                        <span class="pull-right text-muted small">12 min</span>
+                    </div>
+                </a>
+            </li>
+            <li class="divider"></li>
+            <li>
+                <a href="#">
+                    <div>
+                        <i class="fa fa-envelope fa-fw"></i> Message Sent
+                        <span class="pull-right text-muted small">4 min</span>
+                    </div>
+                </a>
+            </li>
+            <li class="divider"></li>
+            <li>
+                <a href="#">
+                    <div>
+                        <i class="fa fa-tasks fa-fw"></i> New Task
+                        <span class="pull-right text-muted small">4 min</span>
+                    </div>
+                </a>
+            </li>
+            <li class="divider"></li>
+            <li>
+                <a href="#">
+                    <div>
+                        <i class="fa fa-upload fa-fw"></i> Server Rebooted
+                        <span class="pull-right text-muted small">4 min</span>
+                    </div>
+                </a>
+            </li>
+            <li class="divider"></li>
+            <li>
+                <a class="text-center" href="#">
+                    <strong>See All Alerts</strong>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
+              <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+          </a>
+          <ul class="dropdown-menu dropdown-user">
+            <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
+            </li>
+            <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+            </li>
+            <li class="divider"></li>
+            <li>
+              <a href="{{ path('app_logout') }}"
+                ><i class="fa fa-sign-out fa-fw"></i> Logout</a
+              >
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+    <nav class="navbar-default navbar-side" role="navigation">
+      <div class="sidebar-collapse">
+        <ul class="nav" id="main-menu">
+          <li>
+              <a class="active-menu" href="{{ path('app_dashboard_home') }}"><i class="fa fa-dashboard"></i> ACCUEIL</a>
+          </li>
+          <li>
+            {% if is_granted('ROLE_ADMIN') %}
+              <a href="ui-elements.html"><i class="fa fa-desktop"></i> COMMUNAUTE<span class="fa arrow"></a>
+              <ul class="nav nav-second-level">
+                <li>
+                  <a 
+                    {% if app.request.get('_route') == 'app_dashboard_dad_read' %} class="active-menu"{% endif %}
+                    href="{{ path('app_dashboard_dad_read', {'situation': 'pere'}) }}">
+                    PERE
+                  </a>
+                </li>
+                <li>
+                  <a {% if app.request.get('_route') == 'app_dashboard_dad_read' %} class="active-menu"{% endif %}
+                     href="{{ path('app_dashboard_dad_read', {'situation': 'mere'}) }}">
+                     FEMME
+                  </a>
+                </li>
+                <li>
+                  <a {% if app.request.get('_route') == 'app_dashboard_dad_read' %} class="active-menu"{% endif %}
+                     href="{{ path('app_dashboard_dad_read', {'situation': 'enfant'}) }}">
+                     ENFANT
+                  </a>
+                </li>
+              </ul>
+            {% endif %}
+          </li> 
+          <li>
+            {% if  is_granted('ROLE_SANTE') %}
+              <a 
+                {% if app.request.get('_route') == 'app_dashboard_read_sante' %} class="active-menu" {% endif %}
+                href="{{ path('app_dashboard_read_sante') }}"
+              >
+                <i class="fa fa-medkit"></i>
+                DEPARTEMENT SANTE
+              </a>
+            {% endif %}
+          </li>	
+          <li>
+            {% if  is_granted('ROLE_EDUCATION') %}
+              <a
+                {% if app.request.get('_route') == 'app_dashboard_education_read' %} class="active-menu"{% endif %}
+                href="{{ path('app_dashboard_education_read') }}"
+              >
+                <i class="fa fa-graduation-cap"></i>
+                DEPARTEMENT EDUCATION
+              </a>
+            {% endif %}
+          </li>
+          <li>
+            {% if  is_granted('ROLE_SOCIAL') %}
+              <a
+                {% if app.request.get('_route') == 'app_dashboard_social_read' %} class="active-menu"{% endif %}
+                href="{{ path('app_dashboard_social_read') }}"
+              >
+                <i class="fa fa-comment">
+                </i>DEPARTEMENT SOCIAL
+              </a>
+            {% endif %}
+          </li>
+          <li>
+            {% if  is_granted('ROLE_LOGEMENT') %}
+              <a
+                {% if app.request.get('_route') == 'app_dashboard_logement_read' %} class="active-menu"{% endif %}
+                href="{{ path('app_dashboard_logement_read') }}"
+              >
+                <i class="fa fa-home"></i>
+                DEPARTEMENT LOGEMENT
+              </a>
+            {% endif %}
+          </li>
+          <li>
+            {% if  is_granted('ROLE_SPORT') %}
+              <a 
+                {% if app.request.get('_route') == 'app_dashboard_sport' %} class="active-menu"{% endif %}
+                href="{{ path('app_dashboard_sport') }}"
+              >
+                <i class="fa fa-futbol-o"></i>
+                DEPARTEMENT SPORT
+              </a>
+            {% endif %}
+          </li>
+          <li>
+            {% if  is_granted('ROLE_FINANCE') %}
+              <a
+                {% if app.request.get('_route') == 'app_dashboard_finance' %} class="active-menu"{% endif %}
+                href="{{ path('app_dashboard_finance') }}"
+              >
+                <i class="fa fa-eur"></i>
+                DEPARTEMENT FINANCE
+              </a>
+            {% endif %}
+          </li>
+          <li>
+            {% if  is_granted('ROLE_COMMERCE') %}
+              <a
+                {% if app.request.get('_route') == 'app_dashboard_profession' %} class="active-menu"{% endif %}
+                href="{{ path('app_dashboard_profession') }}"
+                >
+                  <i class="fa fa-shopping-cart fa-pulse fa-spin fa-1x"></i>
+                  DEPARTEMENT COMMERCE
+              </a>
+            {% endif %}
+          </li>
+          <li>
+            {% if is_granted('ROLE_TABLIGH') %}
+              <a
+                href="{{ path('app_dashboard_tabligh') }}"
+                >
+                <i class="fa fa-user"></i>
+                DEPARTEMENT TABLIGH
+              </a>
+            {% endif %}
+          </li>
+          <li>
+            {% if is_granted('ROLE_ADMIN') %}
+              <a
+                {% if app.request.get('_route') == 'app_dashboard_commity_read' %} class="active-menu"{% endif %}
+                href="{{ path('app_dashboard_commity_read') }}" 
+              >
+                <i class="fa fa-user"></i>
+                COMMUTE
+              </a>
+            {% endif %}
+          </li>
+        </ul>
+      </div>
+    </nav>      
+		<div id="page-wrapper">
+		  <div class="header"> 
+        <h1 class="page-header">
+            Dashboard <small>Welcome John Doe</small>
+        </h1>
+				<ol class="breadcrumb">
+          <li><a href="#">Home</a></li>
+          <li><a href="#">Dashboard</a></li>
+          <li class="active">Data</li>
+				</ol> 			
+		  </div>
+      {% block content %}{% endblock %}
+    </div>
+  </div>
+  <div>
+    {% if app.request.get('_route') != 'app_personne' and app.request.get('_route') != 'send_email' and app.request.get('_route') != 'app_import_excel' %} 
+      <a rel="nofollow" href="#" id="bwp-scroll-top" class="bwp-visible"><i class="fa fa-arrow-up"></i></a>
+    {% endif %}
+  </div>
+{% endif %}
+
+{% if app.user == null %}
     {% block body %}{% endblock %}
+{% endif %}
+{% block javascripts %}{% endblock %}
   </body>
 </html>

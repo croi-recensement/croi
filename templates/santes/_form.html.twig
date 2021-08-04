@@ -1,0 +1,101 @@
+{{ form_start(form) }}
+<div class="row">
+    <div class="form-group col-md-2">
+        <div class="sub-title">Groupe Sanguin</div>
+        {{ form_widget(form.groupeSanguin, {'attr': {'class': 'form-control'}}) }}
+    </div>
+    <div class="form-group col-md-2">
+        <div class="sub-title">Etat de Santé en génèral</div>
+        {{ form_widget(form.etat, {'attr': {'class': 'form-control'}}) }}
+    </div>
+    <div class="form-group col-md-2">
+        <div class="sub-title">Souffrez vous d'une maladie chronique ? </div>
+        {{ form_widget(form.maladieChronique, {'attr': {'class': 'form-control'}}) }}
+    </div>
+    <div class="form-group col-md-2">
+        <div class="sub-title">Etes vous limité par un problème de santé ? </div>
+        {{ form_widget(form.maladieCardiaque, {'attr': {'class': 'form-control'}}) }}
+    </div>
+    <div class="form-group col-md-2">
+        <div class="sub-title">Depuis combient de temps la limité ?</div>
+        {{ form_widget(form.temps, {'attr': {'class': 'form-control'}}) }}
+    </div>
+    <div class="form-group col-md-2">
+        <div class="sub-title">Quelle est votre taille ?</div>
+        {{ form_widget(form.tailles, {'attr': {'class': 'form-control'}}) }}
+    </div>
+</div>
+<div class="row"> 
+    <div class="form-group col-md-2">
+        <div class="sub-title">Quelle est le poids ?</div>
+        {{ form_widget(form.poids, {'attr': {'class': 'form-control'}}) }}
+    </div>
+    <div class="form-group col-md-2">
+        <div class="sub-title">Avez vous subit une opération/ chirurgie invansive ?</div>
+        {{ form_widget(form.operation, {'attr': {'class': 'form-control'}}) }}
+    </div>
+    <div class="form-group col-md-2">
+        <div class="sub-title">Etes vous sous traitement médicamenteuse à long terme ?</div>
+        {{ form_widget(form.traitement, {'attr': {'class': 'form-control'}}) }}
+    </div>
+    <div class="form-group col-md-2">
+        <div class="sub-title">Avez vous subit une opération/ chirurgie invansive ?</div>
+        {{ form_widget(form.chosePorte, {'attr': {'class': 'form-control'}}) }}
+    </div>
+    <div class="form-group col-md-2">
+        <div class="sub-title">Intervention</div>
+        {{ form_widget(form.intervention, {'attr': {'class': 'form-control'}}) }}
+    </div>
+    <div class="form-group col-md-2">
+        <div class="sub-title">Coût d'intervention</div>
+        {{ form_widget(form.prix, {'attr': {'class': 'form-control'}}) }}
+    </div>
+</div>
+<div class="row">
+    <div class="form-group col-md-2">
+        <div class="sub-title">Nom Médicament</div>
+        {{ form_widget(form.nomMedicament, {'attr': {'class': 'form-control'}}) }}
+    </div>
+    <div class="form-group col-md-2">
+        <div class="sub-title">Frequence</div>
+        {{ form_widget(form.frequence, {'attr': {'class': 'form-control'}}) }}
+    </div>
+    <div class="form-group col-md-2">
+        <div class="sub-title">Maladie relative</div>
+        {{ form_widget(form.maladieRelative, {'attr': {'class': 'form-control'}}) }}
+    </div>
+    <div class="form-group col-md-2">
+        <div class="sub-title">Les différentes maladies touchant différente partie du corps :</div>
+        {{ form_widget(form.typeMaladie, {'attr': {'class': 'form-control'}}) }}
+    </div>
+    <div class="form-group col-md-2">
+        <div class="sub-title">A quelle frequence consultez vous des medicins ?</div>
+        {{ form_widget(form.frequentation, {'attr': {'class': 'form-control'}}) }}
+    </div>
+    <div class="form-group col-md-2">
+        <div class="sub-title">Faites vous un bilan sanguin annuel ?</div>
+        {{ form_widget(form.bilanSanguin, {'attr': {'class': 'form-control'}}) }}
+    </div>
+</div>
+<button class="btn">{{ button_label|default('Save') }}</button>
+{{ form_end(form) }}
+
+<div class="modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Modal body text goes here.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

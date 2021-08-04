@@ -1,0 +1,335 @@
+
+<div id="page-inner">   
+    <div class="panel panel-default">
+        <div class="panel-heading"></div>
+        <div class="panel-body">
+            <form method="post" id="wizard">
+                <div>
+                    <h2>COMMUNAUTE</h2>
+                    <section>
+                        <div class="row">
+                            <div class="form-group col-sm-12 col-md-3">
+                                <div class="sub-title">Nom famille</div>
+                                {{ form_widget(form.nomFamille, {'attr': {'class': 'form-control'}}) }}
+                            </div>
+                            <div class="form-group col-sm-12 col-md-3">
+                                <div class="sub-title">Prénom famille</div>
+                                {{ form_widget(form.prenomFamille, {'attr': {'class': 'form-control'}}) }}
+                            </div>
+                            <div class="form-group col-sm-12 col-md-3">
+                                <div class="sub-title">Sexe</div>
+                                {{ form_widget(form.sexe, {'attr': {'class': 'form-control required'}}) }}
+                            </div>
+                            <div class="form-group col-sm-12 col-md-3">
+                                <div class="sub-title">Date de naissance</div>
+                                {{ form_widget(form.dateNaissance, {'attr': {'class': 'form-control required'}}) }}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-sm-12 col-md-3">
+                                <div class="sub-title">Nationalité</div>
+                                {{ form_widget(form.nationalite, {'attr': {'class': 'form-control required'}}) }}
+                            </div>
+                            <div class="form-group col-sm-12 col-md-3">
+                                <div class="sub-title">Document de voyage</div>
+                                {{ form_widget(form.documentVoyage, {'attr': {'class': 'form-control required'}}) }}
+                            </div>
+                            <div class="form-group col-sm-12 col-md-3">
+                                <div class="sub-title">Numéro de passeport</div>
+                                {{ form_widget(form.numeroPassport, {'attr': {'class': 'form-control required'}}) }}
+                            </div>
+                            <div class="form-group col-sm-12 col-md-3">
+                                <div class="sub-title">Numéro cin</div>
+                                {{ form_widget(form.numeroCin, {'attr': {'class': 'form-control required'}}) }}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-sm-12 col-md-3">
+                                <div class="sub-title">Situation marital</div>
+                                {{ form_widget(form.situationMarital, {'attr': {'class': 'form-control required'}}) }}
+                            </div>
+                            <div class="form-group col-sm-12 col-md-3">
+                                <div class="sub-title">Numéro de téléphone</div>
+                                {{ form_widget(form.numeroPhone, {'attr': {'class': 'form-control required'}}) }}
+                            </div>
+                            <div class="form-group col-sm-12 col-md-3">
+                                <div class="sub-title">Adresse email</div>
+                                {{ form_widget(form.adresseEmail, {'attr': {'class': 'form-control required'}}) }}
+                            </div>
+                            <div class="form-group col-sm-12 col-md-3">
+                                <div class="sub-title">Situation familliale</div>
+                                {{ form_widget(form.situationFamiliale, {'attr': {'class': 'form-control required'}}) }}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-sm-12 col-md-6">
+                                <div class="sub-title">Lieu de naissance</div>
+                                {{ form_widget(form.lieuNaissance, {'attr': {'class': 'form-control required'}}) }}
+                            </div>
+                            <div class="form-group col-sm-12 col-md-6">
+                                <div class="sub-title">Photo</div>
+                                {{ form_widget(form.photo, {'attr': {'class': 'form-control required'}}) }}
+                            </div>
+                        </div>
+                    </section>    
+                    <h2>SANTE</h2>
+                    <section>
+                        <div class="row">
+                            <div class="form-group col-md-3">
+                                {{ form_row(form.sante.groupeSanguin, {'attr': {'class': 'form-control'}}) }}                    
+                            </div>
+                            <div class="form-group col-md-3">
+                                {{ form_row(form.sante.etat, {'attr': {'class': 'form-control'}}) }}                    
+                            </div>
+                            <div class="form-group col-md-3">
+                                {{ form_row(form.sante.maladieChronique, {'attr': {'class': 'form-control'}}) }}                    
+                            </div>
+                            <div class="form-group col-md-3">
+                                {{ form_row(form.sante.temps, {'attr': {'class': 'form-control'}}) }}                    
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-3">
+                                {{ form_row(form.sante.tailles, {'attr': {'class': 'form-control'}}) }}
+                            </div>
+                            <div class="form-group col-md-3">
+                                {{ form_row(form.sante.poids, {'attr': {'class': 'form-control'}}) }}
+                            </div>
+                            <div class="form-group col-md-3">
+                                {{ form_row(form.sante.operation, {'attr': {'class': 'form-control'}}) }}
+                            </div>
+                            <div class="form-group col-md-3">
+                                {{ form_row(form.sante.chosePorte, {'attr': {'class': 'form-control'}}) }}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-3">
+                                {{ form_row(form.sante.intervention, {'attr': {'class': 'form-control'}}) }}
+                            </div>
+                            <div class="form-group col-md-3">
+                                {{ form_row(form.sante.prix, {'attr': {'class': 'form-control'}}) }}
+                            </div>
+                            <div class="form-group col-md-3">
+                                {{ form_row(form.sante.traitement, {'attr': {'class': 'form-control'}}) }}
+                            </div>
+                            <div class="form-group col-md-3">
+                                {{ form_row(form.sante.typeMaladie, {'attr': {'class': 'form-control'}}) }}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-3">
+                                {{ form_row(form.sante.frequentation, {'attr': {'class': 'form-control'}}) }}
+                            </div>
+                            <div class="form-group col-md-3">
+                                {{ form_row(form.sante.bilanSanguin, {'attr': {'class': 'form-control'}}) }}
+                            </div>
+                            <div class="form-group col-md-3">
+                                {{ form_row(form.sante.paysChirurgie, {'attr': {'class': 'form-control'}}) }}
+                            </div>
+                            <div class="form-group col-md-3">
+                                {{ form_row(form.sante.note, {'attr': {'class': 'form-control'}}) }}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-3">
+                                {{ form_row(form.sante.nomMedicament, {'attr': {'class': 'form-control'}}) }}
+                            </div>
+                            <div class="form-group col-md-3">
+                                {{ form_row(form.sante.frequence, {'attr': {'class': 'form-control'}}) }}
+                            </div>
+                            <div class="form-group col-md-3">
+                                {{ form_row(form.sante.maladieRelative, {'attr': {'class': 'form-control'}}) }}
+                            </div>
+                        </div>
+                    </section>
+                    <h2>EDUCATION</h2>
+                    <section>
+                        <div class="row">
+                            <div class="form-group col-md-3">
+                                {{ form_row(form.education.nomEcole, {'attr': {'class': 'form-control'}}) }}                    
+                            </div>
+                            <div class="form-group col-md-3">
+                                {{ form_row(form.education.nomUniversite, {'attr': {'class': 'form-control'}}) }}                    
+                            </div>
+                            <div class="form-group col-md-3">
+                                {{ form_row(form.education.classe, {'attr': {'class': 'form-control'}}) }}                    
+                            </div>
+                            <div class="form-group col-md-3">
+                                {{ form_row(form.education.carteEtudiant, {'attr': {'class': 'form-control'}}) }}                    
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-3">
+                                {{ form_row(form.education.adresseEcole, {'attr': {'class': 'form-control'}}) }}                    
+                            </div>
+                            <div class="form-group col-md-3">
+                                {{ form_row(form.education.adresseUniversite, {'attr': {'class': 'form-control'}}) }}                    
+                            </div>
+                            <div class="form-group col-md-3">
+                                {{ form_row(form.education.diplome, {'attr': {'class': 'form-control'}}) }}                    
+                            </div>
+                            <div class="form-group col-md-3">
+                                {{ form_row(form.education.anneeScolaire, {'attr': {'class': 'form-control'}}) }}                    
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-3">
+                                {{ form_row(form.education.nomPays, {'attr': {'class': 'form-control'}}) }}                    
+                            </div>
+                            <div class="form-group col-md-3">
+                                {{ form_row(form.education.province, {'attr': {'class': 'form-control'}}) }}                    
+                            </div>
+                            <div class="form-group col-md-3">
+                                {{ form_row(form.education.region, {'attr': {'class': 'form-control'}}) }}                    
+                            </div>
+                            <div class="form-group col-md-3">
+                                {{ form_row(form.education.fokotany, {'attr': {'class': 'form-control'}}) }}                    
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-3">
+                                {{ form_row(form.education.niveauEtude, {'attr': {'class': 'form-control'}}) }}                    
+                            </div>
+                            <div class="form-group col-md-3">
+                                {{ form_row(form.education.aide, {'attr': {'class': 'form-control'}}) }}                    
+                            </div>
+                            <div class="form-group col-md-3">
+                                {{ form_row(form.education.autre, {'attr': {'class': 'form-control'}}) }}                    
+                            </div>
+                        </div>
+                    </section>
+                    <h2>SOCIAL</h2>
+                    <section>
+                        <div class="row">
+                            <div class="form-group col-md-3">
+                                {{ form_row(form.social.aideNourriture, {'attr': {'class': 'form-control'}}) }}                    
+                            </div>
+                            <div class="form-group col-md-3">
+                                {{ form_row(form.social.aideEducation, {'attr': {'class': 'form-control'}}) }}                    
+                            </div>
+                            <div class="form-group col-md-3">
+                                {{ form_row(form.social.aideSocial, {'attr': {'class': 'form-control'}}) }}                    
+                            </div>
+                            <div class="form-group col-md-3">
+                                {{ form_row(form.social.aideSante, {'attr': {'class': 'form-control'}}) }}                    
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-3">
+                                {{ form_row(form.social.aideTravail, {'attr': {'class': 'form-control'}}) }}                    
+                            </div>
+                        </div>
+                    </section>
+                    <h2>LOGEMENT</h2>
+                    <section>
+                        <div class="row">
+                            <div class="form-group col-md-3">
+                                {{ form_row(form.logement.adressePermanente, {'attr': {'class': 'form-control'}}) }}                    
+                            </div>
+                            <div class="form-group col-md-3">
+                                {{ form_row(form.logement.adresseTemporaire, {'attr': {'class': 'form-control'}}) }}                    
+                            </div>
+                            <div class="form-group col-md-3">
+                                {{ form_row(form.logement.nomPays, {'attr': {'class': 'form-control'}}) }}                    
+                            </div>
+                            <div class="form-group col-md-3">
+                                {{ form_row(form.logement.province, {'attr': {'class': 'form-control'}}) }}                    
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-3">
+                                {{ form_row(form.logement.region, {'attr': {'class': 'form-control'}}) }}                    
+                            </div>
+                            <div class="form-group col-md-3">
+                                {{ form_row(form.logement.fokotany, {'attr': {'class': 'form-control'}}) }}                    
+                            </div>
+                            <div class="form-group col-md-3">
+                                {{ form_row(form.logement.montantLoyer, {'attr': {'class': 'form-control'}}) }}                    
+                            </div>
+                            <div class="form-group col-md-3">
+                                {{ form_row(form.logement.montantSyndic, {'attr': {'class': 'form-control'}}) }}                    
+                            </div>
+                        </div>
+                    </section>
+                    <h2>SPORT</h2>
+                    <section>
+                        <div class="row">
+                            <div class="form-group col-md-3">
+                                {{ form_row(form.sport.pratiqueSport, {'attr': {'class': 'form-control'}}) }}                    
+                            </div>
+                            <div class="form-group col-md-3">
+                                {{ form_row(form.sport.quelSport, {'attr': {'class': 'form-control'}}) }}                    
+                            </div>
+                            <div class="form-group col-md-3">
+                                {{ form_row(form.sport.quelFrequence, {'attr': {'class': 'form-control'}}) }}                    
+                            </div>
+                            <div class="form-group col-md-3">
+                                {{ form_row(form.sport.pratiqueLoisir, {'attr': {'class': 'form-control'}}) }}                    
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-3">
+                                {{ form_row(form.sport.quelLoisir, {'attr': {'class': 'form-control'}}) }}                    
+                            </div>
+                        </div>
+                    </section>
+                    <h2>PROFESSION</h2>
+                    <section>
+                        <div class="row">
+                            <div class="form-group col-md-3">
+                                {{ form_row(form.profession.domaineActivite, {'attr': {'class': 'form-control'}}) }}                    
+                            </div>
+                            <div class="form-group col-md-3">
+                                {{ form_row(form.profession.salaire, {'attr': {'class': 'form-control'}}) }}                    
+                            </div>
+                            <div class="form-group col-md-3">
+                                {{ form_row(form.profession.prime, {'attr': {'class': 'form-control'}}) }}                    
+                            </div>
+                            <div class="form-group col-md-3">
+                                {{ form_row(form.profession.loyer, {'attr': {'class': 'form-control'}}) }}                    
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-3">
+                                {{ form_row(form.profession.profession, {'attr': {'class': 'form-control'}}) }}                    
+                            </div>
+                            <div class="form-group col-md-3">
+                                {{ form_row(form.profession.proprietaire, {'attr': {'class': 'form-control'}}) }}                    
+                            </div>
+                            <div class="form-group col-md-3">
+                                {{ form_row(form.profession.personnel, {'attr': {'class': 'form-control'}}) }}                    
+                            </div>
+                        </div>
+                    </section>
+                    <h2>TABLIGH</h2>
+                    <section>
+                        <div class="row">
+                            <div class="form-group col-md-3">
+                                {{ form_row(form.tabligh.questionMadressa, {'attr': {'class': 'form-control'}}) }}                    
+                            </div>
+                            <div class="form-group col-md-3">
+                                {{ form_row(form.tabligh.classe, {'attr': {'class': 'form-control'}}) }}                    
+                            </div>
+                            <div class="form-group col-md-3">
+                                {{ form_row(form.tabligh.frequentMadressa, {'attr': {'class': 'form-control'}}) }}                    
+                            </div>
+                            <div class="form-group col-md-3">
+                                {{ form_row(form.tabligh.frequentationMosque, {'attr': {'class': 'form-control'}}) }}                    
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-3">
+                                {{ form_row(form.tabligh.questionMosque, {'attr': {'class': 'form-control'}}) }}                    
+                            </div>
+                            <div class="form-group col-md-3">
+                                {{ form_row(form.tabligh.idee, {'attr': {'class': 'form-control'}}) }}                    
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+

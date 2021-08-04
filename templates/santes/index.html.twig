@@ -1,0 +1,85 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Sante{% endblock %}
+
+{% block content %}
+    <div id="page-inner">   
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-md-4">DEPARTEMENT SANTE</div>
+                    <div class="col-md-4"></div>
+                    <div class="col-md-4">
+                    <a href="{{ path('app_dashboard_create_sante') }}" class="btn btn-primary" style="float: right; font-size: x-small;">Ajouter Sante</a>
+                </div>
+            </div>
+        </div>
+        <div class="panel-body">
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered table-hover" style="font-size: 10px">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>GroupeSanguin</th>
+                        <th>Etat</th>
+                        <th>MaladieChronique</th>
+                        <th>MaladieCardiaque</th>
+                        <th>Temps</th>
+                        <th>Tailles</th>
+                        <th>Poids</th>
+                        <th>Operation</th>
+                        <th>ChosePorte</th>
+                        <th>Intervention</th>
+                        <th>Prix</th>
+                        <th>Traitement</th>
+                        <th>TypeMaladie</th>
+                        <th>Frequentation</th>
+                        <th>BilanSanguin</th>
+                        <th>PaysChirurgie</th>
+                        <th>Note</th>
+                        <th>NomMedicament</th>
+                        <th>Frequence</th>
+                        <th>MaladieRelative</th>
+                        <th>actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for sante in santes %}
+                    <tr>
+                        <td>{{ sante.id }}</td>
+                        <td>{{ sante.groupeSanguin }}</td>
+                        <td>{{ sante.etat ? 'Yes' : 'No' }}</td>
+                        <td>{{ sante.maladieChronique ? 'Yes' : 'No' }}</td>
+                        <td>{{ sante.maladieCardiaque }}</td>
+                        <td>{{ sante.temps }}</td>
+                        <td>{{ sante.tailles }}</td>
+                        <td>{{ sante.poids }}</td>
+                        <td>{{ sante.operation ? 'Yes' : 'No' }}</td>
+                        <td>{{ sante.chosePorte }}</td>
+                        <td>{{ sante.intervention }}</td>
+                        <td>{{ sante.prix }}</td>
+                        <td>{{ sante.traitement ? 'Yes' : 'No' }}</td>
+                        <td>{{ sante.typeMaladie ? sante.typeMaladie|join(', ') : '' }}</td>
+                        <td>{{ sante.frequentation }}</td>
+                        <td>{{ sante.bilanSanguin ? 'Yes' : 'No' }}</td>
+                        <td>{{ sante.paysChirurgie }}</td>
+                        <td>{{ sante.note }}</td>
+                        <td>{{ sante.nomMedicament }}</td>
+                        <td>{{ sante.frequence }}</td>
+                        <td>{{ sante.maladieRelative }}</td>
+                        <td>
+                            <a href="{{ path('santes_show', {'id': sante.id}) }}" class="btn btn-info"><i class="fa fa-eye"></i></a>
+                            <a href="{{ path('santes_edit', {'id': sante.id}) }}" class="btn btn-warning">i<i class="fa fa-edit"></i></a>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="22">Pas de donnée</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Sport{% endblock %}
+
+{% block content %}
+    <div id="page-inner">   
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-md-4">DEPARTEMENT SPORT</div>
+                    <div class="col-md-4"></div>
+                    <div class="col-md-4">
+                    <a href="{{ path('app_dashboard_sport_create') }}" class="btn btn-primary" style="float: right; font-size: x-small;">Ajouter Sport</a>
+                </div>
+            </div>
+        </div>
+        <div class="panel-body">
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered table-hover" style="font-size: 10px">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>PratiqueSport</th>
+                        <th>QuelSport</th>
+                        <th>QuelFrequence</th>
+                        <th>PratiqueLoisir</th>
+                        <th>QuelLoisir</th>
+                        <th>actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for sport in sports %}
+                    <tr>
+                        <td>{{ sport.id }}</td>
+                        <td>{{ sport.pratiqueSport ? 'Yes' : 'No' }}</td>
+                        <td>{{ sport.quelSport }}</td>
+                        <td>{{ sport.quelFrequence }}</td>
+                        <td>{{ sport.pratiqueLoisir ? 'Yes' : 'No' }}</td>
+                        <td>{{ sport.quelLoisir }}</td>
+                        <td>
+                            <a href="{{ path('app_dashboard_sport_show', {'id': sport.id}) }}" class="btn btn-info"><i class="fa fa-eye text-primary"></i></a>
+                            <a href="{{ path('app_dashboard_sport_edit', {'id': sport.id}) }}" class="btn btn-warning"><i class="fa fa-edit text-warning"></i></a>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="7">Pas de donnée</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

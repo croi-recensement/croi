@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Sport{% endblock %}
+
+{% block content %}
+    <div id="page-inner">   
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-md-4">DEPARTEMENT SPORT</div>
+                    <div class="col-md-4"></div>
+                    <div class="col-md-4"></div>
+                </div>
+            </div>
+            <div class="panel-body">
+                {{ include('sports/_form.html.twig', {'button_label': 'Update'}) }}
+                {{ include('sports/_delete_form.html.twig') }}
+                <a href="{{ path('app_dashboard_sport') }}">Retour au liste</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

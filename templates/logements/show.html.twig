@@ -1,0 +1,64 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Logement{% endblock %}
+
+{% block content %}
+    <div id="page-inner">   
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-md-4">DEPARTEMENT LOGEMENT</div>
+                    <div class="col-md-4"></div>
+                    <div class="col-md-4">
+                    <a href="{{ path('app_dashboard_logement_create') }}" class="btn btn-primary" style="float: right; font-size: x-small;">Ajouter Logement</a>
+                </div>
+            </div>
+        </div>
+        <div class="panel-body">
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered table-hover" style="font-size: 10px">
+                    <tbody>
+                        <tr>
+                            <th>Id</th>
+                            <td>{{ logement.id }}</td>
+                        </tr>
+                        <tr>
+                            <th>AdressePermanente</th>
+                            <td>{{ logement.adressePermanente }}</td>
+                        </tr>
+                        <tr>
+                            <th>AdresseTemporaire</th>
+                            <td>{{ logement.adresseTemporaire }}</td>
+                        </tr>
+                        <tr>
+                            <th>NomPays</th>
+                            <td>{{ logement.nomPays }}</td>
+                        </tr>
+                        <tr>
+                            <th>Province</th>
+                            <td>{{ logement.province }}</td>
+                        </tr>
+                        <tr>
+                            <th>Region</th>
+                            <td>{{ logement.region }}</td>
+                        </tr>
+                        <tr>
+                            <th>Fokotany</th>
+                            <td>{{ logement.fokotany }}</td>
+                        </tr>
+                        <tr>
+                            <th>MontantLoyer</th>
+                            <td>{{ logement.montantLoyer }}</td>
+                        </tr>
+                        <tr>
+                            <th>MontantSyndic</th>
+                            <td>{{ logement.montantSyndic }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                    <a href="{{ path('app_dashboard_logement_read') }}" class="btn btn-info">Retour à la liste</a>
+                    <a href="{{ path('app_dashboard_logement_edit', {'id': logement.id}) }}" class="btn btn-warning">Modifier</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

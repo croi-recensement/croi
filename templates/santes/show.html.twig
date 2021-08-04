@@ -1,0 +1,100 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Sante{% endblock %}
+
+{% block content %}
+<div class="panel-body">
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered table-hover" style="font-size: 10px">
+            <tbody>
+                <tr>
+                    <th>Id</th>
+                    <td>{{ sante.id }}</td>
+                </tr>
+                <tr>
+                    <th>GroupeSanguin</th>
+                    <td>{{ sante.groupeSanguin }}</td>
+                </tr>
+                <tr>
+                    <th>Etat</th>
+                    <td>{{ sante.etat ? 'Yes' : 'No' }}</td>
+                </tr>
+                <tr>
+                    <th>MaladieChronique</th>
+                    <td>{{ sante.maladieChronique ? 'Yes' : 'No' }}</td>
+                </tr>
+                <tr>
+                    <th>MaladieCardiaque</th>
+                    <td>{{ sante.maladieCardiaque }}</td>
+                </tr>
+                <tr>
+                    <th>Temps</th>
+                    <td>{{ sante.temps }}</td>
+                </tr>
+                <tr>
+                    <th>Tailles</th>
+                    <td>{{ sante.tailles }}</td>
+                </tr>
+                <tr>
+                    <th>Poids</th>
+                    <td>{{ sante.poids }}</td>
+                </tr>
+                <tr>
+                    <th>Operation</th>
+                    <td>{{ sante.operation ? 'Yes' : 'No' }}</td>
+                </tr>
+                <tr>
+                    <th>ChosePorte</th>
+                    <td>{{ sante.chosePorte }}</td>
+                </tr>
+                <tr>
+                    <th>Intervention</th>
+                    <td>{{ sante.intervention }}</td>
+                </tr>
+                <tr>
+                    <th>Prix</th>
+                    <td>{{ sante.prix }}</td>
+                </tr>
+                <tr>
+                    <th>Traitement</th>
+                    <td>{{ sante.traitement ? 'Yes' : 'No' }}</td>
+                </tr>
+                <tr>
+                    <th>TypeMaladie</th>
+                    <td>{{ sante.typeMaladie ? sante.typeMaladie|join(', ') : '' }}</td>
+                </tr>
+                <tr>
+                    <th>Frequentation</th>
+                    <td>{{ sante.frequentation }}</td>
+                </tr>
+                <tr>
+                    <th>BilanSanguin</th>
+                    <td>{{ sante.bilanSanguin ? 'Yes' : 'No' }}</td>
+                </tr>
+                <tr>
+                    <th>PaysChirurgie</th>
+                    <td>{{ sante.paysChirurgie }}</td>
+                </tr>
+                <tr>
+                    <th>Note</th>
+                    <td>{{ sante.note }}</td>
+                </tr>
+                <tr>
+                    <th>NomMedicament</th>
+                    <td>{{ sante.nomMedicament }}</td>
+                </tr>
+                <tr>
+                    <th>Frequence</th>
+                    <td>{{ sante.frequence }}</td>
+                </tr>
+                <tr>
+                    <th>MaladieRelative</th>
+                    <td>{{ sante.maladieRelative }}</td>
+                </tr>
+            </tbody>
+        </table>
+        <a href="{{ path('app_dashboard_create_sante') }}" class="btn btn-info">Retour à la liste</a>
+        <a href="{{ path('app_dashboard_edit_sante', {'id': sante.id}) }}" class="btn btn-warning">Modifier</a>
+    </div>
+</div>
+{% endblock %}

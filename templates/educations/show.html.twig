@@ -1,0 +1,92 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Education{% endblock %}
+
+{% block content %}
+    <div id="page-inner">   
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-md-4">DEPARTEMENT LOGEMENT</div>
+                    <div class="col-md-4"></div>
+                    <div class="col-md-4">
+                    <a href="{{ path('app_dashboard_logement_create') }}" class="btn btn-primary" style="float: right; font-size: x-small;">Ajouter Logement</a>
+                </div>
+            </div>
+        </div>
+        <div class="panel-body">
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered table-hover" style="font-size: 10px">
+                    <tbody>
+                        <tr>
+                            <th>Id</th>
+                            <td>{{ education.id }}</td>
+                        </tr>
+                        <tr>
+                            <th>NomEcole</th>
+                            <td>{{ education.nomEcole }}</td>
+                        </tr>
+                        <tr>
+                            <th>NomUniversite</th>
+                            <td>{{ education.nomUniversite }}</td>
+                        </tr>
+                        <tr>
+                            <th>Classe</th>
+                            <td>{{ education.classe }}</td>
+                        </tr>
+                        <tr>
+                            <th>CarteEtudiant</th>
+                            <td>{{ education.carteEtudiant }}</td>
+                        </tr>
+                        <tr>
+                            <th>AdresseEcole</th>
+                            <td>{{ education.adresseEcole }}</td>
+                        </tr>
+                        <tr>
+                            <th>AdresseUniversite</th>
+                            <td>{{ education.adresseUniversite }}</td>
+                        </tr>
+                        <tr>
+                            <th>Diplome</th>
+                            <td>{{ education.diplome }}</td>
+                        </tr>
+                        <tr>
+                            <th>AnneeScolaire</th>
+                            <td>{{ education.anneeScolaire }}</td>
+                        </tr>
+                        <tr>
+                            <th>NomPays</th>
+                            <td>{{ education.nomPays ? education.nomPays|join(', ') : '' }}</td>
+                        </tr>
+                        <tr>
+                            <th>Province</th>
+                            <td>{{ education.province ? education.province|join(', ') : '' }}</td>
+                        </tr>
+                        <tr>
+                            <th>Region</th>
+                            <td>{{ education.region ? education.region|join(', ') : '' }}</td>
+                        </tr>
+                        <tr>
+                            <th>Fokotany</th>
+                            <td>{{ education.fokotany }}</td>
+                        </tr>
+                        <tr>
+                            <th>NiveauEtude</th>
+                            <td>{{ education.niveauEtude }}</td>
+                        </tr>
+                        <tr>
+                            <th>Aide</th>
+                            <td>{{ education.aide ? 'Yes' : 'No' }}</td>
+                        </tr>
+                        <tr>
+                            <th>Autre</th>
+                            <td>{{ education.autre }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <a href="{{ path('app_dashboard_education_read') }}" class="btn btn-info">Retour à la liste</a>
+                <a href="{{ path('app_dashboard_education_edit', {'id': education.id}) }}" class="btn btn-warning">Modifier</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

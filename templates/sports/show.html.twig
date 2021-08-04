@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Sport{% endblock %}
+
+{% block content %}
+    <div id="page-inner">   
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-md-4">DEPARTEMENT SPORT</div>
+                    <div class="col-md-4"></div>
+                    <div class="col-md-4"></div>
+                </div>
+            </div>
+            <div class="panel-body">
+                <div class="table-responsive">
+                    <table class="table table-striped table-bordered table-hover" style="font-size: 10px">
+                        <tbody>
+                            <tr>
+                                <th>Id</th>
+                                <td>{{ sport.id }}</td>
+                            </tr>
+                            <tr>
+                                <th>PratiqueSport</th>
+                                <td>{{ sport.pratiqueSport ? 'Yes' : 'No' }}</td>
+                            </tr>
+                            <tr>
+                                <th>QuelSport</th>
+                                <td>{{ sport.quelSport }}</td>
+                            </tr>
+                            <tr>
+                                <th>QuelFrequence</th>
+                                <td>{{ sport.quelFrequence }}</td>
+                            </tr>
+                            <tr>
+                                <th>PratiqueLoisir</th>
+                                <td>{{ sport.pratiqueLoisir ? 'Yes' : 'No' }}</td>
+                            </tr>
+                            <tr>
+                                <th>QuelLoisir</th>
+                                <td>{{ sport.quelLoisir }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <a href="{{ path('app_dashboard_sport_edit', {'id': sport.id}) }}" class="btn btn-warning">Modifier</a>
+                    <a href="{{ path('app_dashboard_sport') }}" class="btn btn-info">Retour à la liste</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

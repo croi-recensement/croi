@@ -1,0 +1,32 @@
+{{ form_start(form) }}
+    <div class="row">
+        <div class="form-group col-md-4">
+            <div class="sub-title">Vous pratiquez du sport ?</div>
+            {{ form_widget(form.pratiqueSport, {'attr': {'class': 'form-control'}}) }}
+        </div>
+        <div class="form-group col-md-4">
+            <div class="sub-title">Sport</div>
+            {{ form_widget(form.quelSport, {'attr': {'class': 'form-control'}}) }}
+        </div>
+        <div class="form-group col-md-4">
+            <div class="sub-title">Fréquence</div>
+            {{ form_widget(form.quelFrequence, {'attr': {'class': 'form-control'}}) }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-md-4">
+            <div class="sub-title">Pratiquez vous un loisir qui requiert un exercice physique ?</div>
+            {{ form_widget(form.pratiqueLoisir, {'attr': {'class': 'form-control'}}) }}
+        </div>
+        <div class="form-group col-md-4">
+            <div class="sub-title">Loisir</div>
+            {{ form_widget(form.quelLoisir, {'attr': {'class': 'form-control'}}) }}
+        </div>
+        <div class="form-group col-md-4">
+            <div class="sub-title">Personne</div>
+            {# {{ form_widget(form.membre, {'attr': {'class': 'form-control'}}) }} #}
+        </div>
+    </div>
+    {{ form_widget(form) }}
+    <button class="btn btn-primary">{{ button_label|default('Ajouter') }}</button>
+{{ form_end(form) }}

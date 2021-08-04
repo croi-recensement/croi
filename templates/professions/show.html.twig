@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Profession{% endblock %}
+
+{% block content %}
+    <div id="page-inner">   
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-md-4">DEPARTEMENT SPORT</div>
+                    <div class="col-md-4"></div>
+                    <div class="col-md-4"></div>
+                </div>
+            </div>
+            <div class="panel-body">
+                <div class="table-responsive">
+                    <table class="table table-striped table-bordered table-hover" style="font-size: 10px">
+                        <tbody>
+                            <tr>
+                                <th>Id</th>
+                                <td>{{ profession.id }}</td>
+                            </tr>
+                            <tr>
+                                <th>DomaineActivite</th>
+                                <td>{{ profession.domaineActivite }}</td>
+                            </tr>
+                            <tr>
+                                <th>Salaire</th>
+                                <td>{{ profession.salaire }}</td>
+                            </tr>
+                            <tr>
+                                <th>Prime</th>
+                                <td>{{ profession.prime }}</td>
+                            </tr>
+                            <tr>
+                                <th>Loyer</th>
+                                <td>{{ profession.loyer }}</td>
+                            </tr>
+                            <tr>
+                                <th>Profession</th>
+                                <td>{{ profession.profession }}</td>
+                            </tr>
+                            <tr>
+                                <th>Proprietaire</th>
+                                <td>{{ profession.proprietaire ? 'Yes' : 'No' }}</td>
+                            </tr>
+                            <tr>
+                                <th>Personnel</th>
+                                <td>{{ profession.personnel }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <a href="{{ path('app_dashboard_profession') }}" class="btn btn-info">Retour à la liste</a>
+                    <a href="{{ path('app_dashboard_commerce_edit', {'id': profession.id}) }}" class="btn btn-warning">Modifier</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

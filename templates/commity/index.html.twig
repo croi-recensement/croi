@@ -1,0 +1,72 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Commity index{% endblock %}
+
+{% block content %}
+<div id="page-inner">   
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <div class="row">
+                <div class="col-md-4"> LES COMMUNAUT</div>
+                <div class="col-md-4"></div>
+                <div class="col-md-4">
+                    <a href="{{ path('app_dashboard_commity_new') }}" class="btn btn-primary" style="float: right; font-size: x-small;">Ajouter Sante</a>
+                </div>
+            </div>
+        </div>
+        <div class="panel-body">
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered table-hover" style="font-size: 10px">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>NomFamille</th>
+                            <th>PrenomFamille</th>
+                            <th>Sexe</th>
+                            <th>DateNaissance</th>
+                            <th>LieuNaissance</th>
+                            <th>Nationalite</th>
+                            <th>DocumentVoyage</th>
+                            <th>NumeroPassport</th>
+                            <th>NumeroCin</th>
+                            <th>SituationMarital</th>
+                            <th>NumeroPhone</th>
+                            <th>AdresseEmail</th>
+                            <th>Photo</th>
+                            <th>actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for commity in commities %}
+                        <tr>
+                            <td>{{ commity.id }}</td>
+                            <td>{{ commity.nomFamille }}</td>
+                            <td>{{ commity.prenomFamille }}</td>
+                            <td>{{ commity.sexe }}</td>
+                            <td>{{ commity.dateNaissance ? commity.dateNaissance|date('Y-m-d') : '' }}</td>
+                            <td>{{ commity.lieuNaissance }}</td>
+                            <td>{{ commity.nationalite }}</td>
+                            <td>{{ commity.documentVoyage }}</td>
+                            <td>{{ commity.numeroPassport }}</td>
+                            <td>{{ commity.numeroCin }}</td>
+                            <td>{{ commity.situationMarital }}</td>
+                            <td>{{ commity.numeroPhone }}</td>
+                            <td>{{ commity.adresseEmail }}</td>
+                            <td>{{ commity.photo }}</td>
+                            <td>
+                                <a href="{{ path('app_dashboard_commity_show', {'id': commity.id}) }}">show</a>
+                                <a href="{{ path('app_dashboard_commity_edit', {'id': commity.id}) }}">edit</a>
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="15">no records found</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

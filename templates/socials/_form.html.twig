@@ -1,0 +1,25 @@
+{{ form_start(form) }}
+    <div class="row d-flex justify-content-center">
+        <div class="form-group col-md-2">
+            <div class="sub-title">Aide Nourriture</div>
+            {{ form_widget(form.aideNourriture, {'attr': {'class': 'form-control'}}) }}
+        </div>
+        <div class="form-group col-md-2">
+            <div class="sub-title">Aide Education</div>
+            {{ form_widget(form.aideEducation, {'attr': {'class': 'form-control'}}) }}
+        </div>
+        <div class="form-group col-md-2">
+            <div class="sub-title">Aide Social</div>
+            {{ form_widget(form.aideSocial, {'attr': {'class': 'form-control'}}) }}
+        </div>
+        <div class="form-group col-md-2">
+            <div class="sub-title">Aide Sante</div>
+            {{ form_widget(form.aideSante, {'attr': {'class': 'form-control'}}) }}
+        </div>
+        <div class="form-group col-md-2">
+            <div class="sub-title">Aide Travail</div>
+            {{ form_widget(form.aideTravail, {'attr': {'class': 'form-control'}}) }}
+        </div>
+    </div>
+    <button class="btn btn-primary">{{ button_label|default('Ajouter') }}</button>
+{{ form_end(form) }}

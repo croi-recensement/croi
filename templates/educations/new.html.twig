@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Education{% endblock %}
+
+{% block content %}
+    <div id="page-inner">   
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-md-4">DEPARTEMENT EDUCATION</div>
+                    <div class="col-md-4"></div>
+                    <div class="col-md-4"></div>
+                </div>
+            </div>
+            <div class="panel-body">
+                {{ include('educations/_form.html.twig') }}
+                <a href="{{ path('app_dashboard_education_read') }}">Retour à la liste</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

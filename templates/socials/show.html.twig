@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Social{% endblock %}
+
+{% block content %}
+    <div id="page-inner">   
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-md-4">DEPARTEMENT SOCIAL</div>
+                    <div class="col-md-4"></div>
+                    <div class="col-md-4">
+                </div>
+            </div>
+        </div>
+        <div class="panel-body">
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered table-hover" style="font-size: 10px">
+                    <tbody>
+                        <tr>
+                            <th>Id</th>
+                            <td>{{ social.id }}</td>
+                        </tr>
+                        <tr>
+                            <th>AideNourriture</th>
+                            <td>{{ social.aideNourriture ? 'OUI' : 'NON' }}</td>
+                        </tr>
+                        <tr>
+                            <th>AideEducation</th>
+                            <td>{{ social.aideEducation ? 'OUI' : 'NON' }}</td>
+                        </tr>
+                        <tr>
+                            <th>AideSocial</th>
+                            <td>{{ social.aideSocial ? 'OUI' : 'NON' }}</td>
+                        </tr>
+                        <tr>
+                            <th>AideSante</th>
+                            <td>{{ social.aideSante ? 'OUI' : 'NON' }}</td>
+                        </tr>
+                        <tr>
+                            <th>AideTravail</th>
+                            <td>{{ social.aideTravail ? 'OUI' : 'NON' }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <a href="{{ path('app_dashboard_social_read') }}" class="btn btn-info">Retour à la liste</a>
+                <a href="{{ path('app_dashboard_social_edit', {'id': social.id}) }}" class="btn btn-warning">Modifier</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

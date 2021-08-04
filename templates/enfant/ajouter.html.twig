@@ -1,0 +1,72 @@
+{% extends 'base.html.twig' %} 
+
+{% block title %}Ajout Enfant{% endblock %}
+
+{% block content %}
+<div id="page-inner">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <div class="card-title">
+                <div class="title">Ajouter ENFANT</div>
+            </div>
+        </div>
+        {{ form_start(form) }}
+        <div class="panel-body">
+            <form>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="exampleInputNomFamille">NOM FAMILLE :</label>
+                        {{ form_widget(form.nomFamille, {'attr' : {'class': 'form-control', 'id': 'exampleInputNomFamille', 'aria-describedby': 'nomHelp'}}) }}
+                        <small id="nomHelp" class="form-text text-muted">*Champ nom vide</small>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="exampleInputPernomFamille">PRENOM FAMILLE :</label>
+                        {{ form_widget(form.prenomFamille, {'attr' : {'class': 'form-control', 'id': 'exampleInputPernomFamille', 'aria-describedby': 'prenomHelp'}}) }}
+                        <small id="prenomHelp" class="form-text text-muted">*Champ prénom vide</small>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="exampleDatepicker">DATE DE NAISSANCE :</label>
+                        {{ form_widget(form.dateNaissance, {'attr' : {'class':'form-control', 'id': 'exampleDatepicker', 'aria-describedby': 'dateNaissanceHelp'}}) }}
+                        <small id="dateNaissanceHelp" class="form-text text-muted">*Champ date de naissance vide</small>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="exampleInputLieuNaissance">LIEU DE NAISSANCE :</label>
+                        {{ form_widget(form.lieuNaissance, {'attr' : {'class': 'form-control', 'id': 'exampleInputLieuNaissance', 'aria-describedby': 'lieuNaissanceHelp'}}) }}
+                        <small id="lieuNaissanceHelp" class="form-text text-muted">*Champ lieu naissance vide</small>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label for="exampleSexe">SEXE :</label>
+                        {{ form_widget(form.sexe, {'attr' : {'class': 'form-control', 'id': 'exampleSexe', 'aria-describedby': 'sexeHelp'}}) }}
+                        <small id="sexeHelp" class="form-text text-muted">*Champ sexe vide</small>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="exampleInputNationalite">NATIONALITE :</label>
+                        {{ form_widget(form.nationalite, {'attr' : {'class': 'form-control', 'id': 'exampleInputNationalite', 'aria-describedby': 'nationaliteHelp'}}) }}
+                        <small id="nationaliteHelp" class="form-text text-muted">*Champ nationalite vide</small>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="exampleInputMarital">SITUATION MARITAL :</label>
+                        {{ form_widget(form.situationMarital, {'attr' : {'class': 'form-control', 'id': 'exampleInputMarital', 'aria-describedby': 'maritalHelp'}}) }}
+                        <small id="maritalHelp" class="form-text text-muted">*Champ situation marital vide</small>
+                    </div>
+                </div>
+                <div class="form-row d-flex">
+                    <button type="submit" class="btn btn-primary text-center">Ajouter Enfant</button>
+                </div>
+            </form>
+        </div>
+    {{ form_end(form) }}
+    </div>
+</div>
+{% endblock %}
+{% block javascripts %}
+    <script>
+        $('.datepicker').datepicker({
+            inline: true
+        });
+    </script
+{% endblock %}

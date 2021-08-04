@@ -1,0 +1,31 @@
+{{ form_start(form) }}
+    <div class="row">
+        <div class="form-group col-md-4">
+            <div class="sub-title">Avez vous été au madressa ?</div>
+            {{ form_widget(form.questionMadressa, {'attr': {'class': 'form-control'}}) }}
+        </div>
+        <div class="form-group col-md-4">
+            <div class="sub-title">Jusqu'à quelle classe ? </div>
+            {{ form_widget(form.classe, {'attr': {'class': 'form-control'}}) }}
+        </div>
+        <div class="form-group col-md-4">
+            <div class="sub-title">Est ce vos enfants fréquentent le madressa ?</div>
+            {{ form_widget(form.frequentMadressa, {'attr': {'class': 'form-control'}}) }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-md-4">
+            <div class="sub-title">Quelles sont vos fréquentations de la mosquée ?</div>
+            {{ form_widget(form.frequentationMosque, {'attr': {'class': 'form-control'}}) }}
+        </div>
+        <div class="form-group col-md-4">
+            <div class="sub-title">Selon vous, à quelle fréquence venez vous à la mosquée dans une année ?</div>
+            {{ form_widget(form.questionMosque, {'attr': {'class': 'form-control'}}) }}
+        </div>
+        <div class="form-group col-md-4">
+            <div class="sub-title">Que proposez-vous pour améliorer le tabligh en général ?</div>
+            {{ form_widget(form.idee, {'attr': {'class': 'form-control'}}) }}
+        </div>
+    </div>
+    <button class="btn btn-primary">{{ button_label|default('Ajouter') }}</button>
+{{ form_end(form) }}

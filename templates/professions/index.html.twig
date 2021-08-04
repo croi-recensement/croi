@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Commerce{% endblock %}
+
+{% block content %}
+    <div id="page-inner">   
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-md-4">DEPARTEMENT COMMERCE</div>
+                    <div class="col-md-4"></div>
+                    <div class="col-md-4">
+                    <a href="{{ path('app_dashboard_commerce_create') }}" class="btn btn-primary" style="float: right; font-size: x-small;">Ajouter Profession</a>
+                </div>
+            </div>
+        </div>
+        <div class="panel-body">
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered table-hover" style="font-size: 10px">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>DomaineActivite</th>
+                        <th>Salaire</th>
+                        <th>Prime</th>
+                        <th>Loyer</th>
+                        <th>Profession</th>
+                        <th>Proprietaire</th>
+                        <th>Personnel</th>
+                        <th>actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for profession in professions %}
+                    <tr>
+                        <td>{{ profession.id }}</td>
+                        <td>{{ profession.domaineActivite }}</td>
+                        <td>{{ profession.salaire }}</td>
+                        <td>{{ profession.prime }}</td>
+                        <td>{{ profession.loyer }}</td>
+                        <td>{{ profession.profession }}</td>
+                        <td>{{ profession.proprietaire ? 'Yes' : 'No' }}</td>
+                        <td>{{ profession.personnel }}</td>
+                        <td>
+                            <a href="{{ path('app_dashboard_commerce_show', {'id': profession.id}) }}" class="btn btn-info"><i class="fa fa-eye"></i></a>
+                            <a href="{{ path('app_dashboard_commerce_edit', {'id': profession.id}) }}" class="btn btn-warning"><i class="fa fa-edit"></i></a>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="9">Pas de donnée</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

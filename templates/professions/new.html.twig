@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Profession{% endblock %}
+
+{% block content %}
+    <div id="page-inner">   
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-md-4">DEPARTEMENT COMMERCE</div>
+                    <div class="col-md-4"></div>
+                    <div class="col-md-4"></div>
+                </div>
+            </div>
+            <div class="panel-body">
+                {{ include('professions/_form.html.twig') }}
+                <a href="{{ path('app_dashboard_profession') }}">Retour au liste</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

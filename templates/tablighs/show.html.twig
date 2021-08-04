@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Tabligh{% endblock %}
+
+{% block content %}
+    <div id="page-inner">   
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-md-4">DEPARTEMENT TABLIGH</div>
+                    <div class="col-md-4"></div>
+                    <div class="col-md-4"></div>
+                </div>
+            </div>
+            <div class="panel-body">
+                <div class="table-responsive">
+                    <table class="table table-striped table-bordered table-hover" style="font-size: 10px">
+                        <tbody>
+                            <tr>
+                                <th>Id</th>
+                                <td>{{ tabligh.id }}</td>
+                            </tr>
+                            <tr>
+                                <th>QuestionMadressa</th>
+                                <td>{{ tabligh.questionMadressa ? 'OUI' : 'NON' }}</td>
+                            </tr>
+                            <tr>
+                                <th>Classe</th>
+                                <td>{{ tabligh.classe }}</td>
+                            </tr>
+                            <tr>
+                                <th>FrequentMadressa</th>
+                                <td>{{ tabligh.frequentMadressa ? 'OUI' : 'NON' }}</td>
+                            </tr>
+                            <tr>
+                                <th>FrequentationMosque</th>
+                                <td>
+                                    {% for tablig in tabligh.frequentationMosque %}
+                                        {{ tablig }}
+                                    {% endfor %}
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>QuestionMosque</th>
+                                <td>{{ tabligh.questionMosque ? 'OUI' : 'NON' }}</td>
+                            </tr>
+                            <tr>
+                                <th>Idee</th>
+                                <td>{{ tabligh.idee }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <a href="{{ path('app_dashboard_tabligh') }}" class="btn btn-info">Retour à la liste</a>
+                    <a href="{{ path('app_dashboard_tabligh_edit', {'id': tabligh.id}) }}" class="btn btn-warning">Modifier</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

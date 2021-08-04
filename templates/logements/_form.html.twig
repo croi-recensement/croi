@@ -1,0 +1,39 @@
+{{ form_start(form) }}
+    <div class="row">
+        <div class="form-group col-md-3">
+            <div class="sub-title">Adresse Permanente</div>
+            {{ form_widget(form.adressePermanente, {'attr': {'class': 'form-control'}}) }}
+        </div>
+        <div class="form-group col-md-3">
+            <div class="sub-title">Adresse Temporaire</div>
+            {{ form_widget(form.adresseTemporaire, {'attr': {'class': 'form-control'}}) }}
+        </div>
+        <div class="form-group col-md-3">
+            <div class="sub-title">Montant loyer</div>
+            {{ form_widget(form.montantLoyer, {'attr': {'class': 'form-control'}}) }}
+        </div>
+        <div class="form-group col-md-3">
+            <div class="sub-title">Montant Syndic</div>
+            {{ form_widget(form.montantSyndic, {'attr': {'class': 'form-control'}}) }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-md-3">
+            <div class="sub-title">Pays</div>
+            {{ form_widget(form.nomPays, {'attr': {'class': 'form-control'}}) }}
+        </div>
+        <div class="form-group col-md-3">
+            <div class="sub-title">Province</div>
+            {{ form_widget(form.province, {'attr': {'class': 'form-control'}}) }}
+        </div>
+         <div class="form-group col-md-3">
+            <div class="sub-title">Region</div>
+            {{ form_widget(form.region, {'attr': {'class': 'form-control'}}) }}
+        </div>
+        <div class="form-group col-md-3">
+            <div class="sub-title">Fokotany</div>
+            {{ form_widget(form.fokotany, {'attr': {'class': 'form-control'}}) }}
+        </div>
+    </div>
+    <button class="btn btn-primary">{{ button_label|default('Ajouter') }}</button>
+{{ form_end(form) }}
